@@ -11,7 +11,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "build:offline": "tsc -b && vite build --mode offline && node -e \"require('fs').renameSync('dist-offline/index.html','dist-offline/AllocationLab.html')\"",
-    "golden": "python3 scripts/golden/gen_sector_targets.py /tmp/st.json 40 && python3 scripts/golden/run_workbook.py /tmp/st.json /tmp/st.out.json && python3 scripts/golden/trim_fixture.py /tmp/st.out.json src/engine/__golden__/sector-targets.json"
+    "golden": "python3 scripts/golden/gen_sector_targets.py /tmp/st.json 40 && python3 scripts/golden/run_workbook.py /tmp/st.json /tmp/st.out.json && python3 scripts/golden/trim_fixture.py /tmp/st.out.json src/engine/__golden__/sector-targets.json",
+    "golden:full": "python3 scripts/golden/gen_full.py /tmp/full.json 30 && python3 scripts/golden/run_workbook.py /tmp/full.json /tmp/full.out.json && python3 scripts/golden/trim_workbook_fixture.py /tmp/full.out.json src/engine/workbook/__golden__/full-portfolios.json full",
+    "extract:workbook": "python3 scripts/engine/extract_workbook.py"
   },
   "dependencies": {
     "react": "^18.3.1",

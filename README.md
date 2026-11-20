@@ -44,17 +44,31 @@ Open the URL Vite prints (normally http://localhost:5173).
 
 `approved` · `illustrative` · `synthetic` · `draft` · `missing`. Scenarios are always labelled **Hypothetical**.
 
-## Recommendations engine (in progress)
+## Recommendations (the workbook as an app)
 
-The recommendations workbook (`Recommendations Master Equity Weighting.xlsm`) is being ported to `src/engine/`, formula for formula. Each phase is checked against the real workbook: synthetic scenarios are fed to a copy of the workbook, LibreOffice recalculates it headless with macros never run, and the TypeScript results must match. See [docs/recommendations-engine.md](docs/recommendations-engine.md) for the structure, quirks and phase plan.
+The **Recommendations** page runs the formulas of `Recommendations Master Equity Weighting.xlsm` for one client.
 
-Done so far:
-- The workbook's tactical profiles: Conservative, Moderate, Balanced, Growth, Aggressive, Custom, Current and Master Risk Alloc.
-- The six sector targets.
+1. **Paste holdings.** Paste the Apex export. Names are matched to FS names, and term deposits become "Bank Term Deposit rate% dd/mm/yyyy".
+2. **Set the client.** Choose the risk profile (Custom = any growth %), fees and withdrawals, money added or removed, and any overrides.
+3. **Calculate.** You get per-holding recommendations, sector targets and the workbook's own error checks. You can then adjust overrides and export a CSV.
 
-Both match the workbook in 40 golden scenarios.
+Firm-level inputs are editable on the **Settings** page and versioned there:
+- profile percentages;
+- the property model;
+- fixed-interest, Australasian and global equity limits, splits and model fund lists.
 
-Per-holding recommendations are next, starting with cash, multi-sector and property, then global and Australasian equities, then fixed interest.
+How it works: the workbook's sheets are extracted into `src/engine/workbook/model.json` and evaluated by a TypeScript formula engine. The macros that change inputs are ported, and results are checked against the real workbook recalculated in LibreOffice: 110 golden scenarios across every section, with zero differences. Details, deviations and how to update the workbook are in [docs/recommendations-engine.md](docs/recommendations-engine.md).
+
+| Command | What it does |
+|---|---|
+| `npm run extract:workbook -- "path/to/workbook.xlsm"` | Re-extract a newer version of the workbook |
+| `npm run golden:full` | Regenerate the full-portfolio golden fixtures (needs LibreOffice; about 1 hour) |
+
+Not yet ported:
+- OneAnswer and MMC imports;
+- implementation rounds and trade instructions;
+- Letter of Advice, SoA and annual review documents, and emails;
+- client-master lookups.
 
 ## Calculation rules
 
@@ -143,7 +157,7 @@ src/
 
 ## Tests
 
-`npm test` runs 69 tests covering:
+`npm test` runs 319 tests covering:
 
 - Allocation totals, tolerance and floating-point handling, and missing data
 - The minimum Cash weight and other min/max constraints, including infeasible constraint sets
@@ -153,6 +167,7 @@ src/
 - Baseline versioning, approval locking, and the rule that missing data cannot be approved
 - CSV parsing, round-tripping, and the import safety rules
 - Client holdings: money parsing, CSV/TSV validation, class mapping, weights, drift and tolerance overrides, growth target gaps, annual-% fees and cash coverage
+- The recommendations workbook: 110 golden scenarios against the real workbook, Excel-semantics unit tests, and a check that the evaluator reproduces Excel's saved results
 - The .xlsx reader and datasheet matching, using a synthetic workbook fixture: Apex/FS/OA names, term-deposit suffix stripping, ambiguous and not-found names, and classification precedence
 
 ## Not in this iteration
