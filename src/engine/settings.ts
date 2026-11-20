@@ -51,6 +51,8 @@ export interface FirmSettings {
   general: GeneralSettings;
   /** Every text value in Asset Allocation column B (used by COUNTIF($B:$B, name) in the property pot). */
   assetAllocationColumnB: string[];
+  /** Changes to other Asset Allocation input cells (address → value), on top of the workbook's values. */
+  inputs?: Record<string, number | string | null>;
 }
 
 export const WORKBOOK_SETTINGS = defaults as unknown as FirmSettings;

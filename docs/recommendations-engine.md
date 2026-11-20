@@ -95,35 +95,63 @@ All six are ported formula for formula, keeping the workbook's mix of `=""` and 
   - Otherwise: profile sector ÷ growth × (100 − FI% − cash%) × total, scaled on (total + add/remove) when add/remove is set.
 - **Multi sector (G201).** MS target% × final portfolio total.
 
-## Golden tests
+## How the app runs the workbook
 
-```
-scripts/golden/gen_sector_targets.py   # seeded synthetic scenarios
-scripts/golden/run_workbook.py         # fills a copy of the workbook, recalculates in LibreOffice (macros never run)
-scripts/golden/trim_fixture.py         # → src/engine/__golden__/sector-targets.json
-src/engine/sectorTargets.golden.test.ts
-```
+The app evaluates **the workbook's own formulas**. It doesn't use hand-written approximations of them.
 
-To regenerate the fixtures:
+1. **Extraction.** `scripts/engine/extract_workbook.py` reads four sheets from the `.xlsm` into `src/engine/workbook/model.json`: Portfolio, Asset Allocation, Data and ValidationLists. It keeps every value, every formula (with its array-formula flag), the named ranges and the iterative-calculation setting. Macros are not read.
+2. **Evaluation.** `src/engine/workbook/` is a TypeScript formula evaluator:
+   - **Parser:** `parser.ts`.
+   - **Excel value and comparison rules:** `values.ts`.
+   - **Evaluator:** `evaluator.ts` implements the ~45 functions the workbook uses. It follows legacy Excel's implicit intersection, with element-by-element behaviour in array formulas and SUMPRODUCT. Circular references are solved by iteration.
+3. **Macro behaviour that changes inputs** is ported in `scenario.ts`, `importHoldings.ts` and `settingsCells.ts`:
+   - **Apex import:** names → FS names, term deposits as "Bank Term Deposit rate% dd/mm/yyyy", holdings merged and placed by asset class.
+   - **AdjustPortfolio:** Data rows flagged "Add" are inserted.
+   - **Gold_distribution.**
+   - **ResetInvestmentsMaturing:** 90-day hold window.
+   - **Profile selection (ComboBox1_Change).**
+   - **Asset Allocation `Worksheet_Calculate`:** inserts bond/TD ladder rows, property, global and Australasian model rows. It is repeated until nothing more is added.
+   - **"Update Sheet" button:** optional.
+4. **Settings.** Firm settings (Settings page) are written into the Asset Allocation input cells before each run. Cells that hold formulas are never overwritten.
+
+**Updating to a newer workbook:**
 
 ```bash
-npm run golden
+python3 scripts/engine/extract_workbook.py "path/to/Recommendations Master Equity Weighting.xlsm"
 ```
 
-This needs LibreOffice with Python UNO.
+Then re-run the golden scenarios (below) and the unit tests.
 
-A recalculation check of the unmodified workbook gave **0 differences** between LibreOffice and Excel's saved results across 3,091 formula cells. Every holding cell in that template was empty, though; the golden scenarios add holdings.
+The hand-written modules from the first phases (`sectorTargets.ts`, `property.ts`, `cashMs.ts`, `profiles.ts`) are kept as readable reference implementations. They are tested against the same golden data.
+
+## Verification
+
+- **Excel's saved results.** On the template, the evaluator reproduces every value Excel last saved on the Portfolio and Asset Allocation sheets (`evaluator.test.ts`).
+- **LibreOffice golden scenarios.** `scripts/golden/run_workbook.py` fills a copy of the real workbook with a synthetic scenario and recalculates it in LibreOffice, headless and with macros never run. It applies the same macro emulation and the en-NZ locale, then records every holding row. The evaluator must match all of them.
+  - **Sector targets:** 40 scenarios.
+  - **Property, multi-sector and cash:** 40 scenarios.
+  - **Full portfolios:** 30 scenarios, all sections, with term deposits around the 90-day maturity window, dated bonds, NZ/AUS shares, equivalents, gold and overrides.
+- **Excel semantics.** Unit tests cover the behaviours the workbook depends on (`functions.test.ts`).
+
+**LibreOffice difference.** LibreOffice 24.2 doesn't implement Excel 365's `FILTER`, which the global/Australasian "equivalents" text uses. It returns `#NAME?` there. Golden comparisons therefore run the evaluator with `libreOfficeCompat = true`. The app always uses Excel behaviour, so `FILTER` works as in Excel 365.
+
+**Macro emulation, not tested against Excel.** The macro steps are ported from the VBA source and checked by review. In Excel, the insertion event fires on every recalculation, in an order that depends on how cells were edited. The app runs it after import and profile selection until nothing changes. In rare cases Excel may therefore leave extra $0 placeholder rows that the app does not.
 
 ## Phases
 
-1. **Profiles and sector targets** — done, golden-tested.
-2. **Property, multi-sector and cash rows** — done, golden-tested (40 scenarios covering all five property bands, purchases, sales, under-limit holds and overrides). The "Update Sheet" model-asset insertion is ported for property.
-3. **Remaining per-holding sections.**
-   - Port the `Recalculate` macro: it adds model funds with a distribution to each section with value 0.
-   - Then cash, multi-sector and property row formulas, followed by global equities (active/passive, gold, hedging), then Australasian equities (NZ/AUS split, passive/active, direct shares).
-3. **Fixed interest.** Managed-fund share, the bond and term-deposit ladder by maturity year, perpetual and convertible bonds, maturity versus hold date, rounding to $100, minimum bond/TD limits and bank exposure.
-4. **Checks and outputs.** Error checks (BD2), exposure table, top 10, fixed-interest breakdown, and the recommended-portfolio and changes view.
-5. **Later (not yet scheduled).** Custodian imports (Apex/OA/MMC), implementation rounds and trade stats, documents (Letter of Advice, SoA, annual review) and emails.
+1. **Profiles and sector targets** — done.
+2. **Property, multi-sector and cash** — done.
+3. **Workbook evaluator** — done. It covers global and Australasian equities, fixed interest and checks.
+4. **Recommendations screen** — done:
+   - paste the Apex holdings;
+   - set profile, Custom growth %, fees and withdrawals, add/remove and cash override;
+   - get per-holding recommendations, sector summary, workbook checks, overrides and a CSV export.
+5. **Later (not yet scheduled):**
+   - OneAnswer and MMC imports;
+   - implementation rounds and trade stats;
+   - documents (Letter of Advice, SoA, annual review) and emails;
+   - the external "Bonds Allocation in Years" file used by the Bond_Allocation macro;
+   - client master lookups (FetchClientInfo).
 
 ## Known quirks to preserve (and review with the firm)
 
@@ -133,4 +161,5 @@ A recalculation check of the unmodified workbook gave **0 differences** between 
 - **Multi-sector rows (likely a workbook bug).** Each row's formula is shifted by one row. The first multi-sector holding gets the target divided by `COUNTIF(B193:B200,"<>0")`, which also counts the empty rows, so normally the target ÷ 8. Every other multi-sector holding gets $0. All shipped profiles have 0% multi-sector, so this only matters when an adviser sets a multi-sector target.
 - **Property: flat AUS/INT rows.** Extra AUS and international rows (beyond the first) ignore the bands and only apply when the pot is at least $30,000, a value hard-coded in the formula.
 - **Property: kept holdings.** A holding with override 0 whose name is not anywhere in Asset Allocation column B is deducted from the property pot.
+- **Datasheet entries to check.** "ANZ Bank New Zealand Limited (ANB190) 4.63% 20/02/2030" is typed as a Term Deposit. Apex code WNZ-0726 maps to an FS name with a different coupon (6.355% versus 3.455%).
 - **Hard-coded fund name.** The cash-sufficiency check refers to "Nikko AM NZ Cash Fund" by name; the fund has since been renamed Amova.

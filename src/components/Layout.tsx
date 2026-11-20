@@ -10,6 +10,7 @@ const NAV: { page: Route['page']; label: string; icon: string }[] = [
   { page: 'compare', label: 'Profile Comparison', icon: '⇄' },
   { page: 'scenarios', label: 'Scenarios', icon: '◫' },
   { page: 'assumptions', label: 'Assumptions', icon: '§' },
+  { page: 'recommendations', label: 'Recommendations', icon: '★' },
   { page: 'clients', label: 'Client Holdings', icon: '◉' },
   { page: 'data', label: 'Import / Export', icon: '⇅' },
   { page: 'settings', label: 'Settings', icon: '⚙' },

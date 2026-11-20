@@ -1,4 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import type { WorkbookModel } from '../engine/workbook/evaluator';
+import { INPUT_GROUPS, isFormulaCell, workbookInputDefault, type InputField, type InputValue } from '../engine/workbook/inputCatalog';
 import { PercentInput } from '../components/PercentInput';
 import { Button, Card, Field, inputCls, IssueList, Notice, PageHeader, StatusBadge, Td, Th, TableWrap, cx } from '../components/ui';
 import { isErr, type XValue } from '../engine/excel';
@@ -163,13 +165,14 @@ export function SettingsPage() {
         </div>
       </Card>
 
+      <WorkbookInputsCard draft={draft} set={set} />
+
       <Card title="General" className="mb-6">
         <div className="grid gap-3 sm:grid-cols-4">
           <Field label="Rounding unit" hint="New purchases are rounded to this."><PercentInput suffix="$" ariaLabel="Portfolio rounding" value={draft.general.portfolioRounding} onChange={(v) => set((d) => { d.general.portfolioRounding = v; })} /></Field>
           <Field label="Minimum change" hint="Don't change an investment unless the change exceeds this % of its value."><PercentInput ariaLabel="Portfolio tolerance" value={toPct(draft.general.portfolioTolerance)} onChange={(v) => set((d) => { d.general.portfolioTolerance = v === null ? null : v / 100; })} /></Field>
           <Field label="Asset class tolerance ±"><PercentInput ariaLabel="Asset class tolerance" value={toPct(draft.general.assetClassTolerance)} onChange={(v) => set((d) => { d.general.assetClassTolerance = v === null ? null : v / 100; })} /></Field>
         </div>
-        <p className="mt-2 text-xs text-slate-500">Equities and fixed-interest settings will appear here as those parts of the engine are completed.</p>
       </Card>
 
       <Card title="Save" className="mb-6">
@@ -223,6 +226,100 @@ function ModelList({ title, list, onChange }: { title: string; list: ModelHoldin
         </tbody>
       </table>
       {used.length > 0 && <p className={cx('mt-1 text-xs', Math.abs(total - 1) > 1e-9 ? 'text-amber-800' : 'text-slate-500')}>Distribution total {(total * 100).toFixed(2)}%</p>}
+    </div>
+  );
+}
+
+function WorkbookInputsCard({ draft, set }: { draft: FirmSettings; set: (f: (d: FirmSettings) => void) => void }) {
+  const [model, setModel] = useState<WorkbookModel | null>(null);
+  useEffect(() => {
+    import('../engine/workbook/model.json').then((m) => setModel(m.default as unknown as WorkbookModel)).catch(() => setModel(null));
+  }, []);
+  if (!model) return <Card title="Fixed interest & equities" className="mb-6"><p className="text-sm text-slate-500">Loading workbook inputs…</p></Card>;
+  const value = (cell: string): InputValue => (draft.inputs && cell in draft.inputs ? draft.inputs[cell]! : workbookInputDefault(model, cell));
+  const setValue = (cell: string, v: InputValue) =>
+    set((d) => {
+      const inputs = { ...(d.inputs ?? {}) };
+      if (v === workbookInputDefault(model, cell)) delete inputs[cell];
+      else inputs[cell] = v;
+      d.inputs = inputs;
+    });
+  const changed = Object.keys(draft.inputs ?? {}).length;
+  return (
+    <Card title="Fixed interest & equities" className="mb-6" actions={changed ? <Button variant="ghost" onClick={() => set((d) => { d.inputs = {}; })}>Revert {changed} change(s) to workbook values</Button> : undefined}>
+      <p className="mb-4 text-xs text-slate-600">Inputs from the workbook's Asset Allocation sheet. Changed values are highlighted; everything else uses the workbook's own value.</p>
+      <div className="space-y-6">
+        {INPUT_GROUPS.map((g) => (
+          <div key={g.title}>
+            <h3 className="mb-2 text-sm font-semibold text-slate-800">{g.title}</h3>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {g.fields.map((f) => <InputFieldControl key={f.cell} field={f} value={value(f.cell)} changed={!!draft.inputs && f.cell in draft.inputs} onChange={(v) => setValue(f.cell, v)} />)}
+            </div>
+            {g.lists && (
+              <div className="mt-3 grid gap-4 lg:grid-cols-2">
+                {g.lists.map((l) => (
+                  <details key={l.title} className="rounded border border-slate-200 p-2">
+                    <summary className="cursor-pointer text-sm font-medium">{l.title}</summary>
+                    <table className="mt-2 w-full text-sm">
+                      <tbody>
+                        {Array.from({ length: l.rows[1] - l.rows[0] + 1 }, (_, i) => l.rows[0] + i).filter((r) => !isFormulaCell(model, `${l.nameCol}${r}`)).map((r) => {
+                          const nameCell = `${l.nameCol}${r}`;
+                          const second = l.distCol ?? l.extraCol?.col ?? null;
+                          const secondCell = second ? `${second}${r}` : null;
+                          const nv = value(nameCell);
+                          return (
+                            <tr key={r}>
+                              <td className="py-0.5 pr-2"><input aria-label={`${l.title} ${r}`} className={cx(inputCls, draft.inputs && nameCell in draft.inputs && 'border-amber-400 bg-amber-50')} value={nv === null ? '' : String(nv)} placeholder="(empty)" onChange={(e) => setValue(nameCell, e.target.value || null)} /></td>
+                              {secondCell && !isFormulaCell(model, secondCell) && (
+                                <td className="w-28 py-0.5">
+                                  {l.distCol ? (
+                                    <PercentInput ariaLabel={`${l.title} ${r} distribution`} value={typeof value(secondCell) === 'number' ? toPct(value(secondCell) as number) : null} onChange={(v) => setValue(secondCell, v === null ? null : v / 100)} />
+                                  ) : (
+                                    <PercentInput suffix="" ariaLabel={`${l.title} ${r} ${l.extraCol?.label}`} value={typeof value(secondCell) === 'number' ? (value(secondCell) as number) : null} onChange={(v) => setValue(secondCell, v)} />
+                                  )}
+                                </td>
+                              )}
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </details>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </Card>
+  );
+}
+
+function InputFieldControl({ field, value, changed, onChange }: { field: InputField; value: InputValue; changed: boolean; onChange: (v: InputValue) => void }) {
+  const cls = cx(changed && 'rounded ring-2 ring-amber-300');
+  let control;
+  if (field.kind === 'yesno') {
+    control = (
+      <select className={inputCls} value={value === null ? '' : String(value)} onChange={(e) => onChange(e.target.value)}>
+        {(field.options ?? ['Yes', 'No']).map((o) => <option key={o} value={o}>{o}</option>)}
+      </select>
+    );
+  } else if (field.kind === 'text') {
+    control = <input className={inputCls} value={value === null ? '' : String(value)} onChange={(e) => onChange(e.target.value || null)} />;
+  } else {
+    const pct = field.kind === 'pct';
+    control = (
+      <PercentInput
+        ariaLabel={field.label}
+        suffix={field.kind === 'money' ? '$' : pct ? '%' : ''}
+        value={typeof value === 'number' ? (pct ? toPct(value) : value) : null}
+        onChange={(v) => onChange(v === null ? null : pct ? v / 100 : v)}
+      />
+    );
+  }
+  return (
+    <div className={cls}>
+      <Field label={field.label} hint={field.hint}>{control}</Field>
     </div>
   );
 }

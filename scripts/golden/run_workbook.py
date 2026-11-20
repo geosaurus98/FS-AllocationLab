@@ -127,6 +127,138 @@ def recalculate_macro(p, aa):
                     put(p, f'B{empty_row}', 0)
 
 
+def _insert(lo, p, key, name):
+    """UpdateDescriptions / UpdateGlobal / UpdateProperty / UpdateAus: add name to the section if absent."""
+    first, last = next((f, l) for k, f, l, _ in SECTIONS if k == key)
+    for r in range(first, last + 1):
+        if p.getCellRangeByName(f'A{r}').getString() == name:
+            return False
+    for r in range(first, last + 1):
+        c = p.getCellRangeByName(f'A{r}')
+        if c.getType().value == 'EMPTY':
+            put(p, f'A{r}', name)
+            put(p, f'B{r}', 0)
+            lo.doc.calculate()
+            return True
+    return False
+
+
+class _Abort(Exception):
+    pass
+
+
+def _num(cell):
+    """VBA Value2 of a cell for numeric comparison; errors/text raise (type mismatch aborts the event)."""
+    if cell.getError() != 0:
+        raise _Abort()
+    t = cell.getType().value
+    if t == 'EMPTY':
+        return 0.0
+    if t == 'TEXT' or (t == 'FORMULA' and cell.FormulaResultType2 == 2):
+        s = cell.getString()
+        if s == '':
+            return ''
+        raise _Abort()
+    return cell.getValue()
+
+
+def worksheet_calculate_insert(lo, p, aa):
+    """Port of Asset Allocation Worksheet_Calculate (sheet2.cls): one pass, live recalculation.
+    Returns True if anything was inserted."""
+    inserted = False
+    try:
+        # ProcessBondsAndTDs: BondsTDs = H20:I27
+        for r in range(20, 28):
+            for col, label in (('H', 'bonds'), ('I', 'tds')):
+                c = aa.getCellRangeByName(f'{col}{r}')
+                if c.getError() != 0:
+                    continue
+                v = _num(c)
+                if v == '' or v == 0:
+                    continue
+                year = aa.getCellRangeByName(f'B{r}').getString()
+                desc = f'{year} Bonds (BBB+ or higher, subject to liquidity)' if label == 'bonds' else f'Term Deposits {year}'
+                inserted |= _insert(lo, p, 'fi', desc)
+        # ProcessProperties: Properties = B119:D149
+        for r in range(119, 150):
+            amt = aa.getCellRangeByName(f'D{r}')
+            if amt.getError() != 0:
+                continue
+            name = aa.getCellRangeByName(f'B{r}').getString()
+            if name and _num(amt) != '' and _num(amt) > 0:
+                inserted |= _insert(lo, p, 'prop', name)
+        # ProcessGlobalEquities: Global_Equities = B79:G114
+        limit = aa.getCellRangeByName('Q75').getValue()
+        for r in range(79, 115):
+            d = aa.getCellRangeByName(f'D{r}')
+            if d.getError() != 0:
+                continue
+            g = aa.getCellRangeByName(f'G{r}')
+            dv = _num(d)
+            if dv == '' or not dv > 0:
+                continue
+            gv = _num(g)
+            if gv == '':
+                continue
+            mv = _num(aa.getCellRangeByName(f'M{r}'))
+            if (0 if mv == '' else mv) < 2 and gv > limit:
+                name = aa.getCellRangeByName(f'B{r}').getString()
+                if name not in ('Active', 'Direct', 'Passive'):
+                    inserted |= _insert(lo, p, 'ge', name)
+        # ProcessAustralasianEquities: AA_Australasian_Equities = B35:B70
+        for r in range(35, 71):
+            txt = aa.getCellRangeByName(f'B{r}').getString()
+            if txt and 'direct' not in txt.lower() and len(txt.strip().split(' ')) > 1:
+                dv = _num(aa.getCellRangeByName(f'D{r}'))
+                if dv != '' and dv != 0:
+                    inserted |= _insert(lo, p, 'ae', txt)
+    except _Abort:
+        pass  # a run-time error ends the event handler (its error message box is not reproduced)
+    return inserted
+
+
+def import_macros(lo, p, aa):
+    """Steps of PortfolioSetup that change inputs: AdjustPortfolio, Gold_distribution, ResetInvestmentsMaturing."""
+    data = lo.sheet('Data')
+    # AdjustPortfolio: Data rows flagged "Add" (column W) are added to their section with value 0.
+    last_data = max(r for r in range(1, 1200) if data.getCellByPosition(22, r - 1).getString() != '' or r == 1)
+    def last_portfolio_row():
+        return max(r for r in range(1, 260) if p.getCellRangeByName(f'A{r}').getString() != '')
+    for i in range(2, last_data + 1):
+        if data.getCellByPosition(22, i - 1).getString() != 'Add':
+            continue
+        name = data.getCellByPosition(3, i - 1).getString()
+        section = data.getCellByPosition(4, i - 1).getString()
+        lastp = last_portfolio_row()
+        header = next((r for r in range(1, lastp + 1) if p.getCellRangeByName(f'A{r}').getString().lower() == section.lower()), None)
+        if header is None:
+            continue
+        if any(p.getCellRangeByName(f'A{r}').getString().lower() == name.lower() for r in range(header, lastp + 1)):
+            continue
+        r = header
+        while p.getCellRangeByName(f'A{r}').getString() != '':
+            r += 1
+        put(p, f'A{r}', name)
+        put(p, f'B{r}', 0)
+    # Gold_distribution: K74:K77 from the gold assets held.
+    gold = [aa.getCellRangeByName(f'J{r}').getString() for r in range(74, 78)]
+    held = {}
+    total = 0.0
+    for r in range(1, last_portfolio_row() + 1):
+        a = p.getCellRangeByName(f'A{r}').getString()
+        if a and a in gold and a not in held:
+            held[a] = p.getCellRangeByName(f'B{r}').getValue()
+            total += held[a]
+    for i, g in enumerate(gold):
+        if g in held:
+            v = held[g] / total if total != 0 else (1 if g == 'Sprott Physical Gold Trust ETV' else 0)
+        else:
+            v = 0
+        put(aa, f'K{74 + i}', v)
+    # ResetInvestmentsMaturing
+    put(p, 'BD14', 90)
+
+
 def run(lo, sc):
     p = lo.sheet('Portfolio')
     aa = lo.sheet('Asset Allocation')
@@ -158,6 +290,8 @@ def run(lo, sc):
     for k, cell in SECTOR_OVERRIDE_CELLS.items():
         put(p, cell, (sc.get('sectorOverrides') or {}).get(k))
     put(p, 'B2', sc.get('portfolioDate', '2026-11-20'))
+    if sc.get('importMacros', True):
+        import_macros(lo, p, aa)
     settle(lo, aa)
     # 2. Select the risk profile: ComboBox1_Change copies the profile column x100 into column D.
     headers = [aa.getCellByPosition(c, 1).getString() for c in range(2, 10)]
@@ -168,14 +302,22 @@ def run(lo, sc):
     for k, cell in TARGET_CELLS.items():
         put(p, cell, tp[k] if k in tp else targets[k] * 100)
     settle(lo, aa)
-    # 3. "Update Sheet" button (Trigger_Recalculate.Recalculate): add model assets to their sections.
+    # 3. Asset Allocation Worksheet_Calculate event: add model rows, repeated until nothing changes.
     if sc.get('insertModelAssets', True):
+        for _ in range(10):
+            if not worksheet_calculate_insert(lo, p, aa):
+                break
+            settle(lo, aa)
+    # 4. Optional "Update Sheet" button (Trigger_Recalculate.Recalculate).
+    if sc.get('updateSheetButton'):
         recalculate_macro(p, aa)
         settle(lo, aa)
     out = {'id': sc['id'], 'targetsUsed': targets, 'sectors': {}, 'rows': {}}
     for key, first, last, tot in SECTIONS:
         out['sectors'][key] = {c: val(p, f'{c}{tot}') for c in 'BCDEFGHI'}
         out['rows'][key] = [{c: val(p, f'{c}{r}') for c in 'ABCDEFGHJK'} for r in range(first, last + 1) if val(p, f'A{r}') is not None]
+    if sc.get('debugCells'):
+        out['debug'] = {f'{sh}!{a}': (val(lo.sheet(sh), a), lo.sheet(sh).getCellRangeByName(a).getFormula()[:200]) for sh, a in (x.split('!') for x in sc['debugCells'])}
     out['property'] = {'C117': val(aa, 'C117'), 'amounts': {aa.getCellRangeByName(f'B{r}').getString(): val(aa, f'D{r}') for r in range(119, 150) if aa.getCellRangeByName(f'B{r}').getString()}}
     out['portfolio'] = {k: val(p, a) for k, a in (('total', 'B202'), ('recommendedTotal', 'F202'), ('finalPortfolioTotal', 'F204'), ('errors', 'BD2'), ('status', 'BC2'))}
     out['assetAllocationTargets'] = {k: val(aa, a) for k, a in (('cash', 'M3'), ('fi', 'M4'), ('ae', 'M5'), ('ge', 'M6'), ('prop', 'M7'), ('ms', 'M8'))}
@@ -187,7 +329,7 @@ def main():
     scenarios = json.load(open(sys.argv[1]))
     tmp = tempfile.mkdtemp(prefix='golden-')
     results = []
-    lo = LO()
+    lo = LO(port=int(os.environ.get('LO_PORT', '2002')))
     try:
         for sc in scenarios:
             path = os.path.join(tmp, 'wb.xlsm')
