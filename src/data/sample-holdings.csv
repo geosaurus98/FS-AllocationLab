@@ -1,0 +1,23 @@
+Client number,Asset Name,Asset Value,Asset Class,Asset Sub-Class
+DEMO-001,Demo NZ Cash Fund,"$20,000.00",Cash,New Zealand
+DEMO-001,Demo NZ Bond Fund,"$190,000.00",Fixed Interest,New Zealand
+DEMO-001,Demo Australasian Share Fund,"$90,000.00",Australasian Equities,New Zealand
+DEMO-001,Demo Global Share Fund,"$180,000.00",Global Equities,International
+DEMO-001,Demo Listed Property Fund,"$20,000.00",Property,New Zealand
+DEMO-002,Demo NZ Cash Fund,"$15,000.00",Cash,New Zealand
+DEMO-002,Demo Corporate Bond,"$420,000.00",Fixed Income,New Zealand
+DEMO-002,Demo Australasian Share Fund,"$40,000.00",Australasian Equities,Australia
+DEMO-002,Demo Global Share Fund,"$90,000.00",Global Equities,International
+DEMO-002,Demo Diversified Fund,"$35,000.00",Diversified,International
+DEMO-003,Demo NZ Cash Fund,"$8,000.00",Cash,New Zealand
+DEMO-003,Demo NZ Bond Fund,"$70,000.00",Fixed Interest,New Zealand
+DEMO-003,Demo Australasian Share Fund,"$85,000.00",Australasian Equities,New Zealand
+DEMO-003,Demo Global Share Fund,"$210,000.00",Global Equities,International
+DEMO-003,Demo Listed Property Fund,"$17,000.00",Property,International
+DEMO-003,Demo Multi-Sector Fund,"$10,000.00",Multi-Sector,International
+DEMO-004,Demo NZ Cash Fund,"$9,000.00",Cash,New Zealand
+DEMO-004,Demo NZ Bond Fund,"$141,000.00",Fixed Interest,New Zealand
+DEMO-004,Demo Australasian Share Fund,"$45,000.00",Australasian Equities,New Zealand
+DEMO-004,Demo Global Share Fund,"$93,000.00",Global Equities,International
+DEMO-004,Demo Listed Property Fund,"$12,000.00",Property,Australia
+DEMO-006,Demo Global Share Fund,"$50,000.00",Global Equities,International

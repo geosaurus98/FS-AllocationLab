@@ -1,6 +1,6 @@
 # AllocationLab
 
-Internal workbench for designing, comparing and analysing **standard strategic and target asset allocations** for Financial Strategies' model profiles. It is a prototype. It covers the firm's standard profiles only and does not handle individual client portfolios.
+Internal workbench for designing, comparing and analysing **standard strategic and target asset allocations** for Financial Strategies' model profiles, and for checking client holdings against them. It is a prototype.
 
 > **Data notice.** All allocation data in this app is **synthetic** apart from one **illustrative** Balanced 60/40 allocation (Cash 2%, Fixed Interest 38%, Australasian Equities 17%, Global Equities 39%, Property 4%, Multi-Sector 0%). Nothing ships marked *Approved*. The app produces no investment recommendations or return forecasts.
 
@@ -35,6 +35,7 @@ Open the URL Vite prints (normally http://localhost:5173).
 | **Profile Comparison** | Compare strategic, target and proposed (a saved scenario) allocations side by side. Shows pp differences for every pair, growth/defensive/unclassified rows, a stacked chart and a diverging pp-difference chart. |
 | **Scenarios** | Create a scenario from a strategic baseline, a target baseline or a blank start. You can also duplicate, rename, delete and open scenarios, and compare up to 6 side by side. |
 | **Assumptions** | Revise baselines, constraint sets, the Multi-Sector look-through fraction and validation tolerances. Every record carries a status, source and version. Each revision creates a new version and keeps the old one in history. A record can be marked *Approved* only through a typed confirmation, and approved records are locked. Includes an audit log and a reset to demo data. |
+| **Client Holdings** | Load a client details file and a holdings file. For each client the page shows actual weights against the profile's strategic or target allocation, drift beyond tolerance, growth assets against the client's growth target, and whether cash covers monthly fees and withdrawals. Output is descriptive only. See [Client holdings](#client-holdings). |
 | **Import / Export** | Export baselines and/or scenarios as CSV, or download a template. Imports are parsed, validated and previewed before anything is applied (see below). |
 
 ### Data statuses
@@ -75,6 +76,24 @@ baseline,balanced_50_50,target,,draft,Example source,,3,47,15,31,4,
 4. **Approved baselines can never be overwritten by import.** For those rows, only *import as scenario* or *skip* is offered.
 5. An import cannot set a record to `approved`. Rows marked approved are recorded as `draft`.
 
+## Client holdings
+
+Two CSV files, matched on `Client number`. Templates and synthetic samples are available on the page.
+
+**Client details:** `Client number, Risk Profile, Growth Target %, Monthly Fees, Monthly Withdrawals`. Optional columns: `Cash Cover Months, Drift Tolerance pp, Notes`.
+
+**Holdings:** `Client number, Asset Name, Asset Value, Asset Class, Asset Sub-Class` (one row per holding; NZD, `$` and commas allowed).
+
+Rules (`src/lib/holdings.ts`, with tests in `holdings.test.ts`):
+
+- **Weights.** Weight = class value ÷ the client's total value. Value in asset-class labels that aren't mapped (e.g. "Diversified" or "Gold" until you map them) stays in the total and is shown as unmapped. It is never dropped or guessed. Only exact standard names map automatically.
+- **Drift.** Drift = actual weight − the profile's strategic or target weight, flagged beyond ±tolerance. The default tolerance is 2 pp, matching the existing workbook; a per-client value overrides it.
+- **Growth target.** The actual growth share is compared with the client's growth target. If the client's target differs from the profile model's growth share, that is noted. The app does not build a client-specific allocation.
+- **Cash coverage.** Required cash = (monthly fees + monthly withdrawals) × cover months. The default is 12 months; a per-client value overrides it. The page shows months covered, any shortfall, and the cash needed as a percentage of the portfolio compared with the profile's cash weight.
+- **Bad data.** Rows with missing or invalid values, unknown profiles and duplicate clients are rejected with line numbers. Negative values are kept but warned about. A client found in only one of the two files is flagged.
+
+**Data handling.** Client files are held only in the open tab's memory. They are never written to browser storage, and they are cleared on reload or by **Clear client data**. Selected client numbers are not put in the URL. Only the asset-class mapping and the default settings are remembered. The prototype has no authentication, so do not load real client data until the firm's privacy and compliance process has approved it.
+
 ## Persistence
 
 State is saved to the browser's `localStorage` under the key `allocationlab:state:v1`. If the saved data is corrupt or unrecognised, the app shows the demo data instead and displays a notice; it does not delete the saved copy. **Assumptions → Reset demo data** restores the fixtures. To keep work, export it as CSV. There is no backend.
@@ -101,7 +120,7 @@ src/
 
 ## Tests
 
-`npm test` runs 46 tests covering:
+`npm test` runs 61 tests covering:
 
 - Allocation totals, tolerance and floating-point handling, and missing data
 - The minimum Cash weight and other min/max constraints, including infeasible constraint sets
@@ -110,12 +129,13 @@ src/
 - Scenario isolation: deep-frozen baselines that scenario operations must not mutate; duplicates independent of their source; save/revert/reset semantics; and reducer-level checks that baselines are unchanged after scenario edits
 - Baseline versioning, approval locking, and the rule that missing data cannot be approved
 - CSV parsing, round-tripping, and the import safety rules
+- Client holdings: money parsing, file validation, class mapping, weights, drift and tolerance overrides, growth target gaps and cash coverage
 
 ## Not in this iteration
 
 - Monte Carlo, optimisation, return or risk forecasts (deliberately excluded)
 - Authentication, user identity on approvals, multi-user storage or a backend
-- Client portfolios
+- Client-specific target allocations, trade or rebalancing suggestions, and exporting client results
 - CSV import and export of constraint sets and assumptions (only allocations are exchanged)
 - Dark mode
 

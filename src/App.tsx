@@ -4,6 +4,7 @@ import { Comparison } from './pages/Comparison';
 import { Dashboard } from './pages/Dashboard';
 import { DataPage } from './pages/DataPage';
 import { Designer } from './pages/Designer';
+import { ClientHoldings } from './pages/ClientHoldings';
 import { Scenarios } from './pages/Scenarios';
 import { useRoute } from './router';
 
@@ -25,6 +26,9 @@ export function App() {
       break;
     case 'data':
       page = <DataPage />;
+      break;
+    case 'clients':
+      page = <ClientHoldings />;
       break;
     default:
       page = <Dashboard />;

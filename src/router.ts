@@ -6,7 +6,8 @@ export type Route =
   | { page: 'compare'; profileId: string | null; scenarioId: string | null }
   | { page: 'scenarios' }
   | { page: 'assumptions' }
-  | { page: 'data' };
+  | { page: 'data' }
+  | { page: 'clients' };
 
 export function parseHash(hash: string): Route {
   const [path = '', query = ''] = hash.replace(/^#\/?/, '').split('?');
@@ -23,6 +24,8 @@ export function parseHash(hash: string): Route {
       return { page: 'assumptions' };
     case 'data':
       return { page: 'data' };
+    case 'clients':
+      return { page: 'clients' };
     default:
       return { page: 'dashboard' };
   }
