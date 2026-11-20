@@ -1,0 +1,11 @@
+{
+  "multiSector": {
+    "growthFraction": null,
+    "status": "missing",
+    "source": "Not supplied — Multi-Sector exposure is reported as unclassified until a look-through growth fraction is entered"
+  },
+  "settings": {
+    "sumTolerance": 0.01,
+    "nominalSplitTolerance": 0.5
+  }
+}

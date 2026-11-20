@@ -1,0 +1,21 @@
+{
+  "_comment": "SYNTHETIC DEMONSTRATION DATA. None of these values are approved Financial Strategies allocations. The Balanced 60/40 strategic allocation is the illustrative allocation supplied in the project brief. null = data not supplied (missing).",
+  "asOf": "2026-11-20",
+  "baselines": [
+    { "profileId": "defensive",    "kind": "strategic", "status": "synthetic",    "source": "Synthetic fixture (demo only)", "weights": { "cash": 10, "fixedInterest": 75, "ausEquities": 5,  "globalEquities": 7,  "property": 3, "multiSector": 0 } },
+    { "profileId": "conservative", "kind": "strategic", "status": "synthetic",    "source": "Synthetic fixture (demo only)", "weights": { "cash": 5,  "fixedInterest": 63, "ausEquities": 9,  "globalEquities": 16, "property": 4, "multiSector": 3 } },
+    { "profileId": "moderate",     "kind": "strategic", "status": "synthetic",    "source": "Synthetic fixture (demo only)", "weights": { "cash": 4,  "fixedInterest": 51, "ausEquities": 13, "globalEquities": 25, "property": 4, "multiSector": 3 } },
+    { "profileId": "balanced5050", "kind": "strategic", "status": "synthetic",    "source": "Synthetic fixture (demo only)", "weights": { "cash": 3,  "fixedInterest": 47, "ausEquities": 15, "globalEquities": 31, "property": 4, "multiSector": 0 } },
+    { "profileId": "balanced6040", "kind": "strategic", "status": "illustrative", "source": "Illustrative allocation from project brief — not an approved allocation", "weights": { "cash": 2, "fixedInterest": 38, "ausEquities": 17, "globalEquities": 39, "property": 4, "multiSector": 0 } },
+    { "profileId": "growth",       "kind": "strategic", "status": "synthetic",    "source": "Synthetic fixture (demo only)", "weights": { "cash": 2,  "fixedInterest": 23, "ausEquities": 21, "globalEquities": 49, "property": 5, "multiSector": 0 } },
+    { "profileId": "highGrowth",   "kind": "strategic", "status": "synthetic",    "source": "Synthetic fixture (demo only) — Property deliberately left missing", "weights": { "cash": 2, "fixedInterest": 8, "ausEquities": 24, "globalEquities": 59, "property": null, "multiSector": 0 } },
+
+    { "profileId": "defensive",    "kind": "target", "status": "missing",   "source": "Not supplied", "weights": null },
+    { "profileId": "conservative", "kind": "target", "status": "missing",   "source": "Not supplied", "weights": null },
+    { "profileId": "moderate",     "kind": "target", "status": "missing",   "source": "Not supplied", "weights": null },
+    { "profileId": "balanced5050", "kind": "target", "status": "missing",   "source": "Not supplied", "weights": null },
+    { "profileId": "balanced6040", "kind": "target", "status": "synthetic", "source": "Synthetic fixture (demo only)", "weights": { "cash": 3, "fixedInterest": 37, "ausEquities": 16, "globalEquities": 40, "property": 4, "multiSector": 0 } },
+    { "profileId": "growth",       "kind": "target", "status": "synthetic", "source": "Synthetic fixture (demo only)", "weights": { "cash": 3, "fixedInterest": 22, "ausEquities": 20, "globalEquities": 50, "property": 5, "multiSector": 0 } },
+    { "profileId": "highGrowth",   "kind": "target", "status": "missing",   "source": "Not supplied", "weights": null }
+  ]
+}

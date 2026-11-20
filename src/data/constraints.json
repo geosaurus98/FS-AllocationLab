@@ -1,0 +1,12 @@
+{
+  "_comment": "Constraint sets. Only the Balanced 60/40 minimum Cash weight (2%) is specified by the project brief; all other limits are not configured (null) until supplied.",
+  "constraints": [
+    { "profileId": "defensive",    "status": "missing",      "source": "Not supplied", "bounds": {} },
+    { "profileId": "conservative", "status": "missing",      "source": "Not supplied", "bounds": {} },
+    { "profileId": "moderate",     "status": "missing",      "source": "Not supplied", "bounds": {} },
+    { "profileId": "balanced5050", "status": "missing",      "source": "Not supplied", "bounds": {} },
+    { "profileId": "balanced6040", "status": "illustrative", "source": "Project brief: minimum Cash 2% for the illustrative scenario", "bounds": { "cash": { "min": 2, "max": null } } },
+    { "profileId": "growth",       "status": "missing",      "source": "Not supplied", "bounds": {} },
+    { "profileId": "highGrowth",   "status": "missing",      "source": "Not supplied", "bounds": {} }
+  ]
+}
