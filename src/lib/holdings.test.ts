@@ -15,7 +15,7 @@ const ref6040 = weightsFrom({ cash: 2, fixedInterest: 38, ausEquities: 17, globa
 const H = 'Client number,Asset Name,Asset Value,Asset Class,Asset Sub-Class';
 
 const client = (over: Partial<ClientRecord> = {}): ClientRecord => ({
-  line: 2, clientNumber: 'C1', profileId: 'balanced6040', growthTarget: 60, monthlyFees: 500, monthlyWithdrawals: 1500,
+  line: 2, clientNumber: 'C1', profileId: 'balanced6040', growthTarget: 60, monthlyFees: 500, annualFeePct: null, monthlyWithdrawals: 1500,
   cashCoverMonths: null, driftTolerance: null, notes: '', ...over,
 });
 
@@ -38,7 +38,7 @@ describe('parseHoldingsCsv', () => {
     expect(r.warnings[0]?.message).toMatch(/Negative/);
   });
   it('rejects files missing required columns', () => {
-    expect(parseHoldingsCsv('Client number,Asset Value\nC1,5').fatal[0]).toMatch(/Asset Name, Asset Class/);
+    expect(parseHoldingsCsv('Client number,Asset Value\nC1,5').fatal[0]).toMatch(/Asset Name/);
   });
 });
 

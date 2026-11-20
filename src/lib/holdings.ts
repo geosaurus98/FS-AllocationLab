@@ -1,5 +1,6 @@
 import { cleanFloat, diffWeights, growthDefensiveSplit, type GrowthDefensiveSplit } from './allocation';
-import { parseCsv } from './csv';
+import { detectDelimiter, parseCsv } from './csv';
+import { lookupSecurity, normName, type MatchResult, type SecurityMaster } from './datasheet';
 import { formatPct, formatPp, parsePercent } from './format';
 import { ASSET_CLASSES, PROFILES } from './reference';
 import type { AssetClassId, ProfileId, Severity, Weights } from './types';
@@ -8,9 +9,12 @@ import { ASSET_CLASS_IDS } from './types';
 /**
  * Client holdings analysis. Pure functions only.
  *
- * Holdings CSV columns:  Client number, Asset Name, Asset Value, Asset Class, Asset Sub-Class
- * Clients CSV columns:   Client number, Risk Profile, Growth Target %, Monthly Fees, Monthly Withdrawals,
- *                        [Cash Cover Months], [Drift Tolerance pp], [Notes]
+ * Holdings file (CSV or tab-separated):
+ *   Client number (or Portfolio Id), Asset Name, Asset Value (or Asset value NZD), [Asset Class], [Asset Sub-Class]
+ *   When Asset Class is absent, holdings are classified from the investment datasheet by name.
+ * Clients file:
+ *   Client number, Risk Profile, Growth Target %, Monthly Fees and/or Annual Fee %, Monthly Withdrawals,
+ *   [Cash Cover Months], [Drift Tolerance pp], [Notes]
  *
  * Output is descriptive (actual vs reference, coverage, data problems). It never proposes trades.
  */
@@ -22,8 +26,18 @@ export interface HoldingRow {
   clientNumber: string;
   assetName: string;
   value: number;
+  /** Asset Class from the file; '' when not supplied. */
   assetClass: string;
   subClass: string;
+}
+
+export type ClassSource = 'file' | 'datasheet' | 'override' | 'datasheet-no-class' | 'ambiguous' | 'not-found';
+
+/** A holding after classification. `assetClass` is the label used for aggregation ('' = unclassified). */
+export interface ClassifiedHolding extends HoldingRow {
+  source: ClassSource;
+  match: MatchResult | null;
+  type: string;
 }
 
 export interface ClientRecord {
@@ -32,7 +46,10 @@ export interface ClientRecord {
   profileId: ProfileId;
   /** Client's growth asset target, percent (0–100). */
   growthTarget: number | null;
+  /** Fixed monthly fee in dollars. */
   monthlyFees: number | null;
+  /** Annual fee as % of portfolio value (e.g. 1 = 1% p.a.); converted to dollars per month from total value. */
+  annualFeePct: number | null;
   monthlyWithdrawals: number | null;
   /** Per-client override; null = use default. */
   cashCoverMonths: number | null;
@@ -103,15 +120,15 @@ export function lookupProfile(raw: string): ProfileId | null {
 // ---------------------------------------------------------------- holdings CSV
 
 const H_COLS = {
-  client: ['client number', 'client no', 'client', 'client id'],
-  name: ['asset name', 'asset', 'investment', 'holding'],
-  value: ['asset value', 'value', 'market value'],
+  client: ['client number', 'client no', 'client', 'client id', 'portfolio id', 'portfolio'],
+  name: ['asset name', 'asset', 'investment', 'holding', 'fs name', 'apex name'],
+  value: ['asset value', 'asset value nzd', 'value nzd', 'value', 'market value'],
   cls: ['asset class'],
   sub: ['asset sub class', 'asset subclass', 'sub asset class', 'sub class'],
 };
 
 export function parseHoldingsCsv(text: string): ParseOutcome<HoldingRow> {
-  const table = parseCsv(text);
+  const table = parseCsv(text, detectDelimiter(text));
   const out: ParseOutcome<HoldingRow> = { rows: [], errors: [], warnings: [], fatal: [] };
   if (table.length === 0) return { ...out, fatal: ['The holdings file is empty.'] };
   const header = table[0] ?? [];
@@ -122,9 +139,9 @@ export function parseHoldingsCsv(text: string): ParseOutcome<HoldingRow> {
     cls: headerIndex(header, H_COLS.cls),
     sub: headerIndex(header, H_COLS.sub),
   };
-  const missing = (['client', 'name', 'value', 'cls'] as const).filter((k) => idx[k] < 0);
+  const missing = (['client', 'name', 'value'] as const).filter((k) => idx[k] < 0);
   if (missing.length) {
-    const names = { client: 'Client number', name: 'Asset Name', value: 'Asset Value', cls: 'Asset Class' };
+    const names = { client: 'Client number / Portfolio Id', name: 'Asset Name', value: 'Asset Value' };
     return { ...out, fatal: [`Holdings file is missing column(s): ${missing.map((m) => names[m]).join(', ')}.`] };
   }
   const cell = (r: string[], i: number) => (i < 0 ? '' : (r[i] ?? '').trim());
@@ -138,7 +155,7 @@ export function parseHoldingsCsv(text: string): ParseOutcome<HoldingRow> {
     if (!money.ok) problems.push(money.error);
     else if (money.value === null) problems.push('Asset Value is blank');
     const assetClass = cell(r, idx.cls);
-    if (!assetClass) problems.push('Asset Class is blank');
+    if (!cell(r, idx.name)) problems.push('Asset Name is blank');
     if (problems.length || !money.ok || money.value === null) {
       out.errors.push({ line, message: problems.join('; ') });
       return;
@@ -155,7 +172,8 @@ const C_COLS = {
   client: H_COLS.client,
   profile: ['risk profile', 'profile'],
   growth: ['growth target %', 'growth target', 'growth asset target %', 'growth asset target', 'growth %'],
-  fees: ['monthly fees', 'fees per month', 'fees'],
+  fees: ['monthly fees', 'fees per month', 'monthly fees $'],
+  feePct: ['annual fee %', 'annual fees %', 'fee % p.a.', 'fees % pa', 'annual fee'],
   withdrawals: ['monthly withdrawals', 'withdrawals per month', 'withdrawals'],
   cover: ['cash cover months', 'cash cover', 'months cover'],
   tol: ['drift tolerance pp', 'drift tolerance', 'tolerance'],
@@ -163,7 +181,7 @@ const C_COLS = {
 };
 
 export function parseClientsCsv(text: string): ParseOutcome<ClientRecord> {
-  const table = parseCsv(text);
+  const table = parseCsv(text, detectDelimiter(text));
   const out: ParseOutcome<ClientRecord> = { rows: [], errors: [], warnings: [], fatal: [] };
   if (table.length === 0) return { ...out, fatal: ['The client details file is empty.'] };
   const header = table[0] ?? [];
@@ -172,10 +190,10 @@ export function parseClientsCsv(text: string): ParseOutcome<ClientRecord> {
     ['client', 'Client number'],
     ['profile', 'Risk Profile'],
     ['growth', 'Growth Target %'],
-    ['fees', 'Monthly Fees'],
     ['withdrawals', 'Monthly Withdrawals'],
   ];
   const missing = required.filter(([k]) => idx[k] < 0).map(([, n]) => n);
+  if (idx.fees < 0 && idx.feePct < 0) missing.push('Monthly Fees or Annual Fee %');
   if (missing.length) return { ...out, fatal: [`Client details file is missing column(s): ${missing.join(', ')}.`] };
   const cell = (r: string[], i: number) => (i < 0 ? '' : (r[i] ?? '').trim());
   const seen = new Set<string>();
@@ -209,7 +227,8 @@ export function parseClientsCsv(text: string): ParseOutcome<ClientRecord> {
       return m.value;
     };
     const growthTarget = pct(idx.growth, 'Growth Target %', 100);
-    const monthlyFees = money(idx.fees, 'Monthly Fees');
+    const monthlyFees = idx.fees >= 0 ? money(idx.fees, 'Monthly Fees') : null;
+    const annualFeePct = idx.feePct >= 0 ? pct(idx.feePct, 'Annual Fee %', 100) : null;
     const monthlyWithdrawals = money(idx.withdrawals, 'Monthly Withdrawals');
     const cashCoverMonths = idx.cover >= 0 ? pct(idx.cover, 'Cash Cover Months', 120) : null;
     const driftTolerance = idx.tol >= 0 ? pct(idx.tol, 'Drift Tolerance pp', 100) : null;
@@ -220,8 +239,8 @@ export function parseClientsCsv(text: string): ParseOutcome<ClientRecord> {
     }
     seen.add(clientNumber);
     if (growthTarget === null) out.warnings.push({ line, message: `Client ${clientNumber}: Growth Target % is blank.` });
-    if (monthlyFees === null || monthlyWithdrawals === null) out.warnings.push({ line, message: `Client ${clientNumber}: monthly fees and/or withdrawals are blank, so cash coverage cannot be fully assessed.` });
-    out.rows.push({ line, clientNumber, profileId, growthTarget, monthlyFees, monthlyWithdrawals, cashCoverMonths, driftTolerance, notes: cell(r, idx.notes) });
+    if ((monthlyFees === null && annualFeePct === null) || monthlyWithdrawals === null) out.warnings.push({ line, message: `Client ${clientNumber}: fees and/or withdrawals are blank, so cash coverage cannot be fully assessed.` });
+    out.rows.push({ line, clientNumber, profileId, growthTarget, monthlyFees, annualFeePct, monthlyWithdrawals, cashCoverMonths, driftTolerance, notes: cell(r, idx.notes) });
   });
   return out;
 }
@@ -252,9 +271,12 @@ export function resolveClass(label: string, map: ClassMap): AssetClassId | null 
 }
 
 /** Distinct Asset Class labels in the holdings with the value they carry and their current mapping. */
+export const UNCLASSIFIED_LABEL = 'Unclassified holdings';
+
 export function classLabels(rows: HoldingRow[], map: ClassMap): { key: string; label: string; value: number; count: number; mapped: AssetClassId | null; isDefault: boolean }[] {
   const acc = new Map<string, { key: string; label: string; value: number; count: number }>();
   for (const r of rows) {
+    if (!r.assetClass) continue;
     const k = classKey(r.assetClass);
     const e = acc.get(k) ?? { key: k, label: r.assetClass.trim(), value: 0, count: 0 };
     e.value += r.value;
@@ -265,6 +287,41 @@ export function classLabels(rows: HoldingRow[], map: ClassMap): { key: string; l
     .map((e) => ({ ...e, value: cleanFloat(e.value), mapped: resolveClass(e.label, map), isDefault: !(e.key in map) }))
     .sort((a, b) => b.value - a.value);
 }
+
+// ---------------------------------------------------------------- classification
+
+/** Per-holding-name class overrides chosen by the user, keyed by normName(asset name). */
+export type HoldingOverrides = Record<string, string>;
+
+/**
+ * Give every holding an asset-class label. Precedence:
+ *   1. a user override for that asset name;
+ *   2. Asset Class supplied in the holdings file;
+ *   3. the investment datasheet (exact name, or name without the trailing TD/bond detail suffix).
+ * Anything else is left unclassified ('') with the reason recorded.
+ */
+export function classifyHoldings(rows: HoldingRow[], master: SecurityMaster | null, overrides: HoldingOverrides = {}): ClassifiedHolding[] {
+  return rows.map((r) => {
+    const ov = overrides[normName(r.assetName)];
+    const match = master ? lookupSecurity(master, r.assetName) : null;
+    const type = match?.status === 'matched' ? match.record.type : '';
+    if (ov) return { ...r, assetClass: ov, subClass: r.subClass, source: 'override', match, type };
+    if (r.assetClass) return { ...r, source: 'file', match, type };
+    if (!match || match.status === 'not-found') return { ...r, source: 'not-found', match, type };
+    if (match.status === 'ambiguous') return { ...r, source: 'ambiguous', match, type };
+    if (!match.record.assetClass) return { ...r, source: 'datasheet-no-class', match, type };
+    return { ...r, assetClass: match.record.assetClass, subClass: r.subClass || match.record.subClass, source: 'datasheet', match, type };
+  });
+}
+
+export const SOURCE_LABEL: Record<ClassSource, string> = {
+  file: 'From holdings file',
+  datasheet: 'Datasheet',
+  override: 'Manual assignment',
+  'datasheet-no-class': 'In datasheet, no asset class',
+  ambiguous: 'Ambiguous in datasheet',
+  'not-found': 'Not in datasheet',
+};
 
 // ---------------------------------------------------------------- aggregation & analysis
 
@@ -288,9 +345,10 @@ export function aggregateClient(clientNumber: string, holdings: HoldingRow[], ma
     if (h.clientNumber !== clientNumber) continue;
     count++;
     total += h.value;
-    const ac = resolveClass(h.assetClass, map);
+    const ac = h.assetClass ? resolveClass(h.assetClass, map) : null;
+    const label = h.assetClass.trim() || UNCLASSIFIED_LABEL;
     if (ac) valueByClass[ac] += h.value;
-    else unmappedByLabel.set(h.assetClass.trim(), (unmappedByLabel.get(h.assetClass.trim()) ?? 0) + h.value);
+    else unmappedByLabel.set(label, (unmappedByLabel.get(label) ?? 0) + h.value);
   }
   total = cleanFloat(total);
   const weights = {} as Weights;
@@ -317,6 +375,8 @@ export interface ClientIssue {
 }
 
 export interface CashCoverage {
+  /** Fees per month in dollars (fixed fee, or annual % × total value ÷ 12). */
+  monthlyFees: number | null;
   monthlyOutflow: number | null;
   coverMonths: number;
   requiredCash: number | null;
@@ -415,7 +475,12 @@ export function analyseClient(a: AnalyseArgs): ClientAnalysis {
   }
 
   // Cash coverage
-  const outflow = client && client.monthlyFees !== null && client.monthlyWithdrawals !== null ? client.monthlyFees + client.monthlyWithdrawals : null;
+  let monthlyFees: number | null = null;
+  if (client) {
+    const pctFee = client.annualFeePct !== null && agg.totalValue > 0 ? (agg.totalValue * client.annualFeePct) / 100 / 12 : null;
+    if (client.monthlyFees !== null || pctFee !== null) monthlyFees = cleanFloat((client.monthlyFees ?? 0) + (pctFee ?? 0));
+  }
+  const outflow = client && monthlyFees !== null && client.monthlyWithdrawals !== null ? cleanFloat(monthlyFees + client.monthlyWithdrawals) : null;
   // Without holdings there is no cash position to assess.
   const assessable = agg.holdingCount > 0 && outflow !== null;
   const actualCash = agg.valueByClass.cash;
@@ -450,7 +515,7 @@ export function analyseClient(a: AnalyseArgs): ClientAnalysis {
     split,
     growthGap,
     referenceGrowthGap,
-    cash: { monthlyOutflow: outflow, coverMonths, requiredCash, actualCash, monthsCovered, shortfall, requiredCashPct, referenceCashPct, impliedCashPct },
+    cash: { monthlyFees, monthlyOutflow: outflow, coverMonths, requiredCash, actualCash, monthsCovered, shortfall, requiredCashPct, referenceCashPct, impliedCashPct },
     issues,
   };
 }

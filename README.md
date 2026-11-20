@@ -78,21 +78,30 @@ baseline,balanced_50_50,target,,draft,Example source,,3,47,15,31,4,
 
 ## Client holdings
 
-Two CSV files, matched on `Client number`. Templates and synthetic samples are available on the page.
+You can load three inputs (templates and synthetic samples are on the page):
 
-**Client details:** `Client number, Risk Profile, Growth Target %, Monthly Fees, Monthly Withdrawals`. Optional columns: `Cash Cover Months, Drift Tolerance pp, Notes`.
+1. **Investment datasheet** (optional but usually needed): `Datasheet.xlsx`, the *Data* sheet of the recommendations workbook, or a CSV export of it. It needs a header row with `Asset Class` and at least one of `Apex Name`, `FS Name` or `OA Name`. The app reads .xlsx/.xlsm files itself, with no library and without running macros.
+2. **Client details:** a file with `Client number, Risk Profile, Growth Target %, Annual Fee % and/or Monthly Fees, Monthly Withdrawals`, plus optional `Cash Cover Months, Drift Tolerance pp, Notes`. You can also enter clients one at a time on the page.
+3. **Holdings:** `Client number` (or `Portfolio Id`), `Asset Name`, `Asset Value` (or `Asset value NZD`). `Asset Class` and `Asset Sub-Class` are optional. Upload a CSV or tab-separated file, or paste straight from Excel.
 
-**Holdings:** `Client number, Asset Name, Asset Value, Asset Class, Asset Sub-Class` (one row per holding; NZD, `$` and commas allowed).
+**How each holding gets its asset class.** The first rule that applies wins:
 
-Rules (`src/lib/holdings.ts`, with tests in `holdings.test.ts`):
+1. A manual assignment you made for that investment name.
+2. The Asset Class column in the holdings file.
+3. The datasheet: an exact name match on Apex, FS or OA name, ignoring case and spacing. If that fails, it tries again after removing the trailing detail suffix that platforms add to term deposits and bonds, such as `(188,000.00; 3.53%; 18 Months; 24/12/2026)`.
 
-- **Weights.** Weight = class value ÷ the client's total value. Value in asset-class labels that aren't mapped (e.g. "Diversified" or "Gold" until you map them) stays in the total and is shown as unmapped. It is never dropped or guessed. Only exact standard names map automatically.
+Holdings that still have no class, or match datasheet rows with conflicting classes, are listed for you to assign. Until then they are excluded from the class weights, with a warning. The app never fuzzy-matches names.
+
+Calculation rules (`src/lib/holdings.ts` and `src/lib/datasheet.ts`, with tests):
+
+- **Weights.** Weight = class value ÷ the client's total value. Unclassified or unmapped value stays in the total and is reported separately.
 - **Drift.** Drift = actual weight − the profile's strategic or target weight, flagged beyond ±tolerance. The default tolerance is 2 pp, matching the existing workbook; a per-client value overrides it.
 - **Growth target.** The actual growth share is compared with the client's growth target. If the client's target differs from the profile model's growth share, that is noted. The app does not build a client-specific allocation.
-- **Cash coverage.** Required cash = (monthly fees + monthly withdrawals) × cover months. The default is 12 months; a per-client value overrides it. The page shows months covered, any shortfall, and the cash needed as a percentage of the portfolio compared with the profile's cash weight.
-- **Bad data.** Rows with missing or invalid values, unknown profiles and duplicate clients are rejected with line numbers. Negative values are kept but warned about. A client found in only one of the two files is flagged.
+- **Fees.** Monthly fees = (annual fee % × total portfolio value ÷ 12) + any fixed monthly fee.
+- **Cash coverage.** Required cash = (monthly fees + monthly withdrawals) × cover months. The default is 12 months; a per-client value overrides it.
+- **Bad data.** Rows with missing or invalid values, unknown profiles and duplicate clients are rejected with line numbers. Negative values are kept but warned about.
 
-**Data handling.** Client files are held only in the open tab's memory. They are never written to browser storage, and they are cleared on reload or by **Clear client data**. Selected client numbers are not put in the URL. Only the asset-class mapping and the default settings are remembered. The prototype has no authentication, so do not load real client data until the firm's privacy and compliance process has approved it.
+**Data handling.** Client files, manually entered clients and the datasheet are held only in the open tab's memory. They are cleared on reload or by **Clear client data**, and client numbers are never put in the URL. The only things remembered in browser storage are the asset-class label mapping, manual class assignments keyed by investment name (no client numbers or values), and the default settings. The prototype has no authentication, so do not load real client data until the firm's privacy and compliance process has approved it.
 
 ## Persistence
 
@@ -120,7 +129,7 @@ src/
 
 ## Tests
 
-`npm test` runs 61 tests covering:
+`npm test` runs 69 tests covering:
 
 - Allocation totals, tolerance and floating-point handling, and missing data
 - The minimum Cash weight and other min/max constraints, including infeasible constraint sets
@@ -129,7 +138,8 @@ src/
 - Scenario isolation: deep-frozen baselines that scenario operations must not mutate; duplicates independent of their source; save/revert/reset semantics; and reducer-level checks that baselines are unchanged after scenario edits
 - Baseline versioning, approval locking, and the rule that missing data cannot be approved
 - CSV parsing, round-tripping, and the import safety rules
-- Client holdings: money parsing, file validation, class mapping, weights, drift and tolerance overrides, growth target gaps and cash coverage
+- Client holdings: money parsing, CSV/TSV validation, class mapping, weights, drift and tolerance overrides, growth target gaps, annual-% fees and cash coverage
+- The .xlsx reader and datasheet matching, using a synthetic workbook fixture: Apex/FS/OA names, term-deposit suffix stripping, ambiguous and not-found names, and classification precedence
 
 ## Not in this iteration
 

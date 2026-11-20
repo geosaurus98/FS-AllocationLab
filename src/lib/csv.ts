@@ -19,7 +19,15 @@ export const CSV_COLUMNS = [...CSV_META_COLUMNS, ...ASSET_CLASSES.map((a) => a.c
 
 // ---------- low-level CSV ----------
 
-export function parseCsv(text: string): string[][] {
+/** Tab if the first line contains a tab and no comma outside quotes is more frequent; else comma. */
+export function detectDelimiter(text: string): ',' | '\t' {
+  const first = text.replace(/^\uFEFF/, '').split(/\r?\n/, 1)[0] ?? '';
+  const tabs = (first.match(/\t/g) ?? []).length;
+  const commas = (first.match(/,/g) ?? []).length;
+  return tabs > 0 && tabs >= commas ? '\t' : ',';
+}
+
+export function parseCsv(text: string, delimiter: ',' | '\t' = ','): string[][] {
   const rows: string[][] = [];
   let row: string[] = [];
   let field = '';
@@ -35,7 +43,7 @@ export function parseCsv(text: string): string[][] {
         } else inQuotes = false;
       } else field += c;
     } else if (c === '"') inQuotes = true;
-    else if (c === ',') {
+    else if (c === delimiter) {
       row.push(field);
       field = '';
     } else if (c === '\n' || c === '\r') {

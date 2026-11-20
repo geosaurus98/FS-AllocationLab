@@ -6,19 +6,26 @@ import { PercentInput } from '../components/PercentInput';
 import { Button, Card, EmptyState, Field, inputCls, IssueList, Notice, PageHeader, StatusBadge, Td, Th, TableWrap, ValidationBadge, cx } from '../components/ui';
 import { toCsv } from '../lib/csv';
 import { formatPct, formatPp } from '../lib/format';
+import { buildSecurityMaster, normName } from '../lib/datasheet';
 import {
   aggregateClient,
   allClientNumbers,
   analyseClient,
+  classifyHoldings,
   classLabels,
   fmtMoney,
   parseClientsCsv,
   parseHoldingsCsv,
+  SOURCE_LABEL,
+  type ClassifiedHolding,
   type ClientAnalysis,
+  type ClientRecord,
   type ParseOutcome,
 } from '../lib/holdings';
-import { ASSET_CLASSES, profile } from '../lib/reference';
-import type { AssetClassId, BaselineKind, ValidationStatus } from '../lib/types';
+import { ASSET_CLASSES, PROFILES, profile } from '../lib/reference';
+import type { AssetClassId, BaselineKind, ProfileId, ValidationStatus } from '../lib/types';
+import { readXlsxSheet } from '../lib/xlsx';
+import { parseCsv, detectDelimiter } from '../lib/csv';
 import { useApp } from '../state/AppContext';
 import { useClientData, type LoadedFile } from '../state/ClientDataContext';
 import { findBaseline } from '../state/state';
@@ -33,12 +40,13 @@ function download(filename: string, text: string) {
 }
 
 const CLIENT_TEMPLATE = toCsv([
-  ['Client number', 'Risk Profile', 'Growth Target %', 'Monthly Fees', 'Monthly Withdrawals', 'Cash Cover Months', 'Drift Tolerance pp', 'Notes'],
-  ['EXAMPLE-1', 'Balanced 60/40', 60, 450, 2500, '', '', 'optional columns may be left blank'],
+  ['Client number', 'Risk Profile', 'Growth Target %', 'Annual Fee %', 'Monthly Fees', 'Monthly Withdrawals', 'Cash Cover Months', 'Drift Tolerance pp', 'Notes'],
+  ['EXAMPLE-1', 'Balanced 60/40', 60, 1, '', 2500, '', '', 'use Annual Fee % and/or a fixed Monthly Fees amount'],
 ]);
 const HOLDINGS_TEMPLATE = toCsv([
   ['Client number', 'Asset Name', 'Asset Value', 'Asset Class', 'Asset Sub-Class'],
-  ['EXAMPLE-1', 'Example Cash Fund', '20000.00', 'Cash', 'New Zealand'],
+  ['EXAMPLE-1', 'Example Cash Fund', '20000.00', '', ''],
+  ['EXAMPLE-1', 'Example holding with class supplied', '5000.00', 'Global Equities', 'International'],
 ]);
 
 const money = (v: number | null | undefined) => (v === null || v === undefined || !Number.isFinite(v) ? '—' : `$${fmtMoney(v)}`);
@@ -55,8 +63,12 @@ export function ClientHoldings() {
   const [selected, setSelected] = useState<string | null>(null);
   const [confirmClear, setConfirmClear] = useState(false);
 
-  const clientRows = cd.clients?.outcome.rows ?? [];
-  const holdingRows = cd.holdings?.outcome.rows ?? [];
+  const clientRows = useMemo(() => {
+    const manual = new Set(cd.manualClients.map((c) => c.clientNumber));
+    return [...(cd.clients?.outcome.rows ?? []).filter((c) => !manual.has(c.clientNumber)), ...cd.manualClients];
+  }, [cd.clients, cd.manualClients]);
+  const rawHoldings = cd.holdings?.outcome.rows;
+  const holdingRows = useMemo(() => classifyHoldings(rawHoldings ?? [], cd.datasheet?.master ?? null, cd.overrides), [rawHoldings, cd.datasheet, cd.overrides]);
   const labels = useMemo(() => classLabels(holdingRows, cd.classMap), [holdingRows, cd.classMap]);
 
   const analyses = useMemo(() => {
@@ -83,8 +95,8 @@ export function ClientHoldings() {
   }, [clientRows, holdingRows, cd.classMap, cd.settings, state]);
 
   const current = analyses.find((a) => a.analysis.aggregate.clientNumber === selected) ?? null;
-  const anyLoaded = Boolean(cd.clients || cd.holdings);
-  const syntheticOnly = (!cd.clients || cd.clients.synthetic) && (!cd.holdings || cd.holdings.synthetic);
+  const anyLoaded = Boolean(cd.clients || cd.holdings || cd.manualClients.length);
+  const syntheticOnly = (!cd.clients || cd.clients.synthetic) && (!cd.holdings || cd.holdings.synthetic) && cd.manualClients.length === 0;
 
   return (
     <>
@@ -111,10 +123,13 @@ export function ClientHoldings() {
         </Notice>
       </div>
 
+      <DatasheetCard />
+
       <div className="mb-6 grid gap-6 lg:grid-cols-2">
+        <div className="space-y-6">
         <FileCard
-          title="1. Client details"
-          description="Client number, Risk Profile, Growth Target %, Monthly Fees, Monthly Withdrawals. Optional: Cash Cover Months, Drift Tolerance pp, Notes."
+          title="2. Client details"
+          description="Client number, Risk Profile, Growth Target %, Annual Fee % and/or Monthly Fees ($), Monthly Withdrawals. Optional: Cash Cover Months, Drift Tolerance pp, Notes."
           file={cd.clients}
           onText={(name, text, synthetic) => cd.setClients({ name, outcome: parseClientsCsv(text), loadedAt: new Date().toISOString(), synthetic })}
           onClear={() => cd.setClients(null)}
@@ -123,9 +138,11 @@ export function ClientHoldings() {
           templateName="client-details-template.csv"
           unit="client"
         />
+        <ManualClientCard />
+        </div>
         <FileCard
-          title="2. Current holdings"
-          description="Client number, Asset Name, Asset Value, Asset Class, Asset Sub-Class. One row per holding; values in NZD ($ and commas allowed)."
+          title="3. Current holdings"
+          description="Client number (or Portfolio Id), Asset Name, Asset Value (NZD). Asset Class / Sub-Class are optional — when absent, holdings are classified from the investment datasheet by Apex, FS or OA name. CSV or tab-separated (paste from Excel works)."
           file={cd.holdings}
           onText={(name, text, synthetic) => cd.setHoldings({ name, outcome: parseHoldingsCsv(text), loadedAt: new Date().toISOString(), synthetic })}
           onClear={() => cd.setHoldings(null)}
@@ -136,9 +153,11 @@ export function ClientHoldings() {
         />
       </div>
 
+      {holdingRows.length > 0 && <ClassificationCard holdings={holdingRows} />}
+
       <div className="mb-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
         <SettingsCard />
-        <Card title="Asset class mapping">
+        <Card title="Asset class label mapping">
           {labels.length === 0 ? (
             <p className="text-sm text-slate-500">Load holdings to see the asset class labels they use.</p>
           ) : (
@@ -169,7 +188,7 @@ export function ClientHoldings() {
                   ))}
                 </tbody>
               </TableWrap>
-              <p className="mt-2 text-xs text-slate-500">Only exact standard names are mapped automatically. Other labels (e.g. “Diversified”) stay unmapped until you choose — their value is shown as unmapped rather than guessed. Mappings are remembered in this browser; client data is not.</p>
+              <p className="mt-2 text-xs text-slate-500">Asset class labels come from the holdings file or the datasheet. Only exact standard names are mapped automatically. Other labels (e.g. “Diversified”) stay unmapped until you choose — their value is shown as unmapped rather than guessed. Mappings are remembered in this browser; client data is not.</p>
             </>
           )}
         </Card>
@@ -237,6 +256,7 @@ function FileCard<T>({ title, description, file, onText, onClear, sample, templa
   unit: string;
 }) {
   const o: ParseOutcome<T> | undefined = file?.outcome;
+  const [paste, setPaste] = useState<string | null>(null);
   return (
     <Card title={title} actions={file && <Button variant="ghost" onClick={onClear}>Remove</Button>}>
       <p className="mb-3 text-xs text-slate-600">{description}</p>
@@ -254,9 +274,18 @@ function FileCard<T>({ title, description, file, onText, onClear, sample, templa
             e.target.value = '';
           }}
         />
+        <Button variant="ghost" onClick={() => setPaste(paste === null ? '' : null)}>{paste === null ? 'Paste…' : 'Close paste'}</Button>
         <Button variant="ghost" onClick={() => onText('synthetic sample', sample, true)}>Load synthetic sample</Button>
         <Button variant="ghost" onClick={() => download(templateName, template)}>Template</Button>
       </div>
+      {paste !== null && (
+        <div className="mt-3">
+          <textarea aria-label={`${title} paste`} className={`${inputCls} font-mono text-xs`} rows={6} value={paste} onChange={(e) => setPaste(e.target.value)} placeholder="Paste rows including the header row (copied from Excel or CSV)" />
+          <div className="mt-2 flex gap-2">
+            <Button variant="primary" disabled={!paste.trim()} onClick={() => { onText('pasted data', paste, false); setPaste(null); }}>Load pasted data</Button>
+          </div>
+        </div>
+      )}
       {file && o && (
         <div className="mt-3 space-y-2 text-sm">
           <div className="flex flex-wrap items-center gap-2">
@@ -313,7 +342,7 @@ function ClientDetail({ analysis: a, baseStatus, baseVersion, kind, holdings }: 
   baseStatus?: Parameters<typeof StatusBadge>[0]['status'];
   baseVersion?: number;
   kind: BaselineKind;
-  holdings: { line: number; assetName: string; value: number; assetClass: string; subClass: string }[];
+  holdings: ClassifiedHolding[];
 }) {
   const agg = a.aggregate;
   const c = a.client;
@@ -376,10 +405,17 @@ function ClientDetail({ analysis: a, baseStatus, baseVersion, kind, holdings }: 
             <summary className="cursor-pointer px-3 py-2 text-sm font-medium">Holdings ({holdings.length})</summary>
             <div className="px-3 pb-3">
               <TableWrap>
-                <thead><tr><Th>Asset name</Th><Th>Asset class</Th><Th>Sub-class</Th><Th align="right">Value</Th></tr></thead>
+                <thead><tr><Th>Asset name</Th><Th>Asset class</Th><Th>Sub-class</Th><Th>Type</Th><Th>Classified by</Th><Th align="right">Value</Th></tr></thead>
                 <tbody>
-                  {holdings.map((h) => (
-                    <tr key={h.line}><Td>{h.assetName || '—'}</Td><Td>{h.assetClass}</Td><Td>{h.subClass || '—'}</Td><Td align="right" className={h.value < 0 ? 'text-red-700' : ''}>{money(h.value)}</Td></tr>
+                  {[...holdings].sort((x, y) => (x.assetClass || 'zzz').localeCompare(y.assetClass || 'zzz') || y.value - x.value).map((h) => (
+                    <tr key={h.line} className={!h.assetClass ? 'bg-amber-50/60' : ''}>
+                      <Td className="max-w-md">{h.assetName || '—'}</Td>
+                      <Td className="whitespace-nowrap">{h.assetClass || <span className="text-amber-800">unclassified</span>}</Td>
+                      <Td>{h.subClass || '—'}</Td>
+                      <Td className="text-xs">{h.type || '—'}</Td>
+                      <Td className="whitespace-nowrap text-xs text-slate-600">{SOURCE_LABEL[h.source]}{h.match?.status === 'matched' && <> · {h.match.via}{h.match.stripped ? ' (detail suffix removed)' : ''}</>}</Td>
+                      <Td align="right" className={h.value < 0 ? 'text-red-700' : ''}>{money(h.value)}</Td>
+                    </tr>
                   ))}
                 </tbody>
               </TableWrap>
@@ -407,7 +443,7 @@ function ClientDetail({ analysis: a, baseStatus, baseVersion, kind, holdings }: 
           <div>
             <h3 className="mb-2 text-sm font-semibold text-slate-800">Cash coverage</h3>
             <dl className="grid grid-cols-2 gap-y-1 text-sm">
-              <dt className="text-slate-600">Monthly fees</dt><dd className="text-right tabular-nums">{money(c?.monthlyFees)}</dd>
+              <dt className="text-slate-600">Monthly fees{c?.annualFeePct != null && <span className="text-xs"> ({c.annualFeePct}% p.a.{c.monthlyFees ? ' + fixed' : ''})</span>}</dt><dd className="text-right tabular-nums">{money(a.cash.monthlyFees)}</dd>
               <dt className="text-slate-600">Monthly withdrawals</dt><dd className="text-right tabular-nums">{money(c?.monthlyWithdrawals)}</dd>
               <dt className="text-slate-600">Monthly outflow</dt><dd className="text-right font-medium tabular-nums">{money(a.cash.monthlyOutflow)}</dd>
               <dt className="text-slate-600">Cover required</dt><dd className="text-right tabular-nums">{a.cash.coverMonths} months{c?.cashCoverMonths != null ? ' (client)' : ''}</dd>
@@ -428,6 +464,209 @@ function ClientDetail({ analysis: a, baseStatus, baseVersion, kind, holdings }: 
           )}
         </div>
       </div>
+    </Card>
+  );
+}
+
+function DatasheetCard() {
+  const cd = useClientData();
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  const d = cd.datasheet;
+  return (
+    <Card title="1. Investment datasheet" className="mb-6" actions={d && <Button variant="ghost" onClick={() => cd.setDatasheet(null)}>Remove</Button>}>
+      <p className="mb-3 text-xs text-slate-600">
+        Load the firm's investment datasheet (<code>Datasheet.xlsx</code>, or the <em>Data</em> sheet of the recommendations workbook, or a CSV export). Holdings without an Asset Class are matched to it by Apex, FS or OA name to get their Asset Class and Sub-Asset Class. Matching is exact (ignoring case and spacing); term-deposit and bond detail suffixes like “(188,000.00; 3.53%; 18 Months; 24/12/2026)” are removed before a second attempt. Nothing is fuzzy-matched or guessed.
+      </p>
+      <div className="flex flex-wrap items-center gap-2">
+        <input
+          type="file"
+          accept=".xlsx,.xlsm,.csv,.tsv,.txt"
+          aria-label="Investment datasheet file"
+          disabled={busy}
+          className="max-w-full text-sm file:mr-2 file:rounded file:border file:border-slate-300 file:bg-white file:px-2 file:py-1"
+          onChange={async (e) => {
+            const f = e.target.files?.[0];
+            e.target.value = '';
+            if (!f) return;
+            setError(null);
+            setBusy(true);
+            try {
+              let rows: string[][];
+              let sheetName = '—';
+              if (/\.(xlsx|xlsm)$/i.test(f.name)) {
+                const sheet = await readXlsxSheet(await f.arrayBuffer(), 'Data');
+                rows = sheet.rows;
+                sheetName = sheet.sheetName;
+              } else {
+                const text = await f.text();
+                rows = parseCsv(text, detectDelimiter(text));
+              }
+              cd.setDatasheet({ name: f.name, sheetName, master: buildSecurityMaster(rows), loadedAt: new Date().toISOString() });
+            } catch (err) {
+              setError(err instanceof Error ? err.message : String(err));
+            } finally {
+              setBusy(false);
+            }
+          }}
+        />
+        {busy && <span className="text-sm text-slate-500">Reading…</span>}
+      </div>
+      {error && <div className="mt-3"><Notice tone="danger">{error}</Notice></div>}
+      {d && (
+        <p className="mt-3 text-sm">
+          <span className="font-medium">{d.name}</span>
+          {d.sheetName !== '—' && <span className="text-slate-600"> · sheet “{d.sheetName}”</span>}
+          <span className="text-slate-600"> · {d.master.records.length} investments</span>
+          {d.master.records.filter((r) => !r.assetClass).length > 0 && <span className="text-slate-500"> ({d.master.records.filter((r) => !r.assetClass).length} without an asset class)</span>}
+        </p>
+      )}
+      {!d && <p className="mt-2 text-xs text-slate-500">Optional if your holdings file already has Asset Class. Held in memory only; not saved.</p>}
+    </Card>
+  );
+}
+
+function ClassificationCard({ holdings }: { holdings: ClassifiedHolding[] }) {
+  const cd = useClientData();
+  const bySource = new Map<string, { count: number; value: number }>();
+  for (const h of holdings) {
+    const e = bySource.get(h.source) ?? { count: 0, value: 0 };
+    e.count++;
+    e.value += h.value;
+    bySource.set(h.source, e);
+  }
+  const unresolved = new Map<string, { name: string; value: number; count: number; reason: string }>();
+  for (const h of holdings) {
+    if (h.assetClass) continue;
+    const k = normName(h.assetName);
+    const e = unresolved.get(k) ?? { name: h.assetName, value: 0, count: 0, reason: SOURCE_LABEL[h.source] };
+    e.value += h.value;
+    e.count++;
+    unresolved.set(k, e);
+  }
+  const overridden = Object.entries(cd.overrides);
+  const setOv = (key: string, label: string) => {
+    const next = { ...cd.overrides };
+    if (label) next[key] = label;
+    else delete next[key];
+    cd.setOverrides(next);
+  };
+  return (
+    <Card title="Holding classification" className="mb-6">
+      <div className="flex flex-wrap gap-2 text-sm">
+        {[...bySource.entries()].map(([src, v]) => (
+          <span key={src} className={cx('rounded border px-2 py-1', src === 'datasheet' || src === 'file' || src === 'override' ? 'border-slate-200 bg-slate-50' : 'border-amber-300 bg-amber-50 text-amber-900')}>
+            {SOURCE_LABEL[src as ClassifiedHolding['source']]}: <strong>{v.count}</strong> · {money(v.value)}
+          </span>
+        ))}
+      </div>
+      {!cd.datasheet && holdings.some((h) => h.source === 'not-found') && (
+        <p className="mt-3 text-sm text-amber-800">No investment datasheet is loaded, and some holdings have no Asset Class. Load the datasheet above to classify them.</p>
+      )}
+      {unresolved.size > 0 && (
+        <div className="mt-4">
+          <h3 className="mb-2 text-sm font-semibold text-slate-800">Unclassified holdings ({unresolved.size}) — excluded from asset-class weights until assigned</h3>
+          <TableWrap>
+            <thead><tr><Th>Asset name</Th><Th>Reason</Th><Th align="right">Value</Th><Th>Assign asset class</Th></tr></thead>
+            <tbody>
+              {[...unresolved.entries()].map(([k, u]) => (
+                <tr key={k}>
+                  <Td className="max-w-md">{u.name}{u.count > 1 && <span className="text-xs text-slate-500"> ×{u.count}</span>}</Td>
+                  <Td className="text-xs text-amber-800">{u.reason}</Td>
+                  <Td align="right">{money(u.value)}</Td>
+                  <Td>
+                    <select aria-label={`Assign class for ${u.name}`} className={cx(inputCls, 'max-w-[14rem]')} value="" onChange={(e) => setOv(k, e.target.value)}>
+                      <option value="">Leave unclassified</option>
+                      {ASSET_CLASSES.map((ac) => <option key={ac.id} value={ac.label}>{ac.label}</option>)}
+                    </select>
+                  </Td>
+                </tr>
+              ))}
+            </tbody>
+          </TableWrap>
+        </div>
+      )}
+      {overridden.length > 0 && (
+        <details className="mt-4 text-sm">
+          <summary className="cursor-pointer font-medium">Manual assignments ({overridden.length}) — remembered in this browser</summary>
+          <ul className="mt-2 space-y-1">
+            {overridden.map(([k, label]) => (
+              <li key={k} className="flex items-center justify-between gap-2 border-b border-slate-100 py-1">
+                <span className="truncate">{k} → <strong>{label}</strong></span>
+                <Button variant="ghost" onClick={() => setOv(k, '')}>Remove</Button>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-1 text-xs text-slate-500">Assignments are stored by investment name only (no client numbers or values) and apply to every client holding that investment. Consider adding these investments to the datasheet instead.</p>
+        </details>
+      )}
+    </Card>
+  );
+}
+
+function ManualClientCard() {
+  const cd = useClientData();
+  const [num, setNum] = useState('');
+  const [prof, setProf] = useState<ProfileId>('growth');
+  const [growth, setGrowth] = useState<number | null>(null);
+  const [feePct, setFeePct] = useState<number | null>(null);
+  const [feeFixed, setFeeFixed] = useState<number | null>(null);
+  const [wd, setWd] = useState<number | null>(null);
+  const [cover, setCover] = useState<number | null>(null);
+  const [tol, setTol] = useState<number | null>(null);
+  const problems: string[] = [];
+  if (!num.trim()) problems.push('client / portfolio number');
+  if (growth === null || growth < 0 || growth > 100) problems.push('growth target 0–100%');
+  if (feePct !== null && (feePct < 0 || feePct > 100)) problems.push('annual fee 0–100%');
+  if (feeFixed !== null && feeFixed < 0) problems.push('fixed fee ≥ 0');
+  if (wd === null || wd < 0) problems.push('monthly withdrawals ≥ 0');
+  const add = () => {
+    const rec: ClientRecord = {
+      line: 0,
+      clientNumber: num.trim(),
+      profileId: prof,
+      growthTarget: growth,
+      annualFeePct: feePct,
+      monthlyFees: feeFixed,
+      monthlyWithdrawals: wd,
+      cashCoverMonths: cover,
+      driftTolerance: tol,
+      notes: 'Entered manually',
+    };
+    cd.upsertManualClient(rec);
+    setNum('');
+  };
+  return (
+    <Card title="…or enter a client">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <Field label="Client / Portfolio no."><input className={inputCls} value={num} onChange={(e) => setNum(e.target.value)} /></Field>
+        <Field label="Risk profile">
+          <select className={inputCls} value={prof} onChange={(e) => setProf(e.target.value as ProfileId)}>
+            {PROFILES.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+          </select>
+        </Field>
+        <Field label="Growth target"><PercentInput ariaLabel="Growth target" value={growth} onChange={setGrowth} /></Field>
+        <Field label="Annual fee (% p.a.)"><PercentInput ariaLabel="Annual fee percent" value={feePct} onChange={setFeePct} /></Field>
+        <Field label="Fixed fees / month"><PercentInput ariaLabel="Fixed monthly fees" suffix="$" value={feeFixed} onChange={setFeeFixed} /></Field>
+        <Field label="Withdrawals / month"><PercentInput ariaLabel="Monthly withdrawals" suffix="$" value={wd} onChange={setWd} /></Field>
+        <Field label="Cover (optional)"><PercentInput ariaLabel="Cash cover months" suffix="mo" placeholder="default" value={cover} onChange={setCover} /></Field>
+        <Field label="Tolerance (optional)"><PercentInput ariaLabel="Drift tolerance" suffix="pp" placeholder="default" value={tol} onChange={setTol} /></Field>
+      </div>
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <Button variant="primary" disabled={problems.length > 0} onClick={add}>Add client</Button>
+        {problems.length > 0 && <span className="text-xs text-slate-500">Needs: {problems.join(', ')}</span>}
+      </div>
+      {cd.manualClients.length > 0 && (
+        <ul className="mt-3 space-y-1 text-sm">
+          {cd.manualClients.map((c) => (
+            <li key={c.clientNumber} className="flex items-center justify-between gap-2 border-b border-slate-100 py-1">
+              <span><strong>{c.clientNumber}</strong> · {profile(c.profileId).label} · growth {formatPct(c.growthTarget, 0)} · fee {c.annualFeePct !== null ? `${c.annualFeePct}% pa` : ''}{c.monthlyFees !== null ? ` $${fmtMoney(c.monthlyFees)}/mo` : ''}{c.annualFeePct === null && c.monthlyFees === null ? 'none' : ''} · withdrawals {money(c.monthlyWithdrawals)}/mo</span>
+              <Button variant="ghost" onClick={() => cd.removeManualClient(c.clientNumber)}>Remove</Button>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className="mt-2 text-xs text-slate-500">Manually entered clients override a client details file row with the same number. Held in memory only. No client names are needed — use the portfolio number.</p>
     </Card>
   );
 }
