@@ -1,0 +1,6135 @@
+[
+ {
+  "scenario": {
+   "id": "pm-00",
+   "profile": "Conservative",
+   "holdings": {
+    "cash": [
+     [
+      "AUD",
+      43645.53
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      1050000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Goodman Property Trust",
+      17156.33
+     ],
+     [
+      "Vital Healthcare Property Trust Units",
+      37036.74
+     ],
+     [
+      "Mint Australasian Property Fund",
+      0.0
+     ]
+    ],
+    "ms": [
+     [
+      "Simplicity Growth Investment Fund",
+      39971.24,
+      0
+     ],
+     [
+      "Milford Balanced Fund",
+      25423.86
+     ]
+    ]
+   },
+   "targetsPct": {
+    "ms": 2
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 43645.53,
+     "E": 580593.0175,
+     "F": 624238.5475,
+     "G": 90992.52750000003
+    },
+    "fi": {
+     "B": 1050000.0,
+     "E": -804400.0,
+     "F": 245600.0,
+     "G": 818932.7475000002
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 81000.0,
+     "F": 81000.0,
+     "G": 80882.24666666669
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 202130.8425,
+     "F": 202130.8425,
+     "G": 202205.61666666673
+    },
+    "prop": {
+     "B": 54193.07,
+     "E": -33900.0,
+     "F": 20293.07,
+     "G": 20220.56166666667
+    },
+    "ms": {
+     "B": 65395.1,
+     "E": -25423.86,
+     "F": 39971.24,
+     "G": 24264.674000000003
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "AUD",
+      "B": 43645.53,
+      "F": 624238.5475,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Goodman Property Trust",
+      "B": 17156.33,
+      "F": 5056.330000000002,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 37036.74,
+      "F": 5036.739999999998,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Mint Australasian Property Fund",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 0.0,
+      "F": 5100.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 5100.0,
+      "G": null,
+      "K": "Share"
+     }
+    ],
+    "ms": [
+     {
+      "A": "Simplicity Growth Investment Fund",
+      "B": 39971.24,
+      "F": 39971.24,
+      "G": 0.0,
+      "K": null
+     },
+     {
+      "A": "Milford Balanced Fund",
+      "B": 25423.86,
+      "F": 0.0,
+      "G": null,
+      "K": null
+     }
+    ]
+   },
+   "property": {
+    "C117": 20220.56166666667,
+    "amounts": {
+     "Goodman Property Trust": 5055.140416666667,
+     "Precinct Properties New Zealand Limited": 5055.140416666667,
+     "Vital Healthcare Property Trust Units": 5055.140416666667,
+     "Property For Industry Limited": 5055.140416666667,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1213233.7000000002
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-01",
+   "profile": "Moderate",
+   "holdings": {
+    "cash": [
+     [
+      "Amova NZ Cash Fund",
+      24851.16
+     ],
+     [
+      "USD",
+      7387.97
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      105000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Goodman Property Trust",
+      166.22
+     ],
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      1550.96
+     ],
+     [
+      "Vital Healthcare Property Trust Units",
+      0.0,
+      0
+     ],
+     [
+      "Kernel Wealth NZ Commercial Property Fund",
+      10597.0
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": -25427.78
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 32239.13,
+     "E": 50289.399999999994,
+     "F": 82528.53,
+     "G": 7477.665500000001
+    },
+    "fi": {
+     "B": 105000.0,
+     "E": -85000.0,
+     "F": 20000.0,
+     "G": 66997.65250000003
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 7400.0,
+     "F": 7400.0,
+     "G": 12767.197371428572
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 9200.0,
+     "F": 9200.0,
+     "G": 31917.993428571433
+    },
+    "prop": {
+     "B": 12314.18,
+     "E": -7317.18,
+     "F": 4997.0,
+     "G": 4965.021199999999
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "Amova NZ Cash Fund",
+      "B": 24851.16,
+      "F": 75140.56,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "USD",
+      "B": 7387.97,
+      "F": 7387.97,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Goodman Property Trust",
+      "B": 166.22,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 1550.96,
+      "F": 0.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 0.0,
+      "F": 0.0,
+      "G": 0.0,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 10597.0,
+      "F": 4997.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 4965.021199999999,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 4965.021199999999,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 124125.53
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-02",
+   "profile": "Balanced",
+   "holdings": {
+    "cash": [
+     [
+      "AUD",
+      56176.76
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      1050000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Vital Healthcare Property Trust Units",
+      0.0
+     ],
+     [
+      "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      0.0
+     ],
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      0.0
+     ],
+     [
+      "Smart NZ Property ETF",
+      190.52
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": -12918.94
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 56176.76,
+     "E": 256935.3715,
+     "F": 313112.1315,
+     "G": 22127.3456
+    },
+    "fi": {
+     "B": 1050000.0,
+     "E": -925500.0,
+     "F": 124500.0,
+     "G": 415251.9904
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 174800.0,
+     "F": 174800.0,
+     "G": 174951.73440000002
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 437336.2085,
+     "F": 437336.2085,
+     "G": 437379.33600000007
+    },
+    "prop": {
+     "B": 190.52,
+     "E": 43509.48,
+     "F": 43700.0,
+     "G": 43737.933600000004
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "AUD",
+      "B": 56176.76,
+      "F": 313112.1315,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 0.0,
+      "F": 7100.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 0.0,
+      "F": 4400.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 0.0,
+      "F": 10900.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Smart NZ Property ETF",
+      "B": 190.52,
+      "F": 0.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Goodman Property Trust",
+      "B": 0.0,
+      "F": 7100.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 0.0,
+      "F": 7100.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 7100.0,
+      "G": null,
+      "K": "Share"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 43737.933600000004,
+    "amounts": {
+     "Goodman Property Trust": 7107.414210000001,
+     "Precinct Properties New Zealand Limited": 7107.414210000001,
+     "Vital Healthcare Property Trust Units": 7107.414210000001,
+     "Property For Industry Limited": 7107.414210000001,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 10934.483400000001,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 4373.793360000001
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1093448.34
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-03",
+   "profile": "Growth",
+   "holdings": {
+    "cash": [
+     [
+      "NZD",
+      5704.83
+     ],
+     [
+      "Amova NZ Cash Fund",
+      15225.21
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      105000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Goodman Property Trust",
+      17839.87
+     ],
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      2803.77
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 18344.6
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 20930.04,
+     "E": 7779.297999999995,
+     "F": 28709.337999999996,
+     "G": 18344.6
+    },
+    "fi": {
+     "B": 105000.0,
+     "E": -101800.0,
+     "F": 3200.0,
+     "G": 10970.136000000006
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 28900.0,
+     "F": 28900.0,
+     "G": 31269.051733333337
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 77964.342,
+     "F": 77964.342,
+     "G": 78172.62933333335
+    },
+    "prop": {
+     "B": 20643.64,
+     "E": -12843.64,
+     "F": 7800.0,
+     "G": 7817.262933333334
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "NZD",
+      "B": 5704.83,
+      "F": 13484.127999999997,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "Amova NZ Cash Fund",
+      "B": 15225.21,
+      "F": 15225.21,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Goodman Property Trust",
+      "B": 17839.87,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 2803.77,
+      "F": 0.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 7800.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 7817.262933333334,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 7817.262933333334,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 146573.68
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-04",
+   "profile": "Aggressive",
+   "holdings": {
+    "cash": [
+     [
+      "Amova NZ Cash Fund",
+      14127.85
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      245000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      0.0
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 20368.13,
+   "sectorOverrides": {
+    "prop": -2845.31
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 14127.85,
+     "E": 26021.80375,
+     "F": 40149.65375,
+     "G": 20368.13
+    },
+    "fi": {
+     "B": 245000.0,
+     "E": -243400.0,
+     "F": 1600.0,
+     "G": 5544.6550000000025
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 62200.0,
+     "F": 62200.0,
+     "G": 62190.684000000016
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 155178.19625,
+     "F": 155178.19625,
+     "G": 155476.71000000005
+    },
+    "prop": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": -2845.31
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "Amova NZ Cash Fund",
+      "B": 14127.85,
+      "F": 40149.65375,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": -2845.31,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 259127.85
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-05",
+   "profile": "Custom",
+   "holdings": {
+    "cash": [
+     [
+      "USD",
+      34194.24
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      245000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Kernel Wealth NZ Commercial Property Fund",
+      5354.2
+     ],
+     [
+      "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      0.0
+     ],
+     [
+      "Not In Datasheet Property Co",
+      0.0
+     ],
+     [
+      "Kiwi Property Group Ltd",
+      0.0
+     ]
+    ],
+    "ms": [
+     [
+      "OneAnswer Balanced Fund (MAC)",
+      34779.7
+     ],
+     [
+      "Simplicity Growth Investment Fund",
+      5328.29
+     ]
+    ]
+   },
+   "custom": {
+    "lowerRisk": 0.491,
+    "cash": 0.012,
+    "fi": 0.479,
+    "growth": 0.509
+   },
+   "targetsPct": {
+    "ms": 2
+   },
+   "feesAndWithdrawals": 27001.87
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 34194.24,
+     "E": 84879.93817499999,
+     "F": 119074.178175,
+     "G": 27001.87
+    },
+    "fi": {
+     "B": 245000.0,
+     "E": -205300.0,
+     "F": 39700.0,
+     "G": 132404.43713
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 44000.0,
+     "F": 44000.0,
+     "G": 44066.69943200002
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 110016.41075,
+     "F": 110016.41075,
+     "G": 110166.74858000003
+    },
+    "prop": {
+     "B": 5354.2,
+     "E": 5700.000000000001,
+     "F": 11054.2,
+     "G": 11016.674858000006
+    },
+    "ms": {
+     "B": 40107.99,
+     "E": -39296.348925,
+     "F": 811.641075,
+     "G": 6493.1286
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "USD",
+      "B": 34194.24,
+      "F": 119074.178175,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 5354.2,
+      "F": 11054.2,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Not In Datasheet Property Co",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": ""
+     },
+     {
+      "A": "Kiwi Property Group Ltd",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     }
+    ],
+    "ms": [
+     {
+      "A": "OneAnswer Balanced Fund (MAC)",
+      "B": 34779.7,
+      "F": 811.641075,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "Simplicity Growth Investment Fund",
+      "B": 5328.29,
+      "F": 0.0,
+      "G": null,
+      "K": null
+     }
+    ]
+   },
+   "property": {
+    "C117": 11016.674858000006,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 11016.674858000006,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 324656.43
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-06",
+   "profile": "Conservative",
+   "holdings": {
+    "cash": [
+     [
+      "AUD",
+      43161.41
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      315000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Property For Industry Limited",
+      6417.56
+     ],
+     [
+      "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      0.0
+     ],
+     [
+      "Kernel Wealth NZ Commercial Property Fund",
+      5920.86
+     ],
+     [
+      "Goodman Property Trust",
+      24943.0
+     ],
+     [
+      "Kiwi Property Group Ltd",
+      2820.66
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 43161.41,
+     "E": 185224.63275000005,
+     "F": 228386.04275000005,
+     "G": 29869.76175
+    },
+    "fi": {
+     "B": 315000.0,
+     "E": -234400.0,
+     "F": 80600.0,
+     "G": 268827.85575
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 24400.0,
+     "F": 24400.0,
+     "G": 26550.89933333334
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 58256.58725,
+     "F": 58256.58725,
+     "G": 66377.24833333334
+    },
+    "prop": {
+     "B": 40102.08,
+     "E": -33481.22,
+     "F": 6620.86,
+     "G": 6637.724833333333
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "AUD",
+      "B": 43161.41,
+      "F": 228386.04275000005,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Property For Industry Limited",
+      "B": 6417.56,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 5920.86,
+      "F": 6620.86,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Goodman Property Trust",
+      "B": 24943.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Kiwi Property Group Ltd",
+      "B": 2820.66,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 6637.724833333333,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 6637.724833333333,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 398263.49
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-07",
+   "profile": "Moderate",
+   "holdings": {
+    "cash": [
+     [
+      "USD",
+      55487.4
+     ],
+     [
+      "AUD",
+      28909.21
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      1050000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Kiwi Property Group Ltd",
+      0.0
+     ],
+     [
+      "Dexus AREIT Fund",
+      7109.78
+     ],
+     [
+      "Not In Datasheet Property Co",
+      21470.18
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 84396.61,
+     "E": 421305.54575000005,
+     "F": 505702.15575000003,
+     "G": 58148.82850000001
+    },
+    "fi": {
+     "B": 1050000.0,
+     "E": -858200.0,
+     "F": 191800.0,
+     "G": 639637.1135000002
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 119600.0,
+     "F": 119600.0,
+     "G": 119620.44720000002
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 299174.41425000003,
+     "F": 299174.41425000003,
+     "G": 299051.1180000001
+    },
+    "prop": {
+     "B": 28579.96,
+     "E": 18120.04,
+     "F": 46700.0,
+     "G": 46519.06279999999
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "USD",
+      "B": 55487.4,
+      "F": 476792.94575,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "AUD",
+      "B": 28909.21,
+      "F": 28909.21,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Kiwi Property Group Ltd",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Dexus AREIT Fund",
+      "B": 7109.78,
+      "F": 0.0,
+      "G": null,
+      "K": "AUT"
+     },
+     {
+      "A": "Not In Datasheet Property Co",
+      "B": 21470.18,
+      "F": 0.0,
+      "G": null,
+      "K": ""
+     },
+     {
+      "A": "Goodman Property Trust",
+      "B": 0.0,
+      "F": 7600.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 0.0,
+      "F": 7600.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 0.0,
+      "F": 7600.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 7600.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 0.0,
+      "F": 11600.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 0.0,
+      "F": 4700.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 46519.06279999999,
+    "amounts": {
+     "Goodman Property Trust": 7559.347704999999,
+     "Precinct Properties New Zealand Limited": 7559.347704999999,
+     "Vital Healthcare Property Trust Units": 7559.347704999999,
+     "Property For Industry Limited": 7559.347704999999,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 11629.765699999998,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 4651.906279999999
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1162976.57
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-08",
+   "profile": "Balanced",
+   "holdings": {
+    "cash": [
+     [
+      "Amova NZ Cash Fund",
+      5450.56
+     ],
+     [
+      "AUD",
+      49494.92
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      105000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Vital Healthcare Property Trust Units",
+      0.0
+     ],
+     [
+      "Property For Industry Limited",
+      0.0,
+      5936.06
+     ],
+     [
+      "Precinct Properties New Zealand Limited",
+      0.0
+     ],
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      0.0
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 54945.479999999996,
+     "E": -4734.697,
+     "F": 50210.782999999996,
+     "G": 3198.9096
+    },
+    "fi": {
+     "B": 105000.0,
+     "E": -86800.0,
+     "F": 18200.0,
+     "G": 60779.2824
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 23700.0,
+     "F": 23700.0,
+     "G": 25591.276799999996
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 55498.637,
+     "F": 55498.637,
+     "G": 63978.19199999999
+    },
+    "prop": {
+     "B": 0.0,
+     "E": 12336.060000000001,
+     "F": 12336.060000000001,
+     "G": 6397.819199999999
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "Amova NZ Cash Fund",
+      "B": 5450.56,
+      "F": 715.8629999999939,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "AUD",
+      "B": 49494.92,
+      "F": 49494.92,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 5936.06,
+      "G": 5936.06,
+      "K": "Share"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 6400.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 6397.819199999999,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 6397.819199999999,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 159945.47999999998
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-09",
+   "profile": "Growth",
+   "holdings": {
+    "cash": [
+     [
+      "AUD",
+      49422.41
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      21000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      37835.3
+     ],
+     [
+      "Goodman Property Trust",
+      3252.84
+     ],
+     [
+      "Property For Industry Limited",
+      0.0
+     ],
+     [
+      "Vital Healthcare Property Trust Units",
+      36491.96
+     ],
+     [
+      "Fisher Funds Property and Infrastructure Fund",
+      15786.56
+     ],
+     [
+      "Not In Datasheet Property Co",
+      14890.52,
+      -7445.26
+     ]
+    ],
+    "ms": [
+     [
+      "Simplicity Growth Investment Fund",
+      11516.71
+     ],
+     [
+      "Milford Balanced Fund",
+      32208.63,
+      0
+     ],
+     [
+      "OneAnswer Balanced Fund (MAC)",
+      3885.14,
+      0
+     ]
+    ]
+   },
+   "targetsPct": {
+    "ms": 2
+   },
+   "feesAndWithdrawals": 32817.93
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 49422.41,
+     "E": -52294.346925,
+     "F": -2871.9369249999945,
+     "G": 32817.93
+    },
+    "fi": {
+     "B": 21000.0,
+     "E": -17300.0,
+     "F": 3700.0,
+     "G": 12440.084000000006
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 48200.0,
+     "F": 48200.0,
+     "G": 48275.214933333344
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 121057.25175,
+     "F": 121057.25175,
+     "G": 120688.03733333336
+    },
+    "prop": {
+     "B": 108257.18000000001,
+     "E": -88711.92,
+     "F": 19545.260000000002,
+     "G": 12068.803733333336
+    },
+    "ms": {
+     "B": 47610.48,
+     "E": -10950.984825,
+     "F": 36659.495175000004,
+     "G": 4525.8014
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "AUD",
+      "B": 49422.41,
+      "F": -2871.9369249999945,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 37835.3,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Goodman Property Trust",
+      "B": 3252.84,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 36491.96,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Fisher Funds Property and Infrastructure Fund",
+      "B": 15786.56,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Not In Datasheet Property Co",
+      "B": 14890.52,
+      "F": 7445.26,
+      "G": -7445.26,
+      "K": ""
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 12100.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": [
+     {
+      "A": "Simplicity Growth Investment Fund",
+      "B": 11516.71,
+      "F": 565.725175,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "Milford Balanced Fund",
+      "B": 32208.63,
+      "F": 32208.63,
+      "G": 0.0,
+      "K": null
+     },
+     {
+      "A": "OneAnswer Balanced Fund (MAC)",
+      "B": 3885.14,
+      "F": 3885.14,
+      "G": 0.0,
+      "K": null
+     }
+    ]
+   },
+   "property": {
+    "C117": 12068.803733333336,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 12068.803733333336,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 226290.07
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-10",
+   "profile": "Aggressive",
+   "holdings": {
+    "cash": [
+     [
+      "Amova NZ Cash Fund",
+      58781.8
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      210000.0
+     ]
+    ],
+    "prop": [],
+    "ms": [
+     [
+      "OneAnswer Balanced Fund (MAC)",
+      5023.82
+     ],
+     [
+      "Simplicity Growth Investment Fund",
+      17374.46
+     ],
+     [
+      "Milford Balanced Fund",
+      43544.51
+     ]
+    ]
+   },
+   "targetsPct": {
+    "ms": 2
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 58781.8,
+     "E": -34262.136225000024,
+     "F": 24519.66377499998,
+     "G": 6694.491800000001
+    },
+    "fi": {
+     "B": 210000.0,
+     "E": -202000.0,
+     "F": 8000.0,
+     "G": 26777.967200000006
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 80400.0,
+     "F": 80400.0,
+     "G": 80333.90160000003
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 200968.11475,
+     "F": 200968.11475,
+     "G": 200834.75400000007
+    },
+    "prop": {
+     "B": 0.0,
+     "E": 20000.0,
+     "F": 20000.0,
+     "G": 20083.4754
+    },
+    "ms": {
+     "B": 65942.79000000001,
+     "E": -65105.978525,
+     "F": 836.8114750000001,
+     "G": 6694.491800000001
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "Amova NZ Cash Fund",
+      "B": 58781.8,
+      "F": 24519.66377499998,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Goodman Property Trust",
+      "B": 0.0,
+      "F": 5000.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 0.0,
+      "F": 5000.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 0.0,
+      "F": 5000.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 5000.0,
+      "G": null,
+      "K": "Share"
+     }
+    ],
+    "ms": [
+     {
+      "A": "OneAnswer Balanced Fund (MAC)",
+      "B": 5023.82,
+      "F": 836.8114750000001,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "Simplicity Growth Investment Fund",
+      "B": 17374.46,
+      "F": 0.0,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "Milford Balanced Fund",
+      "B": 43544.51,
+      "F": 0.0,
+      "G": null,
+      "K": null
+     }
+    ]
+   },
+   "property": {
+    "C117": 20083.4754,
+    "amounts": {
+     "Goodman Property Trust": 5020.86885,
+     "Precinct Properties New Zealand Limited": 5020.86885,
+     "Vital Healthcare Property Trust Units": 5020.86885,
+     "Property For Industry Limited": 5020.86885,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 334724.59
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-11",
+   "profile": "Custom",
+   "holdings": {
+    "cash": [
+     [
+      "NZD",
+      5169.57
+     ],
+     [
+      "USD",
+      19289.27
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      245000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Vital Healthcare Property Trust Units",
+      0.0
+     ],
+     [
+      "Goodman Property Trust",
+      140.47
+     ],
+     [
+      "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      4911.37
+     ],
+     [
+      "Smart NZ Property ETF",
+      0.0,
+      0
+     ],
+     [
+      "Fisher Funds Property and Infrastructure Fund",
+      286.9,
+      0
+     ],
+     [
+      "Argosy Property Trust",
+      0.0,
+      0
+     ]
+    ]
+   },
+   "custom": {
+    "lowerRisk": 0.107,
+    "cash": 0.024,
+    "fi": 0.083,
+    "growth": 0.893
+   },
+   "feesAndWithdrawals": 11855.71
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 24458.84,
+     "E": -818.0995000000003,
+     "F": 23640.7405,
+     "G": 11855.71
+    },
+    "fi": {
+     "B": 245000.0,
+     "E": -239800.0,
+     "F": 5200.0,
+     "G": 17547.63106000001
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 65600.0,
+     "F": 65600.0,
+     "G": 65438.463717333354
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 163969.9395,
+     "F": 163969.9395,
+     "G": 163596.1592933334
+    },
+    "prop": {
+     "B": 5338.74,
+     "E": 11048.16,
+     "F": 16386.9,
+     "G": 16359.615929333338
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "NZD",
+      "B": 5169.57,
+      "F": 4351.470499999999,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "USD",
+      "B": 19289.27,
+      "F": 19289.27,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Goodman Property Trust",
+      "B": 140.47,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 4911.37,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Smart NZ Property ETF",
+      "B": 0.0,
+      "F": 0.0,
+      "G": 0.0,
+      "K": "ETF"
+     },
+     {
+      "A": "Fisher Funds Property and Infrastructure Fund",
+      "B": 286.9,
+      "F": 286.9,
+      "G": 0.0,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Argosy Property Trust",
+      "B": 0.0,
+      "F": 0.0,
+      "G": 0.0,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 16100.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 16072.715929333339,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 16072.715929333339,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 274797.58
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-12",
+   "profile": "Conservative",
+   "holdings": {
+    "cash": [
+     [
+      "Amova NZ Cash Fund",
+      11022.56
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      1050000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Precinct Properties New Zealand Limited",
+      24522.71,
+      0
+     ],
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      17425.82
+     ],
+     [
+      "Property For Industry Limited",
+      0.0
+     ],
+     [
+      "Kiwi Property Group Ltd",
+      0.0
+     ]
+    ],
+    "ms": [
+     [
+      "Simplicity Growth Investment Fund",
+      41595.93
+     ]
+    ]
+   },
+   "targetsPct": {
+    "ms": 2
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 11022.56,
+     "E": 587946.15695,
+     "F": 598968.71695,
+     "G": 85842.5265
+    },
+    "fi": {
+     "B": 1050000.0,
+     "E": -818300.0,
+     "F": 231700.0,
+     "G": 772582.7385000001
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 76400.0,
+     "F": 76400.0,
+     "G": 76304.46800000002
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 191014.1755,
+     "F": 191014.1755,
+     "G": 190761.17
+    },
+    "prop": {
+     "B": 41948.53,
+     "E": 1674.1800000000003,
+     "F": 43622.71,
+     "G": 19076.117
+    },
+    "ms": {
+     "B": 41595.93,
+     "E": -38734.51245,
+     "F": 2861.41755,
+     "G": 22891.3404
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "Amova NZ Cash Fund",
+      "B": 11022.56,
+      "F": 598968.71695,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 24522.71,
+      "F": 24522.71,
+      "G": 0.0,
+      "K": "Share"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 17425.82,
+      "F": 0.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Kiwi Property Group Ltd",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 19100.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": [
+     {
+      "A": "Simplicity Growth Investment Fund",
+      "B": 41595.93,
+      "F": 2861.41755,
+      "G": null,
+      "K": null
+     }
+    ]
+   },
+   "property": {
+    "C117": 19076.117,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 19076.117,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1144567.02
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-13",
+   "profile": "Moderate",
+   "holdings": {
+    "cash": [
+     [
+      "NZD",
+      30758.02
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      315000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Precinct Properties New Zealand Limited",
+      17060.78,
+      0
+     ],
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      241.56
+     ],
+     [
+      "Not In Datasheet Property Co",
+      0.0
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 12651.79
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 30758.02,
+     "E": 110465.05099999999,
+     "F": 141223.071,
+     "G": 18153.018000000004
+    },
+    "fi": {
+     "B": 315000.0,
+     "E": -255100.0,
+     "F": 59900.0,
+     "G": 199683.1980000001
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 37200.0,
+     "F": 37200.0,
+     "G": 37343.35131428573
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 93176.509,
+     "F": 93176.509,
+     "G": 93358.37828571431
+    },
+    "prop": {
+     "B": 17302.34,
+     "E": 14258.44,
+     "F": 31560.78,
+     "G": 14522.4144
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "NZD",
+      "B": 30758.02,
+      "F": 141223.071,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 17060.78,
+      "F": 17060.78,
+      "G": 0.0,
+      "K": "Share"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 241.56,
+      "F": 0.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Not In Datasheet Property Co",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": ""
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 14500.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 14522.4144,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 14522.4144,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 363060.36000000004
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-14",
+   "profile": "Balanced",
+   "holdings": {
+    "cash": [
+     [
+      "USD",
+      55636.33
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      1050000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      387.98
+     ],
+     [
+      "Argosy Property Trust",
+      3688.55,
+      0
+     ],
+     [
+      "Fisher Funds Property and Infrastructure Fund",
+      0.0,
+      0
+     ],
+     [
+      "Not In Datasheet Property Co",
+      5262.05
+     ]
+    ],
+    "ms": [
+     [
+      "Simplicity Growth Investment Fund",
+      16950.28
+     ],
+     [
+      "OneAnswer Balanced Fund (MAC)",
+      32511.09
+     ]
+    ]
+   },
+   "targetsPct": {
+    "ms": 2
+   },
+   "feesAndWithdrawals": 10354.03
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 55636.33,
+     "E": 273901.4222999999,
+     "F": 329537.75229999993,
+     "G": 23288.725600000005
+    },
+    "fi": {
+     "B": 1050000.0,
+     "E": -917300.0,
+     "F": 132700.0,
+     "G": 442485.7864000001
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 186400.0,
+     "F": 186400.0,
+     "G": 186309.80480000004
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 466110.907,
+     "F": 466110.907,
+     "G": 465774.51200000005
+    },
+    "prop": {
+     "B": 9338.58,
+     "E": 37437.95,
+     "F": 46776.53,
+     "G": 46577.45120000001
+    },
+    "ms": {
+     "B": 49461.369999999995,
+     "E": -46550.279299999995,
+     "F": 2911.0907000000007,
+     "G": 23288.725600000005
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "USD",
+      "B": 55636.33,
+      "F": 329537.75229999993,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 387.98,
+      "F": 10787.98,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Argosy Property Trust",
+      "B": 3688.55,
+      "F": 3688.55,
+      "G": 0.0,
+      "K": "Share"
+     },
+     {
+      "A": "Fisher Funds Property and Infrastructure Fund",
+      "B": 0.0,
+      "F": 0.0,
+      "G": 0.0,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Not In Datasheet Property Co",
+      "B": 5262.05,
+      "F": 0.0,
+      "G": null,
+      "K": ""
+     },
+     {
+      "A": "Goodman Property Trust",
+      "B": 0.0,
+      "F": 7000.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 0.0,
+      "F": 7000.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 0.0,
+      "F": 7000.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 7000.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 0.0,
+      "F": 4300.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": [
+     {
+      "A": "Simplicity Growth Investment Fund",
+      "B": 16950.28,
+      "F": 2911.0907000000007,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "OneAnswer Balanced Fund (MAC)",
+      "B": 32511.09,
+      "F": 0.0,
+      "G": null,
+      "K": null
+     }
+    ]
+   },
+   "property": {
+    "C117": 42888.90120000001,
+    "amounts": {
+     "Goodman Property Trust": 6969.446445000001,
+     "Precinct Properties New Zealand Limited": 6969.446445000001,
+     "Vital Healthcare Property Trust Units": 6969.446445000001,
+     "Property For Industry Limited": 6969.446445000001,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 10722.225300000002,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 4288.890120000001
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1164436.2800000003
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-15",
+   "profile": "Growth",
+   "holdings": {
+    "cash": [
+     [
+      "AUD",
+      58431.03
+     ],
+     [
+      "Amova NZ Cash Fund",
+      47562.51
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      21000.0
+     ]
+    ],
+    "prop": [],
+    "ms": [
+     [
+      "Simplicity Growth Investment Fund",
+      17850.02,
+      0
+     ],
+     [
+      "OneAnswer Balanced Fund (MAC)",
+      45384.41
+     ]
+    ]
+   },
+   "targetsPct": {
+    "ms": 0
+   },
+   "feesAndWithdrawals": 39052.85,
+   "sectorOverrides": {
+    "prop": -1339.19
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 105993.54000000001,
+     "E": -75571.28925,
+     "F": 30422.25075,
+     "G": 39052.85
+    },
+    "fi": {
+     "B": 21000.0,
+     "E": -21000.0,
+     "F": 0.0,
+     "G": -1007.255999999994
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 40400.0,
+     "F": 40400.0,
+     "G": 40581.966933333344
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 101555.69925,
+     "F": 101555.69925,
+     "G": 101454.91733333336
+    },
+    "prop": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": -1339.19
+    },
+    "ms": {
+     "B": 63234.43000000001,
+     "E": -45384.41,
+     "F": 17850.02,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "AUD",
+      "B": 58431.03,
+      "F": -17140.259250000003,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "Amova NZ Cash Fund",
+      "B": 47562.51,
+      "F": 47562.51,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [],
+    "ms": [
+     {
+      "A": "Simplicity Growth Investment Fund",
+      "B": 17850.02,
+      "F": 17850.02,
+      "G": 0.0,
+      "K": null
+     },
+     {
+      "A": "OneAnswer Balanced Fund (MAC)",
+      "B": 45384.41,
+      "F": 0.0,
+      "G": null,
+      "K": null
+     }
+    ]
+   },
+   "property": {
+    "C117": -1339.19,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 190227.97
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-16",
+   "profile": "Aggressive",
+   "holdings": {
+    "cash": [
+     [
+      "USD",
+      42173.94
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      1050000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Fisher Funds Property and Infrastructure Fund",
+      238.46
+     ],
+     [
+      "Not In Datasheet Property Co",
+      0.0
+     ],
+     [
+      "Goodman Group",
+      7831.35
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 32954.6,
+   "addRemove": 20985.01
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 42173.94,
+     "E": 46524.10099999989,
+     "F": 88698.0409999999,
+     "G": 32954.6
+    },
+    "fi": {
+     "B": 1050000.0,
+     "E": -1026300.0,
+     "F": 23700.0,
+     "G": 79168.27600000001
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 269200.0,
+     "F": 269200.0,
+     "G": 269094.9024000001
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 672530.719,
+     "F": 672530.719,
+     "G": 672737.2560000003
+    },
+    "prop": {
+     "B": 8069.81,
+     "E": 59030.19,
+     "F": 67100.0,
+     "G": 67273.72560000002
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "USD",
+      "B": 42173.94,
+      "F": 88698.0409999999,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Fisher Funds Property and Infrastructure Fund",
+      "B": 238.46,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Not In Datasheet Property Co",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": ""
+     },
+     {
+      "A": "Goodman Group",
+      "B": 7831.35,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Goodman Property Trust",
+      "B": 0.0,
+      "F": 10900.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 0.0,
+      "F": 10900.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 0.0,
+      "F": 10900.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 10900.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 0.0,
+      "F": 16800.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 0.0,
+      "F": 6700.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 67273.72560000002,
+    "amounts": {
+     "Goodman Property Trust": 10931.980410000004,
+     "Precinct Properties New Zealand Limited": 10931.980410000004,
+     "Vital Healthcare Property Trust Units": 10931.980410000004,
+     "Property For Industry Limited": 10931.980410000004,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 16818.431400000005,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 6727.3725600000025
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1121228.76
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-17",
+   "profile": "Custom",
+   "holdings": {
+    "cash": [
+     [
+      "USD",
+      49783.26
+     ],
+     [
+      "NZD",
+      50644.76
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      52500.0
+     ]
+    ],
+    "prop": [
+     [
+      "Goodman Property Trust",
+      0.0
+     ],
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      0.0
+     ],
+     [
+      "Kiwi Property Group Ltd",
+      33078.03
+     ],
+     [
+      "Dexus AREIT Fund",
+      1703.25
+     ],
+     [
+      "Goodman Group",
+      7894.7,
+      0
+     ]
+    ],
+    "ms": [
+     [
+      "Milford Balanced Fund",
+      17949.63
+     ],
+     [
+      "OneAnswer Balanced Fund (MAC)",
+      43351.33
+     ]
+    ]
+   },
+   "custom": {
+    "lowerRisk": 0.266,
+    "cash": 0.022,
+    "fi": 0.244,
+    "growth": 0.734
+   },
+   "targetsPct": {
+    "ms": 0
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 100428.02,
+     "E": -51440.383999999984,
+     "F": 48987.63600000002,
+     "G": 5651.9091199999975
+    },
+    "fi": {
+     "B": 52500.0,
+     "E": -33700.0,
+     "F": 18800.0,
+     "G": 62684.81023999999
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 50400.0,
+     "F": 50400.0,
+     "G": 50284.86417066668
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 126122.624,
+     "F": 126122.624,
+     "G": 125712.1604266667
+    },
+    "prop": {
+     "B": 42675.979999999996,
+     "E": -30081.28,
+     "F": 12594.7,
+     "G": 12571.21604266667
+    },
+    "ms": {
+     "B": 61300.96000000001,
+     "E": -61300.96000000001,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "USD",
+      "B": 49783.26,
+      "F": -1657.1239999999816,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "NZD",
+      "B": 50644.76,
+      "F": 50644.76,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Goodman Property Trust",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Kiwi Property Group Ltd",
+      "B": 33078.03,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Dexus AREIT Fund",
+      "B": 1703.25,
+      "F": 0.0,
+      "G": null,
+      "K": "AUT"
+     },
+     {
+      "A": "Goodman Group",
+      "B": 7894.7,
+      "F": 7894.7,
+      "G": 0.0,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 4700.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": [
+     {
+      "A": "Milford Balanced Fund",
+      "B": 17949.63,
+      "F": 0.0,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "OneAnswer Balanced Fund (MAC)",
+      "B": 43351.33,
+      "F": 0.0,
+      "G": null,
+      "K": null
+     }
+    ]
+   },
+   "property": {
+    "C117": 4676.516042666671,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 4676.516042666671,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 256904.96000000002
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-18",
+   "profile": "Conservative",
+   "holdings": {
+    "cash": [
+     [
+      "AUD",
+      53294.21
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      52500.0
+     ]
+    ],
+    "prop": []
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 53294.21,
+     "E": 23999.999999999993,
+     "F": 77294.20999999999,
+     "G": 7934.565750000001
+    },
+    "fi": {
+     "B": 52500.0,
+     "E": -31100.0,
+     "F": 21400.0,
+     "G": 71411.09174999999
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 500.0,
+     "F": 500.0,
+     "G": 7052.947333333334
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 4800.0,
+     "F": 4800.0,
+     "G": 17632.368333333336
+    },
+    "prop": {
+     "B": 0.0,
+     "E": 1800.0,
+     "F": 1800.0,
+     "G": 1763.2368333333332
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "AUD",
+      "B": 53294.21,
+      "F": 77294.20999999999,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 1800.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 1763.2368333333332,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 1763.2368333333332,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 105794.20999999999
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-19",
+   "profile": "Moderate",
+   "holdings": {
+    "cash": [
+     [
+      "USD",
+      29353.14
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      1050000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Kernel Wealth NZ Commercial Property Fund",
+      2513.99
+     ],
+     [
+      "Smart NZ Property ETF",
+      7061.44
+     ],
+     [
+      "Dexus AREIT Fund",
+      0.0
+     ],
+     [
+      "Goodman Group",
+      24327.8
+     ]
+    ],
+    "ms": [
+     [
+      "Simplicity Growth Investment Fund",
+      7598.22
+     ],
+     [
+      "Milford Balanced Fund",
+      18235.36
+     ],
+     [
+      "OneAnswer Balanced Fund (MAC)",
+      31859.73,
+      0
+     ]
+    ]
+   },
+   "targetsPct": {
+    "ms": 0
+   },
+   "feesAndWithdrawals": 39538.03
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 29353.14,
+     "E": 448463.068,
+     "F": 477816.20800000004,
+     "G": 58547.484000000004
+    },
+    "fi": {
+     "B": 1050000.0,
+     "E": -856800.0,
+     "F": 193200.0,
+     "G": 644022.3240000001
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 120400.0,
+     "F": 120400.0,
+     "G": 120440.53851428573
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 300873.74199999997,
+     "F": 300873.74199999997,
+     "G": 301101.3462857143
+    },
+    "prop": {
+     "B": 33903.229999999996,
+     "E": 12896.77,
+     "F": 46800.0,
+     "G": 46837.98719999999
+    },
+    "ms": {
+     "B": 57693.31,
+     "E": -25833.58,
+     "F": 31859.73,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "USD",
+      "B": 29353.14,
+      "F": 477816.20800000004,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 2513.99,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Smart NZ Property ETF",
+      "B": 7061.44,
+      "F": 0.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Dexus AREIT Fund",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "AUT"
+     },
+     {
+      "A": "Goodman Group",
+      "B": 24327.8,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Goodman Property Trust",
+      "B": 0.0,
+      "F": 7600.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 0.0,
+      "F": 7600.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 0.0,
+      "F": 7600.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 7600.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 0.0,
+      "F": 11700.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 0.0,
+      "F": 4700.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": [
+     {
+      "A": "Simplicity Growth Investment Fund",
+      "B": 7598.22,
+      "F": 0.0,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "Milford Balanced Fund",
+      "B": 18235.36,
+      "F": 0.0,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "OneAnswer Balanced Fund (MAC)",
+      "B": 31859.73,
+      "F": 31859.73,
+      "G": 0.0,
+      "K": null
+     }
+    ]
+   },
+   "property": {
+    "C117": 46837.98719999999,
+    "amounts": {
+     "Goodman Property Trust": 7611.172919999998,
+     "Precinct Properties New Zealand Limited": 7611.172919999998,
+     "Vital Healthcare Property Trust Units": 7611.172919999998,
+     "Property For Industry Limited": 7611.172919999998,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 11709.496799999997,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 4683.798719999999
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1170949.68
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-20",
+   "profile": "Balanced",
+   "holdings": {
+    "cash": [
+     [
+      "AUD",
+      22879.36
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      105000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Goodman Property Trust",
+      4336.81
+     ],
+     [
+      "Precinct Properties New Zealand Limited",
+      289.26
+     ]
+    ],
+    "ms": [
+     [
+      "Milford Balanced Fund",
+      48630.07
+     ],
+     [
+      "OneAnswer Balanced Fund (MAC)",
+      1068.95,
+      0
+     ],
+     [
+      "Simplicity Growth Investment Fund",
+      4681.33
+     ]
+    ]
+   },
+   "targetsPct": {
+    "ms": 2
+   },
+   "feesAndWithdrawals": 36390.96
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 22879.36,
+     "E": 50898.11104999999,
+     "F": 73777.47105,
+     "G": 36390.96
+    },
+    "fi": {
+     "B": 105000.0,
+     "E": -93500.0,
+     "F": 11500.0,
+     "G": 38363.35200000001
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 27600.0,
+     "F": 27600.0,
+     "G": 29901.724800000004
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 64972.1445,
+     "F": 64972.1445,
+     "G": 74754.312
+    },
+    "prop": {
+     "B": 4626.070000000001,
+     "E": 2873.9299999999994,
+     "F": 7500.0,
+     "G": 7475.431200000001
+    },
+    "ms": {
+     "B": 54380.35,
+     "E": -52844.18555,
+     "F": 1536.1644500000002,
+     "G": 3737.7156000000004
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "AUD",
+      "B": 22879.36,
+      "F": 73777.47105,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Goodman Property Trust",
+      "B": 4336.81,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 289.26,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 7500.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": [
+     {
+      "A": "Milford Balanced Fund",
+      "B": 48630.07,
+      "F": 467.21445000000006,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "OneAnswer Balanced Fund (MAC)",
+      "B": 1068.95,
+      "F": 1068.95,
+      "G": 0.0,
+      "K": null
+     },
+     {
+      "A": "Simplicity Growth Investment Fund",
+      "B": 4681.33,
+      "F": 0.0,
+      "G": null,
+      "K": null
+     }
+    ]
+   },
+   "property": {
+    "C117": 7475.431200000001,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 7475.431200000001,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 186885.78000000003
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-21",
+   "profile": "Growth",
+   "holdings": {
+    "cash": [
+     [
+      "NZD",
+      8525.86
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      245000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Goodman Property Trust",
+      4771.99,
+      -2385.99
+     ],
+     [
+      "Kernel Wealth NZ Commercial Property Fund",
+      0.0,
+      0
+     ],
+     [
+      "Kiwi Property Group Ltd",
+      36747.93,
+      0
+     ],
+     [
+      "Dexus AREIT Fund",
+      938.67
+     ],
+     [
+      "Argosy Property Trust",
+      0.0
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 8296.06,
+   "addRemove": 43400.36
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 8525.86,
+     "E": 20440.39974999998,
+     "F": 28966.25974999998,
+     "G": 8296.06
+    },
+    "fi": {
+     "B": 245000.0,
+     "E": -227200.0,
+     "F": 17800.0,
+     "G": 59580.902
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 72400.0,
+     "F": 72400.0,
+     "G": 72402.0928
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 181084.62025,
+     "F": 181084.62025,
+     "G": 181005.232
+    },
+    "prop": {
+     "B": 42458.59,
+     "E": -3324.66,
+     "F": 39133.93,
+     "G": 18100.5232
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "NZD",
+      "B": 8525.86,
+      "F": 28966.25974999998,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Goodman Property Trust",
+      "B": 4771.99,
+      "F": 2386.0,
+      "G": -2385.99,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 0.0,
+      "G": 0.0,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Kiwi Property Group Ltd",
+      "B": 36747.93,
+      "F": 36747.93,
+      "G": 0.0,
+      "K": "Share"
+     },
+     {
+      "A": "Dexus AREIT Fund",
+      "B": 938.67,
+      "F": 0.0,
+      "G": null,
+      "K": "AUT"
+     },
+     {
+      "A": "Argosy Property Trust",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": -18647.4068,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 339384.80999999994
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-22",
+   "profile": "Aggressive",
+   "holdings": {
+    "cash": [
+     [
+      "Amova NZ Cash Fund",
+      12063.78
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      1050000.0
+     ]
+    ],
+    "prop": []
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": 23651.95
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 12063.78,
+     "E": 70709.05675000006,
+     "F": 82772.83675000006,
+     "G": 21241.275600000004
+    },
+    "fi": {
+     "B": 1050000.0,
+     "E": -1023900.0,
+     "F": 26100.0,
+     "G": 87330.29740000002
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 260400.0,
+     "F": 260400.0,
+     "G": 260571.77520000003
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 651242.89325,
+     "F": 651242.89325,
+     "G": 651429.4380000002
+    },
+    "prop": {
+     "B": 0.0,
+     "E": 65200.0,
+     "F": 65200.0,
+     "G": 65142.943799999994
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "Amova NZ Cash Fund",
+      "B": 12063.78,
+      "F": 82772.83675000006,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Goodman Property Trust",
+      "B": 0.0,
+      "F": 10600.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 0.0,
+      "F": 10600.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 0.0,
+      "F": 10600.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 10600.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 0.0,
+      "F": 16300.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 0.0,
+      "F": 6500.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 65142.943799999994,
+    "amounts": {
+     "Goodman Property Trust": 10585.7283675,
+     "Precinct Properties New Zealand Limited": 10585.7283675,
+     "Vital Healthcare Property Trust Units": 10585.7283675,
+     "Property For Industry Limited": 10585.7283675,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 16285.735949999998,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 6514.294379999999
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1085715.73
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-23",
+   "profile": "Custom",
+   "holdings": {
+    "cash": [
+     [
+      "NZD",
+      58336.41
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      105000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Precinct Properties New Zealand Limited",
+      5133.15,
+      3969.09
+     ],
+     [
+      "Fisher Funds Property and Infrastructure Fund",
+      0.0
+     ],
+     [
+      "Kiwi Property Group Ltd",
+      303.98,
+      -151.99
+     ]
+    ]
+   },
+   "custom": {
+    "lowerRisk": 0.554,
+    "cash": 0.028,
+    "fi": 0.526,
+    "growth": 0.446
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 58336.41,
+     "E": 7463.561499999996,
+     "F": 65799.9715,
+     "G": 4725.659119999999
+    },
+    "fi": {
+     "B": 105000.0,
+     "E": -78400.0,
+     "F": 26600.0,
+     "G": 88774.88203999998
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 18500.0,
+     "F": 18500.0,
+     "G": 20072.799690666667
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 43619.3385,
+     "F": 43619.3385,
+     "G": 50181.99922666668
+    },
+    "prop": {
+     "B": 5437.129999999999,
+     "E": 8817.1,
+     "F": 14254.23,
+     "G": 5018.199922666667
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "NZD",
+      "B": 58336.41,
+      "F": 65799.9715,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 5133.15,
+      "F": 9102.24,
+      "G": 3969.09,
+      "K": "Share"
+     },
+     {
+      "A": "Fisher Funds Property and Infrastructure Fund",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Kiwi Property Group Ltd",
+      "B": 303.98,
+      "F": 151.99,
+      "G": -151.99,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 5000.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 5018.199922666667,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 5018.199922666667,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 168773.54
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-24",
+   "profile": "Conservative",
+   "holdings": {
+    "cash": [
+     [
+      "AUD",
+      32879.46
+     ],
+     [
+      "USD",
+      36719.52
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      21000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Dexus AREIT Fund",
+      0.0,
+      1518.79
+     ],
+     [
+      "Not In Datasheet Property Co",
+      18341.85
+     ]
+    ],
+    "ms": [
+     [
+      "OneAnswer Balanced Fund (MAC)",
+      5208.96
+     ]
+    ]
+   },
+   "targetsPct": {
+    "ms": 2
+   },
+   "feesAndWithdrawals": 0,
+   "sectorOverrides": {
+    "prop": -3664.86
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 69598.98,
+     "E": -853.3544750000001,
+     "F": 68745.625525,
+     "G": 8561.23425
+    },
+    "fi": {
+     "B": 21000.0,
+     "E": 2100.0,
+     "F": 23100.0,
+     "G": 77051.10825
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 600.0,
+     "F": 600.0,
+     "G": 7609.986000000001
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 5200.0,
+     "F": 5200.0,
+     "G": 19024.965
+    },
+    "prop": {
+     "B": 18341.85,
+     "E": -2123.0599999999977,
+     "F": 16218.79,
+     "G": 14676.989999999998
+    },
+    "ms": {
+     "B": 5208.96,
+     "E": -4923.585525,
+     "F": 285.374475,
+     "G": 2282.9958
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "AUD",
+      "B": 32879.46,
+      "F": 32026.105525,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "USD",
+      "B": 36719.52,
+      "F": 36719.52,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Dexus AREIT Fund",
+      "B": 0.0,
+      "F": 1518.79,
+      "G": 1518.79,
+      "K": "AUT"
+     },
+     {
+      "A": "Not In Datasheet Property Co",
+      "B": 18341.85,
+      "F": 0.0,
+      "G": null,
+      "K": ""
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 14700.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": [
+     {
+      "A": "OneAnswer Balanced Fund (MAC)",
+      "B": 5208.96,
+      "F": 285.374475,
+      "G": null,
+      "K": null
+     }
+    ]
+   },
+   "property": {
+    "C117": 14676.989999999998,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 14676.989999999998,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 114149.79
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-25",
+   "profile": "Moderate",
+   "holdings": {
+    "cash": [
+     [
+      "AUD",
+      9564.37
+     ],
+     [
+      "Amova NZ Cash Fund",
+      40137.33
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      245000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      20449.84
+     ],
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      7658.39,
+      0
+     ],
+     [
+      "Goodman Group",
+      23266.39
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 49701.700000000004,
+     "E": 93264.32199999999,
+     "F": 142966.022,
+     "G": 17303.816000000006
+    },
+    "fi": {
+     "B": 245000.0,
+     "E": -187900.0,
+     "F": 57100.0,
+     "G": 190341.97600000008
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 35600.0,
+     "F": 35600.0,
+     "G": 35596.421485714294
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 88951.908,
+     "F": 88951.908,
+     "G": 88991.05371428574
+    },
+    "prop": {
+     "B": 51374.62,
+     "E": -29916.229999999996,
+     "F": 21458.39,
+     "G": 13843.052800000001
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "AUD",
+      "B": 9564.37,
+      "F": 102828.692,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "Amova NZ Cash Fund",
+      "B": 40137.33,
+      "F": 40137.33,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 20449.84,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 7658.39,
+      "F": 7658.39,
+      "G": 0.0,
+      "K": "ETF"
+     },
+     {
+      "A": "Goodman Group",
+      "B": 23266.39,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 13800.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 13843.052800000001,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 13843.052800000001,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 346076.32000000007
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-26",
+   "profile": "Balanced",
+   "holdings": {
+    "cash": [
+     [
+      "USD",
+      33856.83
+     ],
+     [
+      "AUD",
+      49965.27
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      1050000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      18542.31
+     ],
+     [
+      "Goodman Property Trust",
+      0.0
+     ],
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      31601.39
+     ],
+     [
+      "Dexus AREIT Fund",
+      39642.72
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 83822.1,
+     "E": 266252.507,
+     "F": 350074.60699999996,
+     "G": 24472.170400000003
+    },
+    "fi": {
+     "B": 1050000.0,
+     "E": -910600.0,
+     "F": 139400.0,
+     "G": 464971.2376
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 195800.0,
+     "F": 195800.0,
+     "G": 195777.36320000002
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 489290.213,
+     "F": 489290.213,
+     "G": 489443.40799999994
+    },
+    "prop": {
+     "B": 89786.42,
+     "E": -40742.72,
+     "F": 49043.7,
+     "G": 48944.340800000005
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "USD",
+      "B": 33856.83,
+      "F": 300109.33699999994,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "AUD",
+      "B": 49965.27,
+      "F": 49965.27,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 18542.31,
+      "F": 4842.310000000001,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Goodman Property Trust",
+      "B": 0.0,
+      "F": 8000.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 31601.39,
+      "F": 12201.39,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Dexus AREIT Fund",
+      "B": 39642.72,
+      "F": 0.0,
+      "G": null,
+      "K": "AUT"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 0.0,
+      "F": 8000.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 0.0,
+      "F": 8000.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 8000.0,
+      "G": null,
+      "K": "Share"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 48944.340800000005,
+    "amounts": {
+     "Goodman Property Trust": 7953.455380000001,
+     "Precinct Properties New Zealand Limited": 7953.455380000001,
+     "Vital Healthcare Property Trust Units": 7953.455380000001,
+     "Property For Industry Limited": 7953.455380000001,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 12236.085200000001,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 4894.434080000001
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1223608.52
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-27",
+   "profile": "Growth",
+   "holdings": {
+    "cash": [
+     [
+      "Amova NZ Cash Fund",
+      49153.6
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      21000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      1770.01,
+      0
+     ],
+     [
+      "Vital Healthcare Property Trust Units",
+      17791.68
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 49153.6,
+     "E": -22908.32,
+     "F": 26245.28,
+     "G": 1794.3058
+    },
+    "fi": {
+     "B": 21000.0,
+     "E": -16200.0,
+     "F": 4800.0,
+     "G": 16148.752200000003
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 17600.0,
+     "F": 17600.0,
+     "G": 19139.26186666667
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 34500.0,
+     "F": 34500.0,
+     "G": 47848.15466666668
+    },
+    "prop": {
+     "B": 19561.69,
+     "E": -12991.68,
+     "F": 6570.01,
+     "G": 4784.815466666668
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "Amova NZ Cash Fund",
+      "B": 49153.6,
+      "F": 26245.28,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 1770.01,
+      "F": 1770.01,
+      "G": 0.0,
+      "K": "ETF"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 17791.68,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 4800.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 4784.815466666668,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 4784.815466666668,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 89715.29000000001
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-28",
+   "profile": "Aggressive",
+   "holdings": {
+    "cash": [
+     [
+      "NZD",
+      58509.49
+     ],
+     [
+      "USD",
+      36067.2
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      52500.0
+     ]
+    ],
+    "prop": [
+     [
+      "Goodman Property Trust",
+      11976.96
+     ],
+     [
+      "Kernel Wealth NZ Commercial Property Fund",
+      297.45
+     ],
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      288.82,
+      0
+     ],
+     [
+      "Property For Industry Limited",
+      23819.14
+     ],
+     [
+      "Mint Australasian Property Fund",
+      32524.33,
+      0
+     ],
+     [
+      "Smart NZ Property ETF",
+      0.0
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 7823.08
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 94576.69,
+     "E": -97306.03475,
+     "F": -2729.344750000004,
+     "G": 7823.08
+    },
+    "fi": {
+     "B": 52500.0,
+     "E": -48400.0,
+     "F": 4100.0,
+     "G": 13775.259000000005
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 52000.0,
+     "F": 52000.0,
+     "G": 51836.01360000001
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 129799.58475,
+     "F": 129799.58475,
+     "G": 129590.03400000006
+    },
+    "prop": {
+     "B": 68906.7,
+     "E": -36093.55,
+     "F": 32813.15,
+     "G": 12959.0034
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "NZD",
+      "B": 58509.49,
+      "F": -38796.54475,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "USD",
+      "B": 36067.2,
+      "F": 36067.2,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Goodman Property Trust",
+      "B": 11976.96,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 297.45,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 288.82,
+      "F": 288.82,
+      "G": 0.0,
+      "K": "ETF"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 23819.14,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Mint Australasian Property Fund",
+      "B": 32524.33,
+      "F": 32524.33,
+      "G": 0.0,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Smart NZ Property ETF",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "ETF"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": -19565.3266,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 215983.39
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-29",
+   "profile": "Custom",
+   "holdings": {
+    "cash": [
+     [
+      "NZD",
+      25880.36
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      21000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Not In Datasheet Property Co",
+      0.0,
+      0
+     ]
+    ]
+   },
+   "custom": {
+    "lowerRisk": 0.483,
+    "cash": 0.027,
+    "fi": 0.456,
+    "growth": 0.517
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": -19187.99
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 25880.36,
+     "E": -5887.990000000002,
+     "F": 19992.37,
+     "G": 1265.7697200000005
+    },
+    "fi": {
+     "B": 21000.0,
+     "E": -17400.0,
+     "F": 3600.0,
+     "G": 12109.64499
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 300.0,
+     "F": 300.0,
+     "G": 3817.8547439999998
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 2800.0,
+     "F": 2800.0,
+     "G": 9544.63686
+    },
+    "prop": {
+     "B": 0.0,
+     "E": 1000.0,
+     "F": 1000.0,
+     "G": 954.4636859999999
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "NZD",
+      "B": 25880.36,
+      "F": 19992.37,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Not In Datasheet Property Co",
+      "B": 0.0,
+      "F": 0.0,
+      "G": 0.0,
+      "K": ""
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 1000.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 954.4636859999999,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 954.4636859999999,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 27692.37
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-30",
+   "profile": "Conservative",
+   "holdings": {
+    "cash": [
+     [
+      "USD",
+      5506.37
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      1050000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Vital Healthcare Property Trust Units",
+      36874.29
+     ],
+     [
+      "Precinct Properties New Zealand Limited",
+      0.0
+     ],
+     [
+      "Smart NZ Property ETF",
+      0.0
+     ]
+    ],
+    "ms": [
+     [
+      "OneAnswer Balanced Fund (MAC)",
+      30081.99
+     ],
+     [
+      "Milford Balanced Fund",
+      21141.71
+     ]
+    ]
+   },
+   "targetsPct": {
+    "ms": 2
+   },
+   "feesAndWithdrawals": 18378.2
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 5506.37,
+     "E": 617948.8701,
+     "F": 623455.2400999999,
+     "G": 85770.327
+    },
+    "fi": {
+     "B": 1050000.0,
+     "E": -818500.0,
+     "F": 231500.0,
+     "G": 771932.9430000001
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 76200.0,
+     "F": 76200.0,
+     "G": 76240.29066666668
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 190490.109,
+     "F": 190490.109,
+     "G": 190600.7266666667
+    },
+    "prop": {
+     "B": 36874.29,
+     "E": -17774.29,
+     "F": 19100.0,
+     "G": 19060.072666666667
+    },
+    "ms": {
+     "B": 51223.7,
+     "E": -48364.6891,
+     "F": 2859.0109,
+     "G": 22872.0872
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "USD",
+      "B": 5506.37,
+      "F": 623455.2400999999,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 36874.29,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Smart NZ Property ETF",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 19100.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": [
+     {
+      "A": "OneAnswer Balanced Fund (MAC)",
+      "B": 30081.99,
+      "F": 2859.0109,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "Milford Balanced Fund",
+      "B": 21141.71,
+      "F": 0.0,
+      "G": null,
+      "K": null
+     }
+    ]
+   },
+   "property": {
+    "C117": 19060.072666666667,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 19060.072666666667,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1143604.36
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-31",
+   "profile": "Moderate",
+   "holdings": {
+    "cash": [
+     [
+      "AUD",
+      55598.7
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      315000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Goodman Property Trust",
+      9798.04,
+      0
+     ],
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      0.0
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 31692.49
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 55598.7,
+     "E": 103990.08150000001,
+     "F": 159588.7815,
+     "G": 31692.49
+    },
+    "fi": {
+     "B": 315000.0,
+     "E": -256100.0,
+     "F": 58900.0,
+     "G": 196545.55400000006
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 39000.0,
+     "F": 39000.0,
+     "G": 39126.52182857143
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 97909.9185,
+     "F": 97909.9185,
+     "G": 97816.30457142858
+    },
+    "prop": {
+     "B": 9798.04,
+     "E": 15200.0,
+     "F": 24998.04,
+     "G": 15215.869599999998
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "AUD",
+      "B": 55598.7,
+      "F": 159588.7815,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Goodman Property Trust",
+      "B": 9798.04,
+      "F": 9798.04,
+      "G": 0.0,
+      "K": "Share"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 15200.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 15215.869599999998,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 15215.869599999998,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 380396.74
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-32",
+   "profile": "Balanced",
+   "holdings": {
+    "cash": [
+     [
+      "Amova NZ Cash Fund",
+      51934.25
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      157500.0
+     ]
+    ],
+    "prop": [
+     [
+      "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      0.0
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 18677.29
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 51934.25,
+     "E": 12264.143750000003,
+     "F": 64198.39375,
+     "G": 18677.29
+    },
+    "fi": {
+     "B": 157500.0,
+     "E": -138000.0,
+     "F": 19500.0,
+     "G": 65096.41
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 33600.0,
+     "F": 33600.0,
+     "G": 33509.48
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 83735.85625,
+     "F": 83735.85625,
+     "G": 83773.7
+    },
+    "prop": {
+     "B": 0.0,
+     "E": 8400.0,
+     "F": 8400.0,
+     "G": 8377.37
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "Amova NZ Cash Fund",
+      "B": 51934.25,
+      "F": 64198.39375,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 8400.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 8377.37,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 8377.37,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 209434.25
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-33",
+   "profile": "Growth",
+   "holdings": {
+    "cash": [
+     [
+      "NZD",
+      11049.58
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      210000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      0.0
+     ],
+     [
+      "Vital Healthcare Property Trust Units",
+      3806.69
+     ],
+     [
+      "Not In Datasheet Property Co",
+      6165.13
+     ],
+     [
+      "Argosy Property Trust",
+      0.0
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 11049.58,
+     "E": 23096.28499999998,
+     "F": 34145.86499999998,
+     "G": 4620.428
+    },
+    "fi": {
+     "B": 210000.0,
+     "E": -197600.0,
+     "F": 12400.0,
+     "G": 41583.852000000006
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 49200.0,
+     "F": 49200.0,
+     "G": 49284.56533333334
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 122975.535,
+     "F": 122975.535,
+     "G": 123211.41333333336
+    },
+    "prop": {
+     "B": 9971.82,
+     "E": 2328.1800000000003,
+     "F": 12300.0,
+     "G": 12321.141333333335
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "NZD",
+      "B": 11049.58,
+      "F": 34145.86499999998,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 3806.69,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Not In Datasheet Property Co",
+      "B": 6165.13,
+      "F": 0.0,
+      "G": null,
+      "K": ""
+     },
+     {
+      "A": "Argosy Property Trust",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 12300.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 12321.141333333335,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 12321.141333333335,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 231021.4
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-34",
+   "profile": "Aggressive",
+   "holdings": {
+    "cash": [
+     [
+      "USD",
+      36438.52
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      525000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Precinct Properties New Zealand Limited",
+      25642.79
+     ],
+     [
+      "Goodman Property Trust",
+      4367.59
+     ],
+     [
+      "Kiwi Property Group Ltd",
+      7565.12
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 27645.25
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 36438.52,
+     "E": 15389.769500000024,
+     "F": 51828.28950000002,
+     "G": 27645.25
+    },
+    "fi": {
+     "B": 525000.0,
+     "E": -515400.0,
+     "F": 9600.0,
+     "G": 32256.152000000016
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 143800.0,
+     "F": 143800.0,
+     "G": 143763.36480000004
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 359375.3505,
+     "F": 359375.3505,
+     "G": 359408.4120000001
+    },
+    "prop": {
+     "B": 37575.5,
+     "E": -3165.12,
+     "F": 34410.380000000005,
+     "G": 35940.8412
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "USD",
+      "B": 36438.52,
+      "F": 51828.28950000002,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 25642.79,
+      "F": 5842.790000000001,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Goodman Property Trust",
+      "B": 4367.59,
+      "F": 4367.59,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Kiwi Property Group Ltd",
+      "B": 7565.12,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 0.0,
+      "F": 5800.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 5800.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 0.0,
+      "F": 9000.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 0.0,
+      "F": 3600.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 35940.8412,
+    "amounts": {
+     "Goodman Property Trust": 5840.386695000001,
+     "Precinct Properties New Zealand Limited": 5840.386695000001,
+     "Vital Healthcare Property Trust Units": 5840.386695000001,
+     "Property For Industry Limited": 5840.386695000001,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 0.0,
+     "Vanguard Australian Property Securities Index ETF": 8985.2103,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 3594.0841200000004
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 599014.02
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-35",
+   "profile": "Custom",
+   "holdings": {
+    "cash": [
+     [
+      "USD",
+      19435.62
+     ],
+     [
+      "NZD",
+      41600.46
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      525000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Kernel Wealth NZ Commercial Property Fund",
+      38199.69,
+      3124.2
+     ],
+     [
+      "Property For Industry Limited",
+      0.0
+     ],
+     [
+      "Not In Datasheet Property Co",
+      7651.73,
+      0
+     ],
+     [
+      "Mint Australasian Property Fund",
+      0.0
+     ]
+    ]
+   },
+   "custom": {
+    "lowerRisk": 0.453,
+    "cash": 0.024,
+    "fi": 0.429,
+    "growth": 0.547
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 61036.08,
+     "E": 118478.61249999997,
+     "F": 179514.69249999998,
+     "G": 15165.299999999997
+    },
+    "fi": {
+     "B": 525000.0,
+     "E": -443700.0,
+     "F": 81300.0,
+     "G": 271079.73749999993
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 92000.0,
+     "F": 92000.0,
+     "G": 92171.32333333335
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 230097.1875,
+     "F": 230097.1875,
+     "G": 230428.3083333334
+    },
+    "prop": {
+     "B": 45851.42,
+     "E": 3124.199999999997,
+     "F": 48975.619999999995,
+     "G": 23042.830833333337
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "USD",
+      "B": 19435.62,
+      "F": 137914.23249999998,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "NZD",
+      "B": 41600.46,
+      "F": 41600.46,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 38199.69,
+      "F": 41323.89,
+      "G": 3124.2,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Not In Datasheet Property Co",
+      "B": 7651.73,
+      "F": 7651.73,
+      "G": 0.0,
+      "K": ""
+     },
+     {
+      "A": "Mint Australasian Property Fund",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 15391.100833333338,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 15391.100833333338,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 631887.5
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-36",
+   "profile": "Conservative",
+   "holdings": {
+    "cash": [
+     [
+      "USD",
+      39236.3
+     ],
+     [
+      "NZD",
+      34663.88
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      525000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Vital Healthcare Property Trust Units",
+      15077.18
+     ],
+     [
+      "Precinct Properties New Zealand Limited",
+      0.0
+     ],
+     [
+      "Not In Datasheet Property Co",
+      33743.07
+     ],
+     [
+      "Kiwi Property Group Ltd",
+      37746.77
+     ],
+     [
+      "Dexus AREIT Fund",
+      6111.01,
+      0
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 73900.18,
+     "E": 304677.56474999996,
+     "F": 378577.74474999995,
+     "G": 51868.36575
+    },
+    "fi": {
+     "B": 525000.0,
+     "E": -385000.0,
+     "F": 140000.0,
+     "G": 466815.29175000003
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 46200.0,
+     "F": 46200.0,
+     "G": 46105.21400000001
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 115289.45525,
+     "F": 115289.45525,
+     "G": 115263.035
+    },
+    "prop": {
+     "B": 92678.03,
+     "E": -81167.01999999999,
+     "F": 11511.01,
+     "G": 11526.3035
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "USD",
+      "B": 39236.3,
+      "F": 343913.86474999995,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "NZD",
+      "B": 34663.88,
+      "F": 34663.88,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 15077.18,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Not In Datasheet Property Co",
+      "B": 33743.07,
+      "F": 0.0,
+      "G": null,
+      "K": ""
+     },
+     {
+      "A": "Kiwi Property Group Ltd",
+      "B": 37746.77,
+      "F": 0.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Dexus AREIT Fund",
+      "B": 6111.01,
+      "F": 6111.01,
+      "G": 0.0,
+      "K": "AUT"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 5400.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 5415.2935,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 5415.2935,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 691578.21
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-37",
+   "profile": "Moderate",
+   "holdings": {
+    "cash": [
+     [
+      "NZD",
+      26735.56
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      52500.0
+     ]
+    ],
+    "prop": [
+     [
+      "Kernel Wealth NZ Commercial Property Fund",
+      18995.28
+     ],
+     [
+      "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      0.0,
+      0
+     ],
+     [
+      "Vanguard Australian Property Securities Index ETF",
+      0.0
+     ],
+     [
+      "Precinct Properties New Zealand Limited",
+      0.0
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 6389.99,
+   "sectorOverrides": {
+    "prop": 6068.56
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 26735.56,
+     "E": 17599.999999999996,
+     "F": 44335.56,
+     "G": 6389.99
+    },
+    "fi": {
+     "B": 52500.0,
+     "E": -36800.0,
+     "F": 15700.0,
+     "G": 52548.51400000002
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 5800.0,
+     "F": 5800.0,
+     "G": 10103.743542857144
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 7300.0,
+     "F": 7300.0,
+     "G": 25259.35885714286
+    },
+    "prop": {
+     "B": 18995.28,
+     "E": 6100.0,
+     "F": 25095.28,
+     "G": 25063.84
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "NZD",
+      "B": 26735.56,
+      "F": 44335.56,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 18995.28,
+      "F": 5095.279999999999,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+      "B": 0.0,
+      "F": 0.0,
+      "G": 0.0,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Vanguard Australian Property Securities Index ETF",
+      "B": 0.0,
+      "F": 0.0,
+      "G": null,
+      "K": "ETF"
+     },
+     {
+      "A": "Precinct Properties New Zealand Limited",
+      "B": 0.0,
+      "F": 5000.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Goodman Property Trust",
+      "B": 0.0,
+      "F": 5000.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Vital Healthcare Property Trust Units",
+      "B": 0.0,
+      "F": 5000.0,
+      "G": null,
+      "K": "Share"
+     },
+     {
+      "A": "Property For Industry Limited",
+      "B": 0.0,
+      "F": 5000.0,
+      "G": null,
+      "K": "Share"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 25063.84,
+    "amounts": {
+     "Goodman Property Trust": 5012.768,
+     "Precinct Properties New Zealand Limited": 5012.768,
+     "Vital Healthcare Property Trust Units": 5012.768,
+     "Property For Industry Limited": 5012.768,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 5012.768,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 98230.84
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-38",
+   "profile": "Balanced",
+   "holdings": {
+    "cash": [
+     [
+      "AUD",
+      32642.56
+     ],
+     [
+      "NZD",
+      44706.81
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      245000.0
+     ]
+    ],
+    "prop": [],
+    "ms": [
+     [
+      "Simplicity Growth Investment Fund",
+      14212.1
+     ]
+    ]
+   },
+   "targetsPct": {
+    "ms": 0
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 77349.37,
+     "E": 18998.063250000007,
+     "F": 96347.43325,
+     "G": 6731.2294
+    },
+    "fi": {
+     "B": 245000.0,
+     "E": -206700.0,
+     "F": 38300.0,
+     "G": 127893.35859999999
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 53800.0,
+     "F": 53800.0,
+     "G": 53849.835199999994
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 134614.03675,
+     "F": 134614.03675,
+     "G": 134624.588
+    },
+    "prop": {
+     "B": 0.0,
+     "E": 13500.0,
+     "F": 13500.0,
+     "G": 13462.458799999999
+    },
+    "ms": {
+     "B": 14212.1,
+     "E": -14212.1,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "AUD",
+      "B": 32642.56,
+      "F": 51640.62325,
+      "G": null,
+      "K": null
+     },
+     {
+      "A": "NZD",
+      "B": 44706.81,
+      "F": 44706.81,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 13500.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": [
+     {
+      "A": "Simplicity Growth Investment Fund",
+      "B": 14212.1,
+      "F": 0.0,
+      "G": null,
+      "K": null
+     }
+    ]
+   },
+   "property": {
+    "C117": 13462.458799999999,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 13462.458799999999,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 336561.47
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "pm-39",
+   "profile": "Growth",
+   "holdings": {
+    "cash": [
+     [
+      "NZD",
+      47854.26
+     ]
+    ],
+    "fi": [
+     [
+      "Harbour NZ Corporate Bond Fund",
+      210000.0
+     ]
+    ],
+    "prop": [
+     [
+      "Mint Australasian Property Fund",
+      5371.78
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "B": 47854.26,
+     "E": -9208.871000000006,
+     "F": 38645.388999999996,
+     "G": 5264.520800000002
+    },
+    "fi": {
+     "B": 210000.0,
+     "E": -195800.0,
+     "F": 14200.0,
+     "G": 47380.687200000015
+    },
+    "ae": {
+     "B": 0.0,
+     "E": 56000.0,
+     "F": 56000.0,
+     "G": 56154.88853333335
+    },
+    "ge": {
+     "B": 0.0,
+     "E": 140380.651,
+     "F": 140380.651,
+     "G": 140387.22133333338
+    },
+    "prop": {
+     "B": 5371.78,
+     "E": 8628.220000000001,
+     "F": 14000.0,
+     "G": 14038.722133333338
+    },
+    "ms": {
+     "B": 0.0,
+     "E": 0.0,
+     "F": 0.0,
+     "G": 0.0
+    }
+   },
+   "rows": {
+    "cash": [
+     {
+      "A": "NZD",
+      "B": 47854.26,
+      "F": 38645.388999999996,
+      "G": null,
+      "K": null
+     }
+    ],
+    "prop": [
+     {
+      "A": "Mint Australasian Property Fund",
+      "B": 5371.78,
+      "F": 0.0,
+      "G": null,
+      "K": "Managed Fund"
+     },
+     {
+      "A": "Kernel Wealth NZ Commercial Property Fund",
+      "B": 0.0,
+      "F": 14000.0,
+      "G": null,
+      "K": "Managed Fund"
+     }
+    ],
+    "ms": []
+   },
+   "property": {
+    "C117": 14038.722133333338,
+    "amounts": {
+     "Goodman Property Trust": 0.0,
+     "Precinct Properties New Zealand Limited": 0.0,
+     "Vital Healthcare Property Trust Units": 0.0,
+     "Property For Industry Limited": 0.0,
+     "Funds": null,
+     "Kernel Wealth NZ Commercial Property Fund": 14038.722133333338,
+     "Vanguard Australian Property Securities Index ETF": 0.0,
+     "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 263226.04000000004
+   }
+  }
+ }
+]

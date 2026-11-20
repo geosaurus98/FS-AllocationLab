@@ -87,6 +87,46 @@ def settle(lo, aa, rounds=60):
         prev = v
 
 
+# Named ranges scanned by Trigger_Recalculate.Recalculate and the Portfolio section each feeds.
+MODEL_RANGES = [('ae', ['B35:B70']), ('ge', ['B79:B114', 'J73:J77']), ('prop', ['B119:B149'])]
+
+
+def recalculate_macro(p, aa):
+    """Port of the Recalculate macro: every model asset whose amount (2 columns right) is non-zero,
+    whose name has more than one word and does not contain "Direct", is added to its section with
+    value 0 if it is not already there."""
+    for key, ranges in MODEL_RANGES:
+        first, last = next((f, l) for k, f, l, _ in SECTIONS if k == key)
+        for rng in ranges:
+            cells = aa.getCellRangeByName(rng)
+            for i in range(cells.Rows.Count):
+                c = cells.getCellByPosition(0, i)
+                name = c.getString()
+                if not name or 'Direct' in name:
+                    continue
+                if len(name.strip().split(' ')) <= 1:
+                    continue
+                amt = aa.getCellByPosition(c.CellAddress.Column + 2, c.CellAddress.Row)
+                # Empty <> 0 is False in VBA; an error value would stop the macro (type mismatch) —
+                # treated here as "not added".
+                if amt.getError() != 0 or amt.getValue() == 0:
+                    continue
+                name = name.strip()
+                empty_row = None
+                exists = False
+                for r in range(first, last + 1):
+                    a = p.getCellRangeByName(f'A{r}').getString()
+                    if a == name:
+                        exists = True
+                        break
+                    if a == '':
+                        empty_row = r
+                        break
+                if not exists and empty_row is not None:
+                    put(p, f'A{empty_row}', name)
+                    put(p, f'B{empty_row}', 0)
+
+
 def run(lo, sc):
     p = lo.sheet('Portfolio')
     aa = lo.sheet('Asset Allocation')
@@ -128,10 +168,15 @@ def run(lo, sc):
     for k, cell in TARGET_CELLS.items():
         put(p, cell, tp[k] if k in tp else targets[k] * 100)
     settle(lo, aa)
+    # 3. "Update Sheet" button (Trigger_Recalculate.Recalculate): add model assets to their sections.
+    if sc.get('insertModelAssets', True):
+        recalculate_macro(p, aa)
+        settle(lo, aa)
     out = {'id': sc['id'], 'targetsUsed': targets, 'sectors': {}, 'rows': {}}
     for key, first, last, tot in SECTIONS:
         out['sectors'][key] = {c: val(p, f'{c}{tot}') for c in 'BCDEFGHI'}
-        out['rows'][key] = [{c: val(p, f'{c}{r}') for c in 'ABCDEFGH'} for r in range(first, last + 1) if val(p, f'A{r}') is not None]
+        out['rows'][key] = [{c: val(p, f'{c}{r}') for c in 'ABCDEFGHJK'} for r in range(first, last + 1) if val(p, f'A{r}') is not None]
+    out['property'] = {'C117': val(aa, 'C117'), 'amounts': {aa.getCellRangeByName(f'B{r}').getString(): val(aa, f'D{r}') for r in range(119, 150) if aa.getCellRangeByName(f'B{r}').getString()}}
     out['portfolio'] = {k: val(p, a) for k, a in (('total', 'B202'), ('recommendedTotal', 'F202'), ('finalPortfolioTotal', 'F204'), ('errors', 'BD2'), ('status', 'BC2'))}
     out['assetAllocationTargets'] = {k: val(aa, a) for k, a in (('cash', 'M3'), ('fi', 'M4'), ('ae', 'M5'), ('ge', 'M6'), ('prop', 'M7'), ('ms', 'M8'))}
     out['profileTable'] = {h: {k: aa.getCellByPosition(2 + i, r).getValue() for k, r in {**TARGET_ROWS, 'lowerRisk': 2, 'growth': 5}.items()} for i, h in enumerate(headers) if h}
@@ -150,6 +195,7 @@ def main():
             lo.open(path)
             try:
                 results.append({'scenario': sc, 'workbook': run(lo, sc)})
+                print(f"  {sc['id']} done ({len(results)}/{len(scenarios)})", flush=True)
             finally:
                 lo.doc.close(True)
     finally:

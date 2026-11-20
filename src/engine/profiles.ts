@@ -1,3 +1,4 @@
+import workbookDefaults from './defaults/workbook-settings.json';
 import { div, iferror, isErr, mul, sub, type XValue } from './excel';
 
 /**
@@ -45,16 +46,8 @@ export interface TacticalTable {
   'Master Risk Alloc': { cash: number; fi: number; ae: number; ge: number; prop: number; ms: number };
 }
 
-/** Values as shipped in the workbook (Asset Allocation!C3:J10). Not company-approved data. */
-export const WORKBOOK_TACTICAL_TABLE: TacticalTable = {
-  Conservative: { lowerRisk: 0.75, cash: 0.075, fi: 0.675, growth: 0.25, ae: null, ge: null, prop: null, ms: 0 },
-  Moderate: { lowerRisk: 0.6, cash: 0.05, fi: 0.55, growth: 0.4, ae: null, ge: null, prop: 0.04, ms: 0 },
-  Balanced: { lowerRisk: 0.4, cash: 0.02, fi: 0.38, growth: 0.6, ae: 0.16, ge: 0.4, prop: 0.04, ms: 0 },
-  Growth: { lowerRisk: 0.2, cash: 0.02, fi: 0.18, growth: 0.8, ae: null, ge: null, prop: null, ms: 0 },
-  Aggressive: { lowerRisk: 0.1, cash: 0.02, fi: 0.08, growth: 0.9, ae: null, ge: null, prop: null, ms: 0 },
-  Custom: { lowerRisk: 0.3, cash: 0.02, fi: 0.28, growth: 0.7, ms: 0 },
-  'Master Risk Alloc': { cash: 0.04, fi: 0.46, ae: 0.2, ge: 0.2, prop: 0.05, ms: 0.05 },
-};
+/** Values as shipped in the workbook (Asset Allocation!C3:J10), extracted by scripts/golden/extract_settings.py. */
+export const WORKBOOK_TACTICAL_TABLE: TacticalTable = workbookDefaults.tactical as unknown as TacticalTable;
 
 /** Current sector weights (Portfolio!C11, C72, C120, C168, C192, C201) used by the "Current" profile. */
 export interface CurrentSectorPct {

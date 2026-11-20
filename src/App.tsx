@@ -5,6 +5,7 @@ import { Dashboard } from './pages/Dashboard';
 import { DataPage } from './pages/DataPage';
 import { Designer } from './pages/Designer';
 import { ClientHoldings } from './pages/ClientHoldings';
+import { SettingsPage } from './pages/SettingsPage';
 import { Scenarios } from './pages/Scenarios';
 import { useRoute } from './router';
 
@@ -29,6 +30,9 @@ export function App() {
       break;
     case 'clients':
       page = <ClientHoldings />;
+      break;
+    case 'settings':
+      page = <SettingsPage />;
       break;
     default:
       page = <Dashboard />;

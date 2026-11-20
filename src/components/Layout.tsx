@@ -12,6 +12,7 @@ const NAV: { page: Route['page']; label: string; icon: string }[] = [
   { page: 'assumptions', label: 'Assumptions', icon: '§' },
   { page: 'clients', label: 'Client Holdings', icon: '◉' },
   { page: 'data', label: 'Import / Export', icon: '⇅' },
+  { page: 'settings', label: 'Settings', icon: '⚙' },
 ];
 
 function routeFor(page: Route['page']): Route {

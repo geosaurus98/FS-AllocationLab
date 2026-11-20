@@ -1,0 +1,327 @@
+{
+ "source": "Recommendations Master Equity Weighting.xlsm (Asset Allocation sheet)",
+ "status": "approved",
+ "tactical": {
+  "Conservative": {
+   "lowerRisk": 0.75,
+   "cash": 0.075,
+   "fi": 0.675,
+   "growth": 0.25,
+   "ae": null,
+   "ge": null,
+   "prop": null,
+   "ms": 0
+  },
+  "Moderate": {
+   "lowerRisk": 0.6,
+   "cash": 0.05,
+   "fi": 0.55,
+   "growth": 0.4,
+   "ae": null,
+   "ge": null,
+   "prop": 0.04,
+   "ms": 0
+  },
+  "Balanced": {
+   "lowerRisk": 0.4,
+   "cash": 0.02,
+   "fi": 0.38,
+   "growth": 0.6,
+   "ae": 0.16,
+   "ge": 0.4,
+   "prop": 0.04,
+   "ms": 0
+  },
+  "Growth": {
+   "lowerRisk": 0.2,
+   "cash": 0.02,
+   "fi": 0.18,
+   "growth": 0.8,
+   "ae": null,
+   "ge": null,
+   "prop": null,
+   "ms": 0
+  },
+  "Aggressive": {
+   "lowerRisk": 0.1,
+   "cash": 0.02,
+   "fi": 0.08,
+   "growth": 0.9,
+   "ae": null,
+   "ge": null,
+   "prop": null,
+   "ms": 0
+  },
+  "Custom": {
+   "lowerRisk": 0.3,
+   "cash": 0.02,
+   "fi": 0.28,
+   "growth": 0.7,
+   "ms": 0
+  },
+  "Master Risk Alloc": {
+   "cash": 0.04,
+   "fi": 0.46,
+   "ae": 0.2,
+   "ge": 0.2,
+   "prop": 0.05,
+   "ms": 0.05
+  }
+ },
+ "property": {
+  "bands": [
+   {
+    "from": 0,
+    "to": 10000.0,
+    "nzFunds": 1.0,
+    "nzShares": 0.0,
+    "aus": 0.0,
+    "int": 0.0
+   },
+   {
+    "from": 10000.0,
+    "to": 20000.0,
+    "nzFunds": 1.0,
+    "nzShares": 0.0,
+    "aus": 0.0,
+    "int": 0.0
+   },
+   {
+    "from": 20000.0,
+    "to": 25000.0,
+    "nzFunds": 0.0,
+    "nzShares": 1.0,
+    "aus": 0.0,
+    "int": 0.0
+   },
+   {
+    "from": 25000.0,
+    "to": 30000.0,
+    "nzFunds": 0.2,
+    "nzShares": 0.8,
+    "aus": 0.0,
+    "int": 0.0
+   },
+   {
+    "from": 30000.0,
+    "to": null,
+    "nzFunds": 0.0,
+    "nzShares": 0.65,
+    "aus": 0.25,
+    "int": 0.1
+   }
+  ],
+  "nzShares": [
+   {
+    "name": "Goodman Property Trust",
+    "distribution": 0.25
+   },
+   {
+    "name": "Precinct Properties New Zealand Limited",
+    "distribution": 0.25
+   },
+   {
+    "name": "Vital Healthcare Property Trust Units",
+    "distribution": 0.25
+   },
+   {
+    "name": "Property For Industry Limited",
+    "distribution": 0.25
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   }
+  ],
+  "nzFunds": [
+   {
+    "name": "Kernel Wealth NZ Commercial Property Fund",
+    "distribution": 1.0
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   }
+  ],
+  "ausBanded": {
+   "name": "Vanguard Australian Property Securities Index ETF",
+   "distribution": 1.0
+  },
+  "ausFlat": [
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   }
+  ],
+  "intBanded": {
+   "name": "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+   "distribution": 1.0
+  },
+  "intFlat": [
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   },
+   {
+    "name": "",
+    "distribution": null
+   }
+  ],
+  "flatMinimumPot": 30000,
+  "fundLimit": 250.0,
+  "shareLimit": 5000.0
+ },
+ "general": {
+  "portfolioTolerance": 0.0,
+  "portfolioRounding": 100.0,
+  "portfolioMinRemainder": 100.0,
+  "assetClassTolerance": 0.02
+ },
+ "assetAllocationColumnB": [
+  "Active",
+  "Amova Global Equity Multi-Manager (Unhedged) Fund",
+  "Annual Review Advisor",
+  "Annual Review Office",
+  "Australasian",
+  "Australasian Equities",
+  "Australia",
+  "Authority to Act",
+  "Berkshire Hathaway Inc B Shares",
+  "Bonds",
+  "Cash",
+  "Corporate Action",
+  "Costs For Advice",
+  "Custodian Checker",
+  "Data Sheet Checker",
+  "Direct",
+  "Direct Aus Shares",
+  "Direct NZ Shares",
+  "Email Advice",
+  "Excess",
+  "Fixed Income",
+  "Fixed Interest",
+  "Follow up Letter",
+  "Funds",
+  "Global Equities",
+  "Gold (whole portfolio)",
+  "Goodman Property Trust",
+  "Growth",
+  "Harbour Australasian Equity Fund",
+  "Harbour NZ Index Shares Fund (PIE)",
+  "Highlights",
+  "Hyperion Australian Growth Companies Fund (PIE)",
+  "Implementation Advice",
+  "Import Standing Orders",
+  "Information",
+  "Investment Grade Corporate Bonds AAA to BBB+",
+  "Investment Grade Corporate Bonds BBB+ to BBB-",
+  "Investment Rationale",
+  "JPMorgan Global Growth & Income PLC",
+  "Kernel Wealth Global Property (NZD Hedged) Fund (PIE)",
+  "Kernel Wealth NZ Commercial Property Fund",
+  "Letter of Advice",
+  "Lower Risk",
+  "Macro",
+  "Managed Funds",
+  "Milford Active Growth Fund",
+  "Milford Trans-Tasman Equity Fund",
+  "Multi Sector",
+  "NZ",
+  "NZ Government Bonds",
+  "NZ Local Government Funding Authority",
+  "Note: Further information can be found for each macro through Developer -> Visual Basic, click on the macro and the description will be in light green at the top.",
+  "Passive",
+  "Portfolio for Advice",
+  "Precinct Properties New Zealand Limited",
+  "Prioritise?",
+  "Property",
+  "Property For Industry Limited",
+  "Regular Purchases Table",
+  "Revert to Portfolio",
+  "Save New Portfolio",
+  "Shares",
+  "Simple AR Table",
+  "Simplicity Hedged Global Share Fund",
+  "Simplicity NZ Share Fund",
+  "Sort Portfolio",
+  "Statement of Advice",
+  "Te Ahumairangi Global Equity Fund",
+  "Term Deposits",
+  "Transtasman",
+  "Undo Import",
+  "Unrated Corporate Bonds",
+  "VanEck S&P/ASX Midcap ETF",
+  "VanEck Vectors Australian Equal Weight ETF",
+  "Vanguard Australian Property Securities Index ETF",
+  "Vanguard Australian Shares Index ETF",
+  "Vanguard Ethically Conscious International Shares Index Fund NZD Hedged",
+  "Vanguard S&P 500 ETF",
+  "Vanguard Total World Stock Index ETF",
+  "Vital Healthcare Property Trust Units",
+  "iShares MSCI World ETF (URTH)"
+ ]
+}

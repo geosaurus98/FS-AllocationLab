@@ -117,7 +117,8 @@ A recalculation check of the unmodified workbook gave **0 differences** between 
 ## Phases
 
 1. **Profiles and sector targets** — done, golden-tested.
-2. **Model-asset insertion and per-holding recommendations, simplest sectors first.**
+2. **Property, multi-sector and cash rows** — done, golden-tested (40 scenarios covering all five property bands, purchases, sales, under-limit holds and overrides). The "Update Sheet" model-asset insertion is ported for property.
+3. **Remaining per-holding sections.**
    - Port the `Recalculate` macro: it adds model funds with a distribution to each section with value 0.
    - Then cash, multi-sector and property row formulas, followed by global equities (active/passive, gold, hedging), then Australasian equities (NZ/AUS split, passive/active, direct shares).
 3. **Fixed interest.** Managed-fund share, the bond and term-deposit ladder by maturity year, perpetual and convertible bonds, maturity versus hold date, rounding to $100, minimum bond/TD limits and bank exposure.
@@ -129,4 +130,7 @@ A recalculation check of the unmodified workbook gave **0 differences** between 
 - **Blank cash target.** `Cash_Target` blank versus 0 changes results: some formulas test `=""` and others `=0`.
 - **Current profile with no cash.** As described above, a client with no cash gets 0 for lower risk and cash.
 - **Dates.** Bond and TD ladder years use `TODAY()`, so results depend on the date the workbook is opened. The engine will take an explicit "as at" date.
+- **Multi-sector rows (likely a workbook bug).** Each row's formula is shifted by one row. The first multi-sector holding gets the target divided by `COUNTIF(B193:B200,"<>0")`, which also counts the empty rows, so normally the target ÷ 8. Every other multi-sector holding gets $0. All shipped profiles have 0% multi-sector, so this only matters when an adviser sets a multi-sector target.
+- **Property: flat AUS/INT rows.** Extra AUS and international rows (beyond the first) ignore the bands and only apply when the pot is at least $30,000, a value hard-coded in the formula.
+- **Property: kept holdings.** A holding with override 0 whose name is not anywhere in Asset Allocation column B is deducted from the property pot.
 - **Hard-coded fund name.** The cash-sufficiency check refers to "Nikko AM NZ Cash Fund" by name; the fund has since been renamed Amova.

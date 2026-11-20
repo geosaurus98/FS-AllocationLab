@@ -3,14 +3,17 @@ import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import { AppProvider } from './state/AppContext';
 import { ClientDataProvider } from './state/ClientDataContext';
+import { EngineSettingsProvider } from './state/EngineSettingsContext';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AppProvider>
-      <ClientDataProvider>
-        <App />
-      </ClientDataProvider>
+      <EngineSettingsProvider>
+        <ClientDataProvider>
+          <App />
+        </ClientDataProvider>
+      </EngineSettingsProvider>
     </AppProvider>
   </StrictMode>,
 );
