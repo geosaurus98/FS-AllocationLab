@@ -1,0 +1,3148 @@
+[
+ {
+  "scenario": {
+   "id": "st-00",
+   "profile": "Conservative",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      233967.7
+     ],
+     [
+      "Synthetic CASH holding 2",
+      154634.25
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      284560.67
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      42453.78
+     ],
+     [
+      "Synthetic AE holding 2",
+      383896.62
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      344085.61
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      87011.79
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": 11654.67,
+   "addRemove": -4157.33
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 114795.7815
+    },
+    "fi": {
+     "G": 1030044.0360000002
+    },
+    "ae": {
+     "G": 101763.53933333335
+    },
+    "ge": {
+     "G": 254408.84833333333
+    },
+    "prop": {
+     "G": 25440.88483333333
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1526453.0899999999
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-01",
+   "profile": "Moderate",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      235666.27
+     ],
+     [
+      "Synthetic CASH holding 2",
+      141248.05
+     ],
+     [
+      "Synthetic CASH holding 3",
+      173200.21
+     ]
+    ],
+    "fi": [],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      146910.32
+     ],
+     [
+      "Synthetic AE holding 2",
+      245145.66
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      209634.11
+     ],
+     [
+      "Synthetic GE holding 2",
+      331592.3
+     ],
+     [
+      "Synthetic GE holding 3",
+      183607.16
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      109097.58
+     ],
+     [
+      "Synthetic PROP holding 2",
+      255510.06
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": 73812.32,
+   "addRemove": null,
+   "targetsPct": {
+    "cash": null,
+    "fi": 57.6
+   },
+   "sectorOverrides": {
+    "ge": 3270.49,
+    "prop": 0
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 105982.41139333331
+    },
+    "fi": {
+     "G": 1165806.525326667
+    },
+    "ae": {
+     "G": 195383.0014148572
+    },
+    "ge": {
+     "G": 728104.0599999999
+    },
+    "prop": {
+     "G": 364607.64
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 2031611.72
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-02",
+   "profile": "Balanced",
+   "holdings": {
+    "cash": [],
+    "fi": [],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      150359.48
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      124575.22
+     ],
+     [
+      "Synthetic GE holding 2",
+      142535.94
+     ],
+     [
+      "Synthetic GE holding 3",
+      20897.94
+     ]
+    ],
+    "prop": [],
+    "ms": []
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 8767.371600000002
+    },
+    "fi": {
+     "G": 166580.06040000002
+    },
+    "ae": {
+     "G": 70138.9728
+    },
+    "ge": {
+     "G": 175347.43200000003
+    },
+    "prop": {
+     "G": 17534.7432
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 438368.58
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-03",
+   "profile": "Growth",
+   "holdings": {
+    "cash": [],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      185207.54
+     ],
+     [
+      "Synthetic FI holding 2",
+      41698.16
+     ],
+     [
+      "Synthetic FI holding 3",
+      215636.95
+     ]
+    ],
+    "ae": [],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      157959.56
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      264272.18
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": 23531.46,
+   "addRemove": -25791.0,
+   "sectorOverrides": {
+    "fi": -22088.51
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 23531.46
+    },
+    "fi": {
+     "G": 420454.14
+    },
+    "ae": {
+     "G": 178983.1232
+    },
+    "ge": {
+     "G": 447457.808
+    },
+    "prop": {
+     "G": 44745.7808
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 838983.3899999999
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-04",
+   "profile": "Aggressive",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      280366.81
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      138624.6
+     ],
+     [
+      "Synthetic FI holding 2",
+      67316.5
+     ],
+     [
+      "Synthetic FI holding 3",
+      331162.82
+     ]
+    ],
+    "ae": [],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      169263.5
+     ],
+     [
+      "Synthetic GE holding 2",
+      98133.21
+     ],
+     [
+      "Synthetic GE holding 3",
+      108920.65
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      166436.21
+     ],
+     [
+      "Synthetic PROP holding 2",
+      282000.0
+     ],
+     [
+      "Synthetic PROP holding 3",
+      197931.38
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": 43919.5,
+   "addRemove": null,
+   "sectorOverrides": {
+    "fi": 0,
+    "ae": -42692.33
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 43919.5
+    },
+    "fi": {
+     "G": 537103.92
+    },
+    "ae": {
+     "G": -42692.33
+    },
+    "ge": {
+     "G": 1104093.4080000003
+    },
+    "prop": {
+     "G": 110409.34079999998
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1840155.6799999997
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-05",
+   "profile": "Custom",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      263795.35
+     ],
+     [
+      "Synthetic CASH holding 2",
+      112175.58
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      246647.75
+     ],
+     [
+      "Synthetic FI holding 2",
+      254546.9
+     ],
+     [
+      "Synthetic FI holding 3",
+      204487.55
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      25984.13
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      382829.06
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      44353.87
+     ],
+     [
+      "Synthetic PROP holding 2",
+      32688.1
+     ],
+     [
+      "Synthetic PROP holding 3",
+      24606.76
+     ]
+    ],
+    "ms": []
+   },
+   "custom": {
+    "lowerRisk": 0.403,
+    "cash": 0.039,
+    "fi": 0.364,
+    "growth": 0.597
+   },
+   "feesAndWithdrawals": 57610.82,
+   "addRemove": 0,
+   "targetsPct": {
+    "ms": 7.33
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 62092.486949999984
+    },
+    "fi": {
+     "G": 579529.8781999999
+    },
+    "ae": {
+     "G": 253464.71596000006
+    },
+    "ge": {
+     "G": 633661.7899000001
+    },
+    "prop": {
+     "G": 63366.178990000015
+    },
+    "ms": {
+     "G": 116702.03316500002
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1592115.05
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-06",
+   "profile": "Current",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      392061.96
+     ],
+     [
+      "Synthetic CASH holding 2",
+      125965.25
+     ],
+     [
+      "Synthetic CASH holding 3",
+      223844.05
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      270900.84
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      180583.67
+     ],
+     [
+      "Synthetic AE holding 2",
+      178248.51
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      56837.47
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      93715.59
+     ]
+    ],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      327527.71
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 35742.73,
+   "addRemove": null,
+   "targetsPct": {
+    "cash": 3.05,
+    "fi": 54.87
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 784771.3824977479
+    },
+    "fi": {
+     "G": 286566.19846225233
+    },
+    "ae": {
+     "G": 333721.8274769267
+    },
+    "ge": {
+     "G": 52860.09843811944
+    },
+    "prop": {
+     "G": 87157.5619496512
+    },
+    "ms": {
+     "G": 327527.71
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1849685.05
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-07",
+   "profile": "Master Risk Alloc",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      14017.19
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      157686.98
+     ],
+     [
+      "Synthetic FI holding 2",
+      193283.94
+     ],
+     [
+      "Synthetic FI holding 3",
+      71227.61
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      257165.89
+     ],
+     [
+      "Synthetic AE holding 2",
+      37172.96
+     ],
+     [
+      "Synthetic AE holding 3",
+      278984.7
+     ]
+    ],
+    "ge": [],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      42061.34
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": 0,
+   "sectorOverrides": {
+    "ae": 14247.15
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 42064.0244
+    },
+    "fi": {
+     "G": 483736.28060000006
+    },
+    "ae": {
+     "G": 587570.7000000001
+    },
+    "ge": {
+     "G": 210320.12200000003
+    },
+    "prop": {
+     "G": 52580.03050000001
+    },
+    "ms": {
+     "G": 52580.03050000001
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1051600.61
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-08",
+   "profile": "Conservative",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      133105.08
+     ],
+     [
+      "Synthetic CASH holding 2",
+      312823.84
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      308610.09
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      25570.5
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      3241.69
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      165446.93
+     ],
+     [
+      "Synthetic PROP holding 2",
+      127658.5
+     ],
+     [
+      "Synthetic PROP holding 3",
+      126680.33
+     ]
+    ],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      105585.63
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 71347.33,
+   "addRemove": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 98154.19425
+    },
+    "fi": {
+     "G": 883387.74825
+    },
+    "ae": {
+     "G": 87248.17266666668
+    },
+    "ge": {
+     "G": 218120.43166666667
+    },
+    "prop": {
+     "G": 21812.043166666663
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1308722.5899999999
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-09",
+   "profile": "Moderate",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      325898.83
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      322301.81
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      276418.04
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      382205.57
+     ],
+     [
+      "Synthetic GE holding 2",
+      117042.69
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      16545.16
+     ]
+    ],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      99819.15
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 35090.3,
+   "addRemove": 0
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 77011.5625
+    },
+    "fi": {
+     "G": 847127.1875000001
+    },
+    "ae": {
+     "G": 158423.7857142857
+    },
+    "ge": {
+     "G": 396059.46428571426
+    },
+    "prop": {
+     "G": 61609.24999999998
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1540231.2499999998
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-10",
+   "profile": "Balanced",
+   "holdings": {
+    "cash": [],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      97129.71
+     ],
+     [
+      "Synthetic FI holding 2",
+      275768.84
+     ],
+     [
+      "Synthetic FI holding 3",
+      38883.38
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      41183.28
+     ],
+     [
+      "Synthetic AE holding 2",
+      116365.47
+     ],
+     [
+      "Synthetic AE holding 3",
+      390812.3
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      133850.15
+     ]
+    ],
+    "prop": [],
+    "ms": []
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": 112304.53
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 21879.8626
+    },
+    "fi": {
+     "G": 460639.20139999996
+    },
+    "ae": {
+     "G": 193007.6256
+    },
+    "ge": {
+     "G": 482519.064
+    },
+    "prop": {
+     "G": 48251.9064
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1206297.66
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-11",
+   "profile": "Growth",
+   "holdings": {
+    "cash": [],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      7660.42
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      98296.2
+     ],
+     [
+      "Synthetic AE holding 2",
+      63833.03
+     ],
+     [
+      "Synthetic AE holding 3",
+      200103.65
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      366675.62
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      20060.89
+     ],
+     [
+      "Synthetic PROP holding 2",
+      259205.38
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": null,
+   "sectorOverrides": {
+    "ge": 0
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 20316.703800000003
+    },
+    "fi": {
+     "G": 182850.3342
+    },
+    "ae": {
+     "G": 216711.50720000002
+    },
+    "ge": {
+     "G": 366675.62
+    },
+    "prop": {
+     "G": 54177.876800000005
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1015835.19
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-12",
+   "profile": "Aggressive",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      85734.69
+     ],
+     [
+      "Synthetic CASH holding 2",
+      91808.25
+     ],
+     [
+      "Synthetic CASH holding 3",
+      224838.9
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      93913.44
+     ],
+     [
+      "Synthetic FI holding 2",
+      68385.99
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      238436.13
+     ],
+     [
+      "Synthetic AE holding 2",
+      192986.82
+     ],
+     [
+      "Synthetic AE holding 3",
+      342427.95
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      19070.94
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      72234.32
+     ],
+     [
+      "Synthetic PROP holding 2",
+      180676.38
+     ],
+     [
+      "Synthetic PROP holding 3",
+      114370.21
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": null,
+   "addRemove": -3799.55,
+   "targetsPct": {
+    "cash": 2.13,
+    "fi": 9.43
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 39879.3185424
+    },
+    "fi": {
+     "G": 159078.04618959996
+    },
+    "ae": {
+     "G": 405900.56140480004
+    },
+    "ge": {
+     "G": 1014751.4035120002
+    },
+    "prop": {
+     "G": 101475.1403512
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1721084.47
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-13",
+   "profile": "Custom",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      311627.98
+     ]
+    ],
+    "fi": [],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      325284.79
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      283648.39
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      323053.98
+     ],
+     [
+      "Synthetic PROP holding 2",
+      226242.56
+     ]
+    ],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      348510.67
+     ]
+    ]
+   },
+   "custom": {
+    "lowerRisk": 0.259,
+    "cash": 0.089,
+    "fi": 0.17,
+    "growth": 0.741
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": null,
+   "targetsPct": {
+    "cash": 5.89,
+    "fi": 35.07
+   },
+   "sectorOverrides": {
+    "fi": 0
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 255936.40118659462
+    },
+    "fi": {
+     "G": 0.0
+    },
+    "ae": {
+     "G": 286283.9161728001
+    },
+    "ge": {
+     "G": 715709.7904320003
+    },
+    "prop": {
+     "G": 71570.97904320003
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1818368.37
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-14",
+   "profile": "Current",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      380738.27
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      24244.08
+     ]
+    ],
+    "ae": [],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      339066.06
+     ],
+     [
+      "Synthetic GE holding 2",
+      293903.75
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      364489.48
+     ],
+     [
+      "Synthetic PROP holding 2",
+      301282.84
+     ],
+     [
+      "Synthetic PROP holding 3",
+      179608.27
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": 65391.43,
+   "addRemove": null,
+   "targetsPct": {
+    "cash": null,
+    "fi": 68.2,
+    "ms": 3.94
+   },
+   "sectorOverrides": {
+    "fi": -18581.25
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 1565486.5058585508
+    },
+    "fi": {
+     "G": 5662.830000000002
+    },
+    "ae": {
+     "G": 0.0
+    },
+    "ge": {
+     "G": 93407.94399722248
+    },
+    "prop": {
+     "G": 124753.60050277736
+    },
+    "ms": {
+     "G": 74203.31035
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1883332.7500000002
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-15",
+   "profile": "Master Risk Alloc",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      395447.28
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      233361.16
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      127487.03
+     ],
+     [
+      "Synthetic AE holding 2",
+      30705.45
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      341027.15
+     ]
+    ],
+    "prop": [],
+    "ms": []
+   },
+   "feesAndWithdrawals": 9387.62,
+   "addRemove": 69049.65,
+   "targetsPct": {
+    "cash": 7.62,
+    "fi": 1.53
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 9387.62
+    },
+    "fi": {
+     "G": 100144.99138
+    },
+    "ae": {
+     "G": 435018.04344800004
+    },
+    "ge": {
+     "G": 435018.04344800004
+    },
+    "prop": {
+     "G": 108754.51086200001
+    },
+    "ms": {
+     "G": 59853.886
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1197077.72
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-16",
+   "profile": "Conservative",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      48451.53
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      119787.97
+     ],
+     [
+      "Synthetic FI holding 2",
+      75270.0
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      14680.53
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      268039.53
+     ],
+     [
+      "Synthetic GE holding 2",
+      145138.13
+     ],
+     [
+      "Synthetic GE holding 3",
+      346544.46
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      280410.53
+     ],
+     [
+      "Synthetic PROP holding 2",
+      354728.3
+     ]
+    ],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      64961.35
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": -41531.55,
+   "targetsPct": {
+    "ms": 2.88
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 128850.92475000003
+    },
+    "fi": {
+     "G": 1128509.6602500004
+    },
+    "ae": {
+     "G": 111765.38533333337
+    },
+    "ge": {
+     "G": 279413.46333333344
+    },
+    "prop": {
+     "G": 27941.34633333334
+    },
+    "ms": {
+     "G": 48282.646464000005
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1676480.7800000003
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-17",
+   "profile": "Moderate",
+   "holdings": {
+    "cash": [],
+    "fi": [],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      355624.03
+     ],
+     [
+      "Synthetic AE holding 2",
+      209737.65
+     ],
+     [
+      "Synthetic AE holding 3",
+      12132.19
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      278079.24
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      170572.01
+     ],
+     [
+      "Synthetic PROP holding 2",
+      147448.0
+     ],
+     [
+      "Synthetic PROP holding 3",
+      41268.06
+     ]
+    ],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      184603.23
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 48873.06,
+   "addRemove": -8437.62
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 69973.22050000001
+    },
+    "fi": {
+     "G": 764642.8535000002
+    },
+    "ae": {
+     "G": 143077.04125714288
+    },
+    "ge": {
+     "G": 357692.6031428572
+    },
+    "prop": {
+     "G": 55641.071599999996
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1391026.79
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-18",
+   "profile": "Balanced",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      347340.45
+     ],
+     [
+      "Synthetic CASH holding 2",
+      55401.28
+     ],
+     [
+      "Synthetic CASH holding 3",
+      317415.43
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      63759.4
+     ],
+     [
+      "Synthetic FI holding 2",
+      155727.04
+     ],
+     [
+      "Synthetic FI holding 3",
+      318557.19
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      299623.94
+     ],
+     [
+      "Synthetic AE holding 2",
+      206123.08
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      197237.75
+     ],
+     [
+      "Synthetic GE holding 2",
+      289897.99
+     ],
+     [
+      "Synthetic GE holding 3",
+      107213.38
+     ]
+    ],
+    "prop": [],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      240698.04
+     ]
+    ]
+   },
+   "feesAndWithdrawals": null,
+   "addRemove": 47989.41,
+   "targetsPct": {
+    "cash": 5.51,
+    "fi": 30.5,
+    "ms": 4.04
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 46794.904434849996
+    },
+    "fi": {
+     "G": 906384.1708031499
+    },
+    "ae": {
+     "G": 451681.41460320004
+    },
+    "ge": {
+     "G": 1129203.536508
+    },
+    "prop": {
+     "G": 112920.35365080001
+    },
+    "ms": {
+     "G": 106938.16895199999
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 2646984.38
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-19",
+   "profile": "Growth",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      111601.02
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      247243.95
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      88169.2
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      88360.11
+     ],
+     [
+      "Synthetic GE holding 2",
+      307353.04
+     ],
+     [
+      "Synthetic GE holding 3",
+      175588.4
+     ]
+    ],
+    "prop": [],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      219616.12
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 64862.24,
+   "addRemove": null,
+   "sectorOverrides": {
+    "ge": -15348.95
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 64862.24
+    },
+    "fi": {
+     "G": 182724.12800000006
+    },
+    "ae": {
+     "G": 264092.1258666667
+    },
+    "ge": {
+     "G": 555952.6
+    },
+    "prop": {
+     "G": 66023.03146666668
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1237931.84
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-20",
+   "profile": "Aggressive",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      268385.73
+     ],
+     [
+      "Synthetic CASH holding 2",
+      47365.99
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      181869.08
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      318212.71
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      314980.65
+     ]
+    ],
+    "prop": [],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      298826.17
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 76032.85,
+   "addRemove": null,
+   "targetsPct": {
+    "cash": 9.24,
+    "fi": 4.2,
+    "ms": 2.16
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 76032.85
+    },
+    "fi": {
+     "G": 116110.81035200003
+    },
+    "ae": {
+     "G": 329999.1119061334
+    },
+    "ge": {
+     "G": 824997.7797653336
+    },
+    "prop": {
+     "G": 82499.77797653334
+    },
+    "ms": {
+     "G": 30880.231128000003
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1429640.33
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-21",
+   "profile": "Custom",
+   "holdings": {
+    "cash": [],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      240075.81
+     ],
+     [
+      "Synthetic FI holding 2",
+      7703.49
+     ],
+     [
+      "Synthetic FI holding 3",
+      248055.24
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      348279.58
+     ],
+     [
+      "Synthetic AE holding 2",
+      8291.02
+     ]
+    ],
+    "ge": [],
+    "prop": [],
+    "ms": []
+   },
+   "custom": {
+    "lowerRisk": 0.07,
+    "cash": 0.024,
+    "fi": 0.046,
+    "growth": 0.93
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": null,
+   "targetsPct": {
+    "cash": 0.93,
+    "fi": 23.6
+   },
+   "sectorOverrides": {
+    "fi": 0
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 71689.70771725714
+    },
+    "fi": {
+     "G": 495834.54
+    },
+    "ae": {
+     "G": 171549.37577546673
+    },
+    "ge": {
+     "G": 428873.43943866686
+    },
+    "prop": {
+     "G": 42887.34394386668
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 852405.14
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-22",
+   "profile": "Current",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      269880.12
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      163932.82
+     ],
+     [
+      "Synthetic FI holding 2",
+      10306.37
+     ],
+     [
+      "Synthetic FI holding 3",
+      178978.98
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      66262.75
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      228868.43
+     ]
+    ],
+    "prop": [],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      332632.73
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 4289.76,
+   "addRemove": 0,
+   "sectorOverrides": {
+    "fi": -10917.52
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 269880.12
+    },
+    "fi": {
+     "G": 342300.65
+    },
+    "ae": {
+     "G": 66262.75
+    },
+    "ge": {
+     "G": 228868.42999999996
+    },
+    "prop": {
+     "G": 0.0
+    },
+    "ms": {
+     "G": 332632.73
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1250862.2
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-23",
+   "profile": "Master Risk Alloc",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      55328.97
+     ],
+     [
+      "Synthetic CASH holding 2",
+      104596.13
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      239593.78
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      127332.07
+     ]
+    ],
+    "ge": [],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      171013.52
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": 25342.33,
+   "addRemove": -50876.45,
+   "targetsPct": {
+    "cash": 3.67,
+    "fi": 24.02
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 25342.33
+    },
+    "fi": {
+     "G": 153808.652738
+    },
+    "ae": {
+     "G": 187134.81490480003
+    },
+    "ge": {
+     "G": 187134.81490480003
+    },
+    "prop": {
+     "G": 46783.70372620001
+    },
+    "ms": {
+     "G": 32349.401
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 646988.02
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-24",
+   "profile": "Conservative",
+   "holdings": {
+    "cash": [],
+    "fi": [],
+    "ae": [],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      197930.86
+     ]
+    ],
+    "prop": [],
+    "ms": []
+   },
+   "feesAndWithdrawals": 17616.1,
+   "addRemove": 46544.64,
+   "sectorOverrides": {
+    "prop": 0
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 17616.1
+    },
+    "fi": {
+     "G": 165740.52500000002
+    },
+    "ae": {
+     "G": 16298.36666666667
+    },
+    "ge": {
+     "G": 40745.91666666667
+    },
+    "prop": {
+     "G": 0.0
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 244475.5
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-25",
+   "profile": "Moderate",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      135992.5
+     ],
+     [
+      "Synthetic CASH holding 2",
+      219538.27
+     ]
+    ],
+    "fi": [],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      259405.59
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      356332.56
+     ],
+     [
+      "Synthetic GE holding 2",
+      163583.48
+     ]
+    ],
+    "prop": [],
+    "ms": []
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": null,
+   "targetsPct": {
+    "cash": 2.68,
+    "fi": 32.83,
+    "ms": 4.52
+   },
+   "sectorOverrides": {
+    "fi": 0,
+    "prop": -5775.45
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 33582.17393666666
+    },
+    "fi": {
+     "G": 0.0
+    },
+    "ae": {
+     "G": 188194.19470971436
+    },
+    "ge": {
+     "G": 470485.4867742859
+    },
+    "prop": {
+     "G": -5775.45
+    },
+    "ms": {
+     "G": 51295.32847999999
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1134852.4
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-26",
+   "profile": "Balanced",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      172685.53
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      249894.25
+     ]
+    ],
+    "ae": [],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      265614.8
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      181955.23
+     ],
+     [
+      "Synthetic PROP holding 2",
+      288448.06
+     ],
+     [
+      "Synthetic PROP holding 3",
+      44841.22
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": null,
+   "addRemove": 0,
+   "targetsPct": {
+    "ms": 0.89
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 24068.781800000004
+    },
+    "fi": {
+     "G": 457306.85420000006
+    },
+    "ae": {
+     "G": 192550.2544
+    },
+    "ge": {
+     "G": 481375.63600000006
+    },
+    "prop": {
+     "G": 48137.5636
+    },
+    "ms": {
+     "G": 10710.607901000001
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1203439.09
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-27",
+   "profile": "Growth",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      386238.37
+     ],
+     [
+      "Synthetic CASH holding 2",
+      215693.72
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      99069.23
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      115062.58
+     ],
+     [
+      "Synthetic AE holding 2",
+      345409.73
+     ],
+     [
+      "Synthetic AE holding 3",
+      319656.54
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      87502.9
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      184607.34
+     ],
+     [
+      "Synthetic PROP holding 2",
+      289468.51
+     ]
+    ],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      248858.87
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 16908.22,
+   "addRemove": null,
+   "targetsPct": {
+    "ms": 3.2
+   },
+   "sectorOverrides": {
+    "ge": 47801.46
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 45831.355800000005
+    },
+    "fi": {
+     "G": 412482.20220000006
+    },
+    "ae": {
+     "G": 488867.7952000001
+    },
+    "ge": {
+     "G": 135304.36
+    },
+    "prop": {
+     "G": 122216.94880000003
+    },
+    "ms": {
+     "G": 73330.16928
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 2291567.79
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-28",
+   "profile": "Aggressive",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      272422.54
+     ]
+    ],
+    "fi": [],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      88573.44
+     ]
+    ],
+    "ge": [],
+    "prop": [],
+    "ms": []
+   },
+   "feesAndWithdrawals": 6937.15,
+   "addRemove": null,
+   "sectorOverrides": {
+    "fi": -46623.72,
+    "prop": 42822.44
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 7219.9196
+    },
+    "fi": {
+     "G": -46623.72
+    },
+    "ae": {
+     "G": 86639.03520000001
+    },
+    "ge": {
+     "G": 216597.58800000005
+    },
+    "prop": {
+     "G": 42822.44
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 360995.98
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-29",
+   "profile": "Custom",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      362526.22
+     ],
+     [
+      "Synthetic CASH holding 2",
+      370428.79
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      324150.64
+     ],
+     [
+      "Synthetic FI holding 2",
+      305102.56
+     ],
+     [
+      "Synthetic FI holding 3",
+      89840.47
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      24362.16
+     ],
+     [
+      "Synthetic AE holding 2",
+      262602.46
+     ],
+     [
+      "Synthetic AE holding 3",
+      30082.66
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      372535.43
+     ],
+     [
+      "Synthetic GE holding 2",
+      371324.01
+     ]
+    ],
+    "prop": [],
+    "ms": []
+   },
+   "custom": {
+    "lowerRisk": 0.283,
+    "cash": 0.066,
+    "fi": 0.217,
+    "growth": 0.717
+   },
+   "feesAndWithdrawals": null,
+   "addRemove": null,
+   "targetsPct": {
+    "cash": 9.53,
+    "fi": 41.17
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 297132.5568720848
+    },
+    "fi": {
+     "G": 976935.830927915
+    },
+    "ae": {
+     "G": 330369.86992
+    },
+    "ge": {
+     "G": 825924.6748
+    },
+    "prop": {
+     "G": 82592.46748
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 2512955.3999999994
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-30",
+   "profile": "Current",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      264374.15
+     ],
+     [
+      "Synthetic CASH holding 2",
+      194960.82
+     ],
+     [
+      "Synthetic CASH holding 3",
+      103846.35
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      353641.7
+     ],
+     [
+      "Synthetic FI holding 2",
+      362345.85
+     ],
+     [
+      "Synthetic FI holding 3",
+      65247.1
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      106126.94
+     ],
+     [
+      "Synthetic AE holding 2",
+      312627.23
+     ],
+     [
+      "Synthetic AE holding 3",
+      17898.44
+     ]
+    ],
+    "ge": [],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      214389.23
+     ],
+     [
+      "Synthetic PROP holding 2",
+      330262.16
+     ],
+     [
+      "Synthetic PROP holding 3",
+      369911.16
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": -13711.99,
+   "targetsPct": {
+    "cash": 2.95,
+    "fi": 16.93
+   },
+   "sectorOverrides": {
+    "fi": 0,
+    "prop": -17452.66
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 224487.11665308953
+    },
+    "fi": {
+     "G": 781234.65
+    },
+    "ae": {
+     "G": 694381.5478082058
+    },
+    "ge": {
+     "G": 0.0
+    },
+    "prop": {
+     "G": 897109.8899999999
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 2681919.14
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-31",
+   "profile": "Master Risk Alloc",
+   "holdings": {
+    "cash": [],
+    "fi": [],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      368988.55
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      198582.75
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      188756.11
+     ]
+    ],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      297.06
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": null,
+   "sectorOverrides": {
+    "fi": -11064.0
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 30264.978800000004
+    },
+    "fi": {
+     "G": -11064.0
+    },
+    "ae": {
+     "G": 151324.89400000003
+    },
+    "ge": {
+     "G": 151324.89400000003
+    },
+    "prop": {
+     "G": 37831.22350000001
+    },
+    "ms": {
+     "G": 37831.22350000001
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 756624.4700000001
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-32",
+   "profile": "Conservative",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      93408.58
+     ],
+     [
+      "Synthetic CASH holding 2",
+      224734.47
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      289281.93
+     ],
+     [
+      "Synthetic FI holding 2",
+      296590.75
+     ]
+    ],
+    "ae": [],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      258200.81
+     ],
+     [
+      "Synthetic GE holding 2",
+      375276.94
+     ],
+     [
+      "Synthetic GE holding 3",
+      179082.05
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      110604.6
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": 83011.61,
+   "addRemove": null,
+   "targetsPct": {
+    "ms": 4.07
+   },
+   "sectorOverrides": {
+    "ae": 0
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 137038.50975000003
+    },
+    "fi": {
+     "G": 1233346.5877500002
+    },
+    "ae": {
+     "G": 0.0
+    },
+    "ge": {
+     "G": 304530.0216666667
+    },
+    "prop": {
+     "G": 30453.00216666667
+    },
+    "ms": {
+     "G": 74366.231291
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1827180.1300000001
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-33",
+   "profile": "Moderate",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      181262.72
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      312736.51
+     ],
+     [
+      "Synthetic FI holding 2",
+      167975.16
+     ],
+     [
+      "Synthetic FI holding 3",
+      289602.11
+     ]
+    ],
+    "ae": [],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      244848.53
+     ],
+     [
+      "Synthetic GE holding 2",
+      359639.05
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      367893.88
+     ],
+     [
+      "Synthetic PROP holding 2",
+      227657.42
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": 23738.29,
+   "addRemove": null,
+   "targetsPct": {
+    "ms": 1.3
+   },
+   "sectorOverrides": {
+    "ge": 0
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 107580.769
+    },
+    "fi": {
+     "G": 1183388.4590000003
+    },
+    "ae": {
+     "G": 221309.01051428574
+    },
+    "ge": {
+     "G": 604487.58
+    },
+    "prop": {
+     "G": 86064.61519999999
+    },
+    "ms": {
+     "G": 27970.99994
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 2151615.38
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-34",
+   "profile": "Balanced",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      185977.42
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      275598.23
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      222699.44
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      275748.82
+     ],
+     [
+      "Synthetic GE holding 2",
+      43204.47
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      128120.84
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": null,
+   "addRemove": null,
+   "targetsPct": {
+    "cash": 9.33,
+    "fi": 56.69
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 37345.83775220001
+    },
+    "fi": {
+     "G": 709570.9172918001
+    },
+    "ae": {
+     "G": 102515.32398826671
+    },
+    "ge": {
+     "G": 256288.30997066674
+    },
+    "prop": {
+     "G": 25628.830997066678
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1131349.2200000002
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-35",
+   "profile": "Growth",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      951.05
+     ]
+    ],
+    "fi": [],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      348844.57
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      30070.84
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      49075.63
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": 25378.23,
+   "addRemove": 62742.95,
+   "targetsPct": {
+    "cash": null,
+    "fi": 68.77
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 30356.231709300002
+    },
+    "fi": {
+     "G": 317609.27109870006
+    },
+    "ae": {
+     "G": 38325.20991786668
+    },
+    "ge": {
+     "G": 95813.0247946667
+    },
+    "prop": {
+     "G": 9581.30247946667
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 491685.04000000004
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-36",
+   "profile": "Aggressive",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      58590.42
+     ]
+    ],
+    "fi": [],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      10633.12
+     ],
+     [
+      "Synthetic AE holding 2",
+      211185.74
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      185191.93
+     ],
+     [
+      "Synthetic GE holding 2",
+      134827.26
+     ]
+    ],
+    "prop": [],
+    "ms": []
+   },
+   "feesAndWithdrawals": 75414.06,
+   "addRemove": -13753.46,
+   "sectorOverrides": {
+    "prop": 49585.54
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 75414.06
+    },
+    "fi": {
+     "G": -16746.558999999987
+    },
+    "ae": {
+     "G": 140802.00240000003
+    },
+    "ge": {
+     "G": 352005.0060000001
+    },
+    "prop": {
+     "G": 49585.54
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 586675.01
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-37",
+   "profile": "Custom",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      378625.1
+     ]
+    ],
+    "fi": [],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      158475.07
+     ],
+     [
+      "Synthetic AE holding 2",
+      202167.86
+     ],
+     [
+      "Synthetic AE holding 3",
+      287471.03
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      319511.49
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      139624.03
+     ],
+     [
+      "Synthetic PROP holding 2",
+      38276.65
+     ],
+     [
+      "Synthetic PROP holding 3",
+      50438.29
+     ]
+    ],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      66284.71
+     ]
+    ]
+   },
+   "custom": {
+    "lowerRisk": 0.366,
+    "cash": 0.078,
+    "fi": 0.288,
+    "growth": 0.634
+   },
+   "feesAndWithdrawals": 0,
+   "addRemove": null
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 127988.18993999997
+    },
+    "fi": {
+     "G": 472571.7782399998
+    },
+    "ae": {
+     "G": 277417.1364853333
+    },
+    "ge": {
+     "G": 693542.8412133333
+    },
+    "prop": {
+     "G": 69354.28412133333
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1640874.2299999997
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-38",
+   "profile": "Current",
+   "holdings": {
+    "cash": [],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      118973.04
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      252487.37
+     ],
+     [
+      "Synthetic AE holding 2",
+      335287.65
+     ],
+     [
+      "Synthetic AE holding 3",
+      388904.94
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      351498.48
+     ]
+    ],
+    "prop": [
+     [
+      "Synthetic PROP holding 1",
+      319686.45
+     ]
+    ],
+    "ms": []
+   },
+   "feesAndWithdrawals": 40857.25,
+   "addRemove": null
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 40857.25
+    },
+    "fi": {
+     "G": {
+      "error": "#DIV/0!"
+     }
+    },
+    "ae": {
+     "G": 976679.96
+    },
+    "ge": {
+     "G": 351498.48
+    },
+    "prop": {
+     "G": 319686.45
+    },
+    "ms": {
+     "G": 0.0
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1766837.93
+   }
+  }
+ },
+ {
+  "scenario": {
+   "id": "st-39",
+   "profile": "Master Risk Alloc",
+   "holdings": {
+    "cash": [
+     [
+      "Synthetic CASH holding 1",
+      21632.32
+     ]
+    ],
+    "fi": [
+     [
+      "Synthetic FI holding 1",
+      324760.66
+     ],
+     [
+      "Synthetic FI holding 2",
+      142976.63
+     ]
+    ],
+    "ae": [
+     [
+      "Synthetic AE holding 1",
+      13472.67
+     ],
+     [
+      "Synthetic AE holding 2",
+      312967.14
+     ],
+     [
+      "Synthetic AE holding 3",
+      268466.51
+     ]
+    ],
+    "ge": [
+     [
+      "Synthetic GE holding 1",
+      105707.21
+     ],
+     [
+      "Synthetic GE holding 2",
+      108910.48
+     ],
+     [
+      "Synthetic GE holding 3",
+      263877.7
+     ]
+    ],
+    "prop": [],
+    "ms": [
+     [
+      "Synthetic MS holding 1",
+      66751.79
+     ]
+    ]
+   },
+   "feesAndWithdrawals": 23872.54,
+   "addRemove": 38769.9,
+   "targetsPct": {
+    "ms": 1.62
+   },
+   "sectorOverrides": {
+    "fi": 0
+   }
+  },
+  "workbook": {
+   "sectors": {
+    "cash": {
+     "G": 65180.924399999996
+    },
+    "fi": {
+     "G": 467737.29
+    },
+    "ae": {
+     "G": 333658.60199999996
+    },
+    "ge": {
+     "G": 333658.60199999996
+    },
+    "prop": {
+     "G": 83414.65049999999
+    },
+    "ms": {
+     "G": 27026.346762
+    }
+   },
+   "portfolio": {
+    "finalPortfolioTotal": 1668293.0099999998
+   }
+  }
+ }
+]

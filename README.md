@@ -25,6 +25,8 @@ Open the URL Vite prints (normally http://localhost:5173).
 | `npm run typecheck` | Strict TypeScript check |
 | `npm run build` | Type-check and build to `dist/` |
 | `npm run preview` | Serve the production build |
+| `npm run build:offline` | Build **one self-contained file**, `dist-offline/AllocationLab.html`, that opens straight from disk with no server or internet |
+| `npm run golden` | Regenerate the recommendation-engine golden fixtures from the real workbook (needs LibreOffice) |
 
 ## Features
 
@@ -41,6 +43,18 @@ Open the URL Vite prints (normally http://localhost:5173).
 ### Data statuses
 
 `approved` · `illustrative` · `synthetic` · `draft` · `missing`. Scenarios are always labelled **Hypothetical**.
+
+## Recommendations engine (in progress)
+
+The recommendations workbook (`Recommendations Master Equity Weighting.xlsm`) is being ported to `src/engine/`, formula for formula. Each phase is checked against the real workbook: synthetic scenarios are fed to a copy of the workbook, LibreOffice recalculates it headless with macros never run, and the TypeScript results must match. See [docs/recommendations-engine.md](docs/recommendations-engine.md) for the structure, quirks and phase plan.
+
+Done so far:
+- The workbook's tactical profiles: Conservative, Moderate, Balanced, Growth, Aggressive, Custom, Current and Master Risk Alloc.
+- The six sector targets.
+
+Both match the workbook in 40 golden scenarios.
+
+Per-holding recommendations are next, starting with cash, multi-sector and property, then global and Australasian equities, then fixed interest.
 
 ## Calculation rules
 
