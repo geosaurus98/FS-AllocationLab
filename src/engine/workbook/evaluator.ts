@@ -127,6 +127,25 @@ export class Workbook {
     this.invalidate();
   }
 
+  /**
+   * Set input cells and recalculate only the cells in `sheet` columns [c1, c2] (plus every cached
+   * range). Use only when nothing outside those columns can depend on the changed cells — e.g. the
+   * implementation round columns, which only feed Remaining, round totals, the exposure table and
+   * the checks (Portfolio AC:BN). Cells outside the range keep their cached values, which is
+   * correct because they cannot change.
+   */
+  setScoped(cells: { sheet: string; row: number; col: number; value: Scalar | null }[], scope: { sheet: string; c1: number; c2: number }): void {
+    for (const x of cells) this.inputs.set(key(x.sheet, x.row, x.col), x.value === null ? BLANK : x.value);
+    const prefix = `${scope.sheet}\u0000`;
+    for (const k of [...this.memo.keys()]) {
+      if (!k.startsWith(prefix)) continue;
+      const col = Number(k.split('\u0000')[2]);
+      if (col >= scope.c1 && col <= scope.c2) this.memo.delete(k);
+    }
+    this.rangeCache.clear();
+    this.matchCache.clear();
+  }
+
   /** Read the raw (non-evaluated) definition of a cell — for diagnostics. */
   formulaAt(sheet: string, r: number, c: number): string | null {
     const d = this.cells.get(key(sheet, r, c));

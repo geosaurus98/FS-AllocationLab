@@ -312,13 +312,30 @@ def run(lo, sc):
     if sc.get('updateSheetButton'):
         recalculate_macro(p, aa)
         settle(lo, aa)
+    # 5. Implementation: custodian, holdings added during implementation, round amounts.
+    if sc.get('custodian'):
+        put(p, 'BD1', sc['custodian'])
+    for key, name in sc.get('addHoldings', []):
+        _insert(lo, p, key, name)
+    if sc.get('rounds'):
+        round_cols = ['AC', 'AG', 'AK', 'AO', 'AS', 'AW']
+        for r in range(1, 260):
+            a = p.getCellRangeByName(f'A{r}').getString()
+            if a in sc['rounds']:
+                for i, v in enumerate(sc['rounds'][a]):
+                    put(p, f'{round_cols[i]}{r}', v)
+    if sc.get('custodian') or sc.get('rounds') or sc.get('addHoldings'):
+        settle(lo, aa)
     out = {'id': sc['id'], 'targetsUsed': targets, 'sectors': {}, 'rows': {}}
     for key, first, last, tot in SECTIONS:
         out['sectors'][key] = {c: val(p, f'{c}{tot}') for c in 'BCDEFGHI'}
-        out['rows'][key] = [{c: val(p, f'{c}{r}') for c in 'ABCDEFGHJK'} for r in range(first, last + 1) if val(p, f'A{r}') is not None]
+        cols = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K'] + (['L', 'M', 'N', 'O', 'P', 'Q', 'R', 'T', 'BA'] if sc.get('implementationOutputs') else [])
+        out['rows'][key] = [{c: val(p, f'{c}{r}') for c in cols} for r in range(first, last + 1) if val(p, f'A{r}') is not None]
     if sc.get('debugCells'):
         out['debug'] = {f'{sh}!{a}': (val(lo.sheet(sh), a), lo.sheet(sh).getCellRangeByName(a).getFormula()[:200]) for sh, a in (x.split('!') for x in sc['debugCells'])}
     out['property'] = {'C117': val(aa, 'C117'), 'amounts': {aa.getCellRangeByName(f'B{r}').getString(): val(aa, f'D{r}') for r in range(119, 150) if aa.getCellRangeByName(f'B{r}').getString()}}
+    if sc.get('implementationOutputs'):
+        out['implementation'] = {a: val(p, a) for a in ['BI51', 'BJ51', 'BK51', 'BL51', 'BM51', 'BI53', 'BJ53', 'BK53', 'BL53', 'BM53', 'BI55', 'BJ55', 'BK55', 'BL55', 'BM55', 'AC72', 'AG72', 'AC120', 'AC168', 'AC192', 'BA72', 'BA120', 'BA168']}
     out['portfolio'] = {k: val(p, a) for k, a in (('total', 'B202'), ('recommendedTotal', 'F202'), ('finalPortfolioTotal', 'F204'), ('errors', 'BD2'), ('status', 'BC2'))}
     out['assetAllocationTargets'] = {k: val(aa, a) for k, a in (('cash', 'M3'), ('fi', 'M4'), ('ae', 'M5'), ('ge', 'M6'), ('prop', 'M7'), ('ms', 'M8'))}
     out['profileTable'] = {h: {k: aa.getCellByPosition(2 + i, r).getValue() for k, r in {**TARGET_ROWS, 'lowerRisk': 2, 'growth': 5}.items()} for i, h in enumerate(headers) if h}

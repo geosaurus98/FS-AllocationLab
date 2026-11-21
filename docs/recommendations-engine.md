@@ -146,9 +146,22 @@ The hand-written modules from the first phases (`sectorTargets.ts`, `property.ts
    - paste the Apex holdings;
    - set profile, Custom growth %, fees and withdrawals, add/remove and cash override;
    - get per-holding recommendations, sector summary, workbook checks, overrides and a CSV export.
-5. **Later (not yet scheduled):**
+5. **Implementation (rounds)** — done. This is the workbook's Implementation Advice table:
+   - **Rounds 1–6:** the amounts go into the Portfolio round columns (AC, AG, AK, AO, AS, AW), each with a date and three sign-off initials.
+   - **Remaining:** the workbook's own BA formula. Round amounts on actual bonds count against the matching "YYYY Bonds (BBB+…)" placeholder rows.
+   - **Holding details:** broker and brokerage by custodian, spreads, rationale and the custodian's asset name (SafeNameChange).
+   - **Bank exposure and checks** are recalculated with the rounds.
+   - **Trade instructions per round:** sells, then buys, as a CSV.
+   - **Computer check** (Transactions_Match) against the Apex transaction report.
+   - **Implementation file:** saved where the adviser chooses, never in the browser.
+   - **Verification:** 12 golden round scenarios in LibreOffice match exactly, including Remaining, broker/spread/rationale columns, exposure and checks.
+   - **Speed:** round edits recalculate only Portfolio AC:BN, which are the only cells that depend on them.
+6. **Later (not yet scheduled):**
    - OneAnswer and MMC imports;
-   - implementation rounds and trade stats;
+   - the OneAnswer transaction report for the computer check;
+   - standing orders and regular purchases;
+   - the implementation dashboard (bond summary tables);
+   - more than six rounds (the workbook inserts extra columns);
    - documents (Letter of Advice, SoA, annual review) and emails;
    - the external "Bonds Allocation in Years" file used by the Bond_Allocation macro;
    - client master lookups (FetchClientInfo).
@@ -162,4 +175,5 @@ The hand-written modules from the first phases (`sectorTargets.ts`, `property.ts
 - **Property: flat AUS/INT rows.** Extra AUS and international rows (beyond the first) ignore the bands and only apply when the pot is at least $30,000, a value hard-coded in the formula.
 - **Property: kept holdings.** A holding with override 0 whose name is not anywhere in Asset Allocation column B is deducted from the property pot.
 - **Datasheet entries to check.** "ANZ Bank New Zealand Limited (ANB190) 4.63% 20/02/2030" is typed as a Term Deposit. Apex code WNZ-0726 maps to an FS name with a different coupon (6.355% versus 3.455%).
+- **Computer check (deliberate differences).** The macro looks for "Bond" in the Data sheet's *Style* column, which never contains it, so bond names were never trimmed and bonds never matched; the app uses the *Type* column. The macro also kept only the last transaction per asset; the app adds them together.
 - **Hard-coded fund name.** The cash-sufficiency check refers to "Nikko AM NZ Cash Fund" by name; the fund has since been renamed Amova.

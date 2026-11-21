@@ -3,7 +3,8 @@ import { PercentInput } from '../components/PercentInput';
 import { Button, Card, EmptyState, Field, inputCls, Notice, PageHeader, StatusBadge, Td, Th, TableWrap, cx } from '../components/ui';
 import type { WorkbookModel } from '../engine/workbook/evaluator';
 import { dataRowsFromWorkbook, importApexHoldings, type ImportResult, type RawHolding } from '../engine/workbook/importHoldings';
-import { RECOMMENDATION_PROFILES, runRecommendation, type ClientInputs, type RecommendationResult } from '../engine/workbook/run';
+import { applyRounds, readImplementation, RECOMMENDATION_PROFILES, runRecommendation, type ClientInputs, type RecommendationResult, type SectionKey } from '../engine/workbook/run';
+import { emptyRounds, Implementation, type RoundsState } from './Implementation';
 import { Workbook } from '../engine/workbook/evaluator';
 import { BLANK, isErr, type Scalar } from '../engine/workbook/values';
 import { toCsv } from '../lib/csv';
@@ -74,6 +75,13 @@ export function Recommendations() {
   const [result, setResult] = useState<RecommendationResult | null>(null);
   const [busy, setBusy] = useState(false);
   const [runError, setRunError] = useState<string | null>(null);
+  const [custodian, setCustodian] = useState<'Apex' | 'OA'>('Apex');
+  const [portfolioId, setPortfolioId] = useState('');
+  const [addHoldings, setAddHoldings] = useState<[SectionKey, string][]>([]);
+  const [rounds, setRounds] = useState<RoundsState>(emptyRounds);
+  const [impl, setImpl] = useState<ReturnType<typeof readImplementation> | null>(null);
+  const [tab, setTab] = useState<'recommendation' | 'implementation'>('recommendation');
+  const [fileNotice, setFileNotice] = useState<string | null>(null);
 
   const dataRows = useMemo(() => {
     if (!model) return [];
@@ -87,17 +95,21 @@ export function Recommendations() {
   const doImport = (text: string) => {
     const p = parsePaste(text);
     setImported({ result: importApexHoldings(p.rows, dataRows), parseErrors: p.errors, ids: p.portfolioIds });
+    if (p.portfolioIds.length === 1) setPortfolioId(p.portfolioIds[0]!);
     setResult(null);
+    setImpl(null);
     setOverrides({});
+    setAddHoldings([]);
+    setRounds(emptyRounds());
   };
 
-  const run = (ov = overrides) => {
-    if (!model || !imported) return;
+  const run = (ov = overrides, adds = addHoldings, rs = rounds, cust = custodian, imp = imported) => {
+    if (!model || !imp) return;
     setBusy(true);
     setRunError(null);
     setTimeout(() => {
       try {
-        const r = runRecommendation(model, es.current.settings, imported.result, {
+        const r = runRecommendation(model, es.current.settings, imp.result, {
           profile,
           custom: profile === 'Custom' ? { growth: (growth ?? 0) / 100, cash: (customCash ?? 0) / 100 } : null,
           portfolioDate: date,
@@ -107,7 +119,11 @@ export function Recommendations() {
           sectorOverrides: {},
           overrides: ov,
           updateSheetButton: updateButton,
+          custodian: cust,
+          addHoldings: adds,
         });
+        applyRounds(r.workbook, rs.amounts);
+        setImpl(readImplementation(r.workbook));
         setResult(r);
       } catch (e) {
         setRunError(e instanceof Error ? e.message : String(e));
@@ -127,6 +143,67 @@ export function Recommendations() {
     a.download = `recommendations-${date}.csv`;
     a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  /** Round edits only recalculate the cells that depend on them (instant). */
+  const updateRounds = (rs: RoundsState) => {
+    setRounds(rs);
+    if (result) {
+      applyRounds(result.workbook, rs.amounts);
+      setImpl(readImplementation(result.workbook));
+    }
+  };
+
+  // ---------------- implementation file (client data — saved where the adviser chooses, never in the browser)
+  const saveFile = () => {
+    const file = {
+      kind: 'allocationlab-implementation',
+      version: 1,
+      savedAt: new Date().toISOString(),
+      settingsVersion: es.current.version,
+      paste,
+      client: { profile, growth, customCash, feePct, feeFixed, withdrawals, addRemove, cashOverride, date, updateButton, custodian, portfolioId },
+      overrides,
+      addHoldings,
+      rounds,
+    };
+    const url = URL.createObjectURL(new Blob([JSON.stringify(file, null, 1)], { type: 'application/json' }));
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `implementation-${portfolioId || 'client'}-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+  const openFile = async (f: File) => {
+    try {
+      const o = JSON.parse(await f.text());
+      if (o?.kind !== 'allocationlab-implementation') throw new Error('Not an AllocationLab implementation file.');
+      const c = o.client ?? {};
+      setPaste(o.paste ?? '');
+      setProfile(c.profile ?? 'Balanced');
+      setGrowth(c.growth ?? null);
+      setCustomCash(c.customCash ?? null);
+      setFeePct(c.feePct ?? null);
+      setFeeFixed(c.feeFixed ?? null);
+      setWithdrawals(c.withdrawals ?? null);
+      setAddRemove(c.addRemove ?? null);
+      setCashOverride(c.cashOverride ?? null);
+      setDate(c.date ?? new Date().toISOString().slice(0, 10));
+      setUpdateButton(!!c.updateButton);
+      setCustodian(c.custodian === 'OA' ? 'OA' : 'Apex');
+      setPortfolioId(c.portfolioId ?? '');
+      setOverrides(o.overrides ?? {});
+      setAddHoldings(o.addHoldings ?? []);
+      setRounds(o.rounds ?? emptyRounds());
+      const p = parsePaste(o.paste ?? '');
+      const imp = { result: importApexHoldings(p.rows, dataRows), parseErrors: p.errors, ids: p.portfolioIds };
+      setImported(imp);
+      setFileNotice(`Opened ${f.name} (saved ${String(o.savedAt ?? '').slice(0, 10)}${o.settingsVersion !== es.current.version ? `; it was saved with settings version ${o.settingsVersion}, current is ${es.current.version}` : ''}). Press Calculate to restore the results.`);
+      setResult(null);
+      setImpl(null);
+    } catch (e) {
+      setFileNotice(`Could not open ${f.name}: ${e instanceof Error ? e.message : String(e)}`);
+    }
   };
 
   const customInvalid = profile === 'Custom' && (growth === null || customCash === null || growth < 0 || growth > 100 || customCash < 0 || growth + customCash > 100);
@@ -180,6 +257,13 @@ export function Recommendations() {
               </select>
             </Field>
             <Field label="Portfolio date"><input type="date" className={inputCls} value={date} onChange={(e) => setDate(e.target.value)} /></Field>
+            <Field label="Custodian">
+              <select className={inputCls} value={custodian} onChange={(e) => { const c = e.target.value as 'Apex' | 'OA'; setCustodian(c); if (result) run(overrides, addHoldings, rounds, c); }}>
+                <option value="Apex">Apex</option>
+                <option value="OA">OneAnswer</option>
+              </select>
+            </Field>
+            <Field label="Portfolio number"><input className={inputCls} value={portfolioId} onChange={(e) => setPortfolioId(e.target.value)} /></Field>
             {profile === 'Custom' && (
               <>
                 <Field label="Growth assets" hint="Custom profile: equities and property are split like Balanced."><PercentInput ariaLabel="Custom growth" value={growth} onChange={setGrowth} /></Field>
@@ -198,6 +282,15 @@ export function Recommendations() {
             <Button variant="primary" disabled={!imported || busy || customInvalid} onClick={() => run()}>{busy ? 'Calculating…' : 'Calculate recommendations'}</Button>
             {result && <Button onClick={exportCsv}>Export CSV</Button>}
           </div>
+          <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-slate-100 pt-3 text-sm">
+            <Button variant="ghost" disabled={!imported} onClick={saveFile}>Save implementation file</Button>
+            <label className="cursor-pointer rounded-md px-3 py-1.5 font-medium text-slate-700 hover:bg-slate-100">
+              Open implementation file…
+              <input type="file" accept=".json" className="hidden" disabled={!model} onChange={(e) => { const f = e.target.files?.[0]; e.target.value = ''; if (f) void openFile(f); }} />
+            </label>
+            <span className="text-xs text-slate-500">Contains client data — save it where client files belong (e.g. the P: drive).</span>
+          </div>
+          {fileNotice && <div className="mt-2"><Notice tone="info" onDismiss={() => setFileNotice(null)}>{fileNotice}</Notice></div>}
           {customInvalid && <p className="mt-2 text-xs text-red-700">Custom growth and cash must be between 0% and 100% and total at most 100%.</p>}
           {runError && <div className="mt-2"><Notice tone="danger">{runError}</Notice></div>}
         </Card>
@@ -206,7 +299,32 @@ export function Recommendations() {
       {!result ? (
         <EmptyState title="No recommendation yet">Import holdings, choose the client's settings and calculate. Use the synthetic sample to try it.</EmptyState>
       ) : (
+        <>
+        <div className="mb-4 flex gap-1 border-b border-slate-200" role="tablist">
+          {(['recommendation', 'implementation'] as const).map((t) => (
+            <button key={t} role="tab" aria-selected={tab === t} type="button" onClick={() => setTab(t)} className={cx('-mb-px border-b-2 px-4 py-2 text-sm font-medium', tab === t ? 'border-slate-900 text-slate-900' : 'border-transparent text-slate-500 hover:text-slate-800')}>
+              {t === 'recommendation' ? 'Recommendation' : 'Implementation (rounds)'}
+            </button>
+          ))}
+        </div>
+        {tab === 'implementation' && impl ? (
+          <Implementation
+            rows={impl.rows}
+            checks={impl.checks}
+            exposure={impl.exposure}
+            custodian={custodian}
+            portfolioId={portfolioId}
+            rounds={rounds}
+            onRounds={updateRounds}
+            dataNames={dataRows.map((d) => ({ name: d.fsName, assetClass: d.assetClass }))}
+            onAddHolding={(sec, name) => { const adds = [...addHoldings, [sec, name] as [SectionKey, string]]; setAddHoldings(adds); run(overrides, adds); }}
+            addedNames={addHoldings.map((a) => a[1])}
+            busy={busy}
+          />
+        ) : (
         <Results result={result} portfolioDate={date} importedNames={new Set(Object.values(imported?.result.bySection ?? {}).flat().map((h) => h[0]))} overrides={overrides} onOverride={(name, v) => { const ov = { ...overrides, [name]: v }; setOverrides(ov); run(ov); }} />
+        )}
+        </>
       )}
     </>
   );
