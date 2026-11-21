@@ -5,71 +5,7 @@
  * Macros in .xlsm files are never read or executed.
  */
 
-interface ZipEntry {
-  name: string;
-  method: number;
-  compressedSize: number;
-  localOffset: number;
-}
-
-function u16(b: Uint8Array, o: number): number {
-  return b[o]! | (b[o + 1]! << 8);
-}
-function u32(b: Uint8Array, o: number): number {
-  return (b[o]! | (b[o + 1]! << 8) | (b[o + 2]! << 16) | (b[o + 3]! << 24)) >>> 0;
-}
-
-function readZipDirectory(b: Uint8Array): ZipEntry[] {
-  let eocd = -1;
-  for (let i = b.length - 22; i >= Math.max(0, b.length - 65557); i--) {
-    if (u32(b, i) === 0x06054b50) {
-      eocd = i;
-      break;
-    }
-  }
-  if (eocd < 0) throw new Error('Not a valid .xlsx file (zip directory not found).');
-  const count = u16(b, eocd + 10);
-  let p = u32(b, eocd + 16);
-  const entries: ZipEntry[] = [];
-  const dec = new TextDecoder();
-  for (let i = 0; i < count; i++) {
-    if (u32(b, p) !== 0x02014b50) throw new Error('Corrupt .xlsx file (bad central directory).');
-    const method = u16(b, p + 10);
-    const compressedSize = u32(b, p + 20);
-    const nameLen = u16(b, p + 28);
-    const extraLen = u16(b, p + 30);
-    const commentLen = u16(b, p + 32);
-    const localOffset = u32(b, p + 42);
-    const name = dec.decode(b.subarray(p + 46, p + 46 + nameLen));
-    entries.push({ name, method, compressedSize, localOffset });
-    p += 46 + nameLen + extraLen + commentLen;
-  }
-  return entries;
-}
-
-async function inflateRaw(data: Uint8Array): Promise<Uint8Array> {
-  const ds = new DecompressionStream('deflate-raw');
-  const source = new ReadableStream<Uint8Array>({
-    start(controller) {
-      controller.enqueue(data);
-      controller.close();
-    },
-  });
-  const stream = source.pipeThrough(ds);
-  return new Uint8Array(await new Response(stream).arrayBuffer());
-}
-
-async function readEntry(b: Uint8Array, e: ZipEntry): Promise<string> {
-  const p = e.localOffset;
-  if (u32(b, p) !== 0x04034b50) throw new Error(`Corrupt .xlsx file (bad local header for ${e.name}).`);
-  const start = p + 30 + u16(b, p + 26) + u16(b, p + 28);
-  const raw = b.subarray(start, start + e.compressedSize);
-  let bytes: Uint8Array;
-  if (e.method === 0) bytes = raw;
-  else if (e.method === 8) bytes = await inflateRaw(raw);
-  else throw new Error(`Unsupported compression method ${e.method} in ${e.name}.`);
-  return new TextDecoder().decode(bytes);
-}
+import { entryText, readZip } from './zip';
 
 function colIndex(ref: string): number {
   const letters = /^[A-Z]+/.exec(ref)?.[0] ?? 'A';
@@ -100,12 +36,11 @@ export interface XlsxSheet {
  * Read one worksheet. `preferSheet` (case-insensitive) is used when present, otherwise the first sheet.
  */
 export async function readXlsxSheet(buffer: ArrayBuffer, preferSheet?: string): Promise<XlsxSheet> {
-  const b = new Uint8Array(buffer);
-  const entries = readZipDirectory(b);
+  const entries = readZip(buffer, '.xlsx file');
   const byName = new Map(entries.map((e) => [e.name, e]));
   const get = async (n: string) => {
     const e = byName.get(n);
-    return e ? readEntry(b, e) : null;
+    return e ? entryText(e) : null;
   };
   const parser = new DOMParser();
   const xml = (s: string) => parser.parseFromString(s, 'application/xml');

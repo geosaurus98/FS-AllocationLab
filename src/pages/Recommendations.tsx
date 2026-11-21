@@ -4,7 +4,9 @@ import { Button, Card, EmptyState, Field, inputCls, Notice, PageHeader, StatusBa
 import type { WorkbookModel } from '../engine/workbook/evaluator';
 import { dataRowsFromWorkbook, importApexHoldings, type ImportResult, type RawHolding } from '../engine/workbook/importHoldings';
 import { applyRounds, readImplementation, RECOMMENDATION_PROFILES, runRecommendation, type ClientInputs, type RecommendationResult, type SectionKey } from '../engine/workbook/run';
+import { Documents, emptyLetterClient } from './Documents';
 import { emptyRounds, Implementation, type RoundsState } from './Implementation';
+import type { LetterClient } from '../lib/letters';
 import { Workbook } from '../engine/workbook/evaluator';
 import { BLANK, isErr, type Scalar } from '../engine/workbook/values';
 import { toCsv } from '../lib/csv';
@@ -80,7 +82,8 @@ export function Recommendations() {
   const [addHoldings, setAddHoldings] = useState<[SectionKey, string][]>([]);
   const [rounds, setRounds] = useState<RoundsState>(emptyRounds);
   const [impl, setImpl] = useState<ReturnType<typeof readImplementation> | null>(null);
-  const [tab, setTab] = useState<'recommendation' | 'implementation'>('recommendation');
+  const [tab, setTab] = useState<'recommendation' | 'implementation' | 'documents'>('recommendation');
+  const [letterClient, setLetterClient] = useState<LetterClient>(emptyLetterClient);
   const [fileNotice, setFileNotice] = useState<string | null>(null);
 
   const dataRows = useMemo(() => {
@@ -166,6 +169,7 @@ export function Recommendations() {
       overrides,
       addHoldings,
       rounds,
+      letterClient,
     };
     const url = URL.createObjectURL(new Blob([JSON.stringify(file, null, 1)], { type: 'application/json' }));
     const a = document.createElement('a');
@@ -195,6 +199,7 @@ export function Recommendations() {
       setOverrides(o.overrides ?? {});
       setAddHoldings(o.addHoldings ?? []);
       setRounds(o.rounds ?? emptyRounds());
+      setLetterClient({ ...emptyLetterClient(), ...(o.letterClient ?? {}) });
       const p = parsePaste(o.paste ?? '');
       const imp = { result: importApexHoldings(p.rows, dataRows), parseErrors: p.errors, ids: p.portfolioIds };
       setImported(imp);
@@ -301,13 +306,15 @@ export function Recommendations() {
       ) : (
         <>
         <div className="mb-4 flex gap-1 border-b border-slate-200" role="tablist">
-          {(['recommendation', 'implementation'] as const).map((t) => (
+          {(['recommendation', 'implementation', 'documents'] as const).map((t) => (
             <button key={t} role="tab" aria-selected={tab === t} type="button" onClick={() => setTab(t)} className={cx('-mb-px border-b-2 px-4 py-2 text-sm font-medium', tab === t ? 'border-slate-900 text-slate-900' : 'border-transparent text-slate-500 hover:text-slate-800')}>
-              {t === 'recommendation' ? 'Recommendation' : 'Implementation (rounds)'}
+              {t === 'recommendation' ? 'Recommendation' : t === 'implementation' ? 'Implementation (rounds)' : 'Letters & documents'}
             </button>
           ))}
         </div>
-        {tab === 'implementation' && impl ? (
+        {tab === 'documents' ? (
+          <Documents workbook={result.workbook} custodian={custodian} client={letterClient} onClient={setLetterClient} version={result} />
+        ) : tab === 'implementation' && impl ? (
           <Implementation
             rows={impl.rows}
             checks={impl.checks}

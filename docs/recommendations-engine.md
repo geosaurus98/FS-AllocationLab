@@ -156,13 +156,19 @@ The hand-written modules from the first phases (`sectorTargets.ts`, `property.ts
    - **Implementation file:** saved where the adviser chooses, never in the browser.
    - **Verification:** 12 golden round scenarios in LibreOffice match exactly, including Remaining, broker/spread/rationale columns, exposure and checks.
    - **Speed:** round edits recalculate only Portfolio AC:BN, which are the only cells that depend on them.
-6. **Later (not yet scheduled):**
+6. **Letters & documents** — done (Letter of Advice, Email Advice, Follow-up letter):
+   - **Tables** (`src/engine/workbook/documentTables.ts`): ports of Sort_Portfolio, Portfolio_For_Advice, Costs_For_Advice, InvestmentRationale and Simple_AR_table, with the Excel number formats of the cells that are pasted.
+   - **Word filler** (`src/lib/docx.ts`, `src/lib/letters.ts`): ReplaceTextInWord (whole words, case-insensitive with Word's case matching, across runs), the tables at their placeholders with the widths and font sizes the macros set, rationale headings and bullets with "Link to the fact sheet here.", the AdvisorTable signature table built from the adviser bookmarks, which are then deleted, and Cost1–Cost3 removed when there are no costs.
+   - **Placeholders:** Letter of Advice and Follow-up use `Investmentrationale`, `Portfolioforadvice`, `InsertTable`, `ChangeTable`; Email Advice uses `Portfolio_for_advice` and `Costs_For_Advice` instead, plus `holder0`–`holder4` wording by client type.
+   - **Inputs the app cannot reach:** the templates (P: drive) are chosen by the adviser; client details from the Master Portfolio Risk Profiles workbook are typed in. Nothing is uploaded.
+   - **Not ported:** the "hold the portfolio at the current date" prompt and the save-to-P: step (the browser downloads the file instead).
+7. **Later (not yet scheduled):**
    - OneAnswer and MMC imports;
    - the OneAnswer transaction report for the computer check;
    - standing orders and regular purchases;
    - the implementation dashboard (bond summary tables);
    - more than six rounds (the workbook inserts extra columns);
-   - documents (Letter of Advice, SoA, annual review) and emails;
+   - the Statement of Advice and annual review documents (they need performance, tax and holder details);
    - the external "Bonds Allocation in Years" file used by the Bond_Allocation macro;
    - client master lookups (FetchClientInfo).
 
@@ -176,4 +182,5 @@ The hand-written modules from the first phases (`sectorTargets.ts`, `property.ts
 - **Property: kept holdings.** A holding with override 0 whose name is not anywhere in Asset Allocation column B is deducted from the property pot.
 - **Datasheet entries to check.** "ANZ Bank New Zealand Limited (ANB190) 4.63% 20/02/2030" is typed as a Term Deposit. Apex code WNZ-0726 maps to an FS name with a different coupon (6.355% versus 3.455%).
 - **Computer check (deliberate differences).** The macro looks for "Bond" in the Data sheet's *Style* column, which never contains it, so bond names were never trimmed and bonds never matched; the app uses the *Type* column. The macro also kept only the last transaction per asset; the app adds them together.
+- **Letter tables (deliberate differences).** In the Summary table the macro never resets its running section total after Cash, so the first "All Other … (No Changes)" figure would subtract cash funds; the app resets it. It treats any 3-letter name as a cash currency in every section; the app does so only in Cash. A bond or term deposit whose name does not end in a date stops the macro with an error; the app shows "Sell". The stray column-T formula on the "Multi Sector Total" row would add a rationale bullet for the total; the app ignores it. The macro means to remove the Cost1–Cost3 sections when there are no costs, but its test can never be true; the app removes them. Column U (Fact Sheet) calls `GetHyperlinkAddress`, which is not defined in the workbook (the module defines `GetlinkAddress`), so Excel shows it blank; the letters use the Data sheet's FactSheet value, as the macro does.
 - **Hard-coded fund name.** The cash-sufficiency check refers to "Nikko AM NZ Cash Fund" by name; the fund has since been renamed Amova.

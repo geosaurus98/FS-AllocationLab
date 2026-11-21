@@ -59,6 +59,12 @@ The **Implementation (rounds)** tab is the workbook's Implementation Advice tabl
 - run the computer check against the Apex transaction report;
 - save or open the implementation file (client data, so it is kept wherever you choose).
 
+The **Letters & documents** tab fills the firm's Word templates the way the workbook's macros do:
+- Letter of Advice, Email Advice and Follow-up letter;
+- the Summary of changes, Portfolio for advice and Costs for advice tables, and the investment rationale with fact-sheet links;
+- client details (name, address, client type, advisers) are typed in, because the macros read them from the Master Portfolio Risk Profiles workbook;
+- choose the template .docx from the P: drive; it stays in the browser, and the filled letter is downloaded. Without a template you get a plain document with the tables.
+
 Firm-level inputs are editable on the **Settings** page and versioned there:
 - profile percentages;
 - the property model;
@@ -74,7 +80,7 @@ How it works: the workbook's sheets are extracted into `src/engine/workbook/mode
 Not yet ported:
 - OneAnswer and MMC imports (and the OneAnswer transaction report);
 - standing orders and regular purchases;
-- Letter of Advice, SoA and annual review documents, and emails;
+- the Statement of Advice and annual review documents (they need performance and tax data);
 - client-master lookups.
 
 ## Calculation rules
@@ -164,7 +170,7 @@ src/
 
 ## Tests
 
-`npm test` runs 337 tests covering:
+`npm test` runs 350 tests covering:
 
 - Allocation totals, tolerance and floating-point handling, and missing data
 - The minimum Cash weight and other min/max constraints, including infeasible constraint sets
@@ -175,6 +181,7 @@ src/
 - CSV parsing, round-tripping, and the import safety rules
 - Client holdings: money parsing, CSV/TSV validation, class mapping, weights, drift and tolerance overrides, growth target gaps, annual-% fees and cash coverage
 - Implementation rounds (12 golden scenarios: Remaining, broker/spread/rationale, exposure, checks) and the computer check
+- Letter tables (Excel number formats, sort order, totals that add up, buy/sell ordering) and the Word filler on a synthetic template: text split across runs, whole-word and case matching, trust wording, tables, bullets, hyperlinks, signature bookmarks and removed cost sections
 - The recommendations workbook: 110 golden scenarios against the real workbook, Excel-semantics unit tests, and a check that the evaluator reproduces Excel's saved results
 - The .xlsx reader and datasheet matching, using a synthetic workbook fixture: Apex/FS/OA names, term-deposit suffix stripping, ambiguous and not-found names, and classification precedence
 
