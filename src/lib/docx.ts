@@ -46,14 +46,17 @@ export class DocxDocument {
   private contentTypes: Document;
   private bulletNumId: string | null = null;
   private relSeq = 0;
+  private settings: Document | null;
+  private updateFieldsOnOpen = false;
 
-  private constructor(entries: ZipEntry[], parts: { doc: string; rels: string; numbering: string | null; ct: string }) {
+  private constructor(entries: ZipEntry[], parts: { doc: string; rels: string; numbering: string | null; ct: string; settings?: string | null }) {
     this.entries = entries;
     const p = new DOMParser();
     this.doc = p.parseFromString(parts.doc, 'application/xml');
     this.rels = p.parseFromString(parts.rels, 'application/xml');
     this.numbering = parts.numbering ? p.parseFromString(parts.numbering, 'application/xml') : null;
     this.contentTypes = p.parseFromString(parts.ct, 'application/xml');
+    this.settings = parts.settings ? p.parseFromString(parts.settings, 'application/xml') : null;
     if (this.doc.getElementsByTagName('parsererror').length) throw new Error('The Word document could not be read (document.xml is not valid XML).');
   }
 
@@ -68,7 +71,7 @@ export class DocxDocument {
     const rels = (await get('word/_rels/document.xml.rels')) ?? `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="${PR}"/>`;
     const ct = await get('[Content_Types].xml');
     if (!ct) throw new Error('This is not a Word .docx document ([Content_Types].xml is missing).');
-    return new DocxDocument(entries, { doc, rels, numbering: await get('word/numbering.xml'), ct });
+    return new DocxDocument(entries, { doc, rels, numbering: await get('word/numbering.xml'), ct, settings: await get('word/settings.xml') });
   }
 
   /** A new, empty document (used when no firm template is loaded). */
@@ -130,9 +133,10 @@ export class DocxDocument {
   // ------------------------------------------------------------ find and replace
 
   /** ReplaceTextInWord: replace all, whole words, case-insensitive with Word's case matching. Returns the count. */
-  replaceText(find: string, replacement: string, opts: { wholeWord?: boolean; matchCase?: boolean } = {}): number {
+  replaceText(find: string, replacement: string, opts: { wholeWord?: boolean; matchCase?: boolean; adjustCase?: boolean } = {}): number {
     const whole = opts.wholeWord ?? true;
     const exact = opts.matchCase ?? false;
+    const adjust = !exact && (opts.adjustCase ?? true);
     const re = new RegExp(escapeRe(find), exact ? 'g' : 'gi');
     let count = 0;
     for (const p of this.paragraphs()) {
@@ -147,7 +151,7 @@ export class DocxDocument {
         matches.push({ s, e, found: m[0] });
       }
       for (const m of matches.reverse()) {
-        this.spliceText(ts, m.s, m.e, exact ? replacement : matchCase(m.found, replacement));
+        this.spliceText(ts, m.s, m.e, adjust ? matchCase(m.found, replacement) : replacement);
         count++;
       }
     }
@@ -255,13 +259,15 @@ export class DocxDocument {
       t.center ? this.el('jc', { val: 'center' }) : null,
       this.el('tblBorders', {}, ...['top', 'left', 'bottom', 'right', 'insideH', 'insideV'].map((k) => this.el(k, { val: 'nil' }))),
       this.el('tblLayout', { type: 'fixed' }),
-      this.el('tblCellMar', {}, this.el('left', { w: '57', type: 'dxa' }), this.el('right', { w: '57', type: 'dxa' })),
+      t.padding
+        ? this.el('tblCellMar', {}, this.el('top', { w: twips(t.padding.top), type: 'dxa' }), this.el('left', { w: twips(t.padding.left), type: 'dxa' }), this.el('bottom', { w: twips(t.padding.bottom), type: 'dxa' }), this.el('right', { w: twips(t.padding.right), type: 'dxa' }))
+        : this.el('tblCellMar', {}, this.el('left', { w: '57', type: 'dxa' }), this.el('right', { w: '57', type: 'dxa' })),
     );
     const grid = this.el('tblGrid', {}, ...t.widths.map((w) => this.el('gridCol', { w: twips(w) })));
     const tbl = this.el('tbl', {}, tblPr, grid);
     const n = t.rows.length;
     t.rows.forEach((row, i) => {
-      const tr = this.el('tr', {}, this.el('trPr', {}, this.el('cantSplit')));
+      const tr = this.el('tr', {}, this.el('trPr', {}, this.el('cantSplit'), t.minRowHeight ? this.el('trHeight', { val: twips(t.minRowHeight), hRule: 'atLeast' }) : null));
       row.forEach((c, j) => {
         const borders: Partial<Record<'top' | 'left' | 'bottom' | 'right', number>> = {};
         if (t.edgeBorders && i === 0) borders.top = 4;
@@ -274,6 +280,15 @@ export class DocxDocument {
           if (i === 1) borders.bottom = 12;
           if (c.topBorder) borders.top = 4;
         }
+        if (t.columnLines) {
+          borders.left = 4;
+          borders.right = 4;
+        }
+        if (t.headerRule && i === 0) {
+          borders.top = 4;
+          borders.bottom = 4;
+        }
+        if (t.headerRule && i === n - 1) borders.bottom = 4;
         tr.appendChild(this.cellXml(c, t.widths[j] ?? 60, t.fontSize, borders));
       });
       tbl.appendChild(tr);
@@ -498,7 +513,7 @@ export class DocxDocument {
    * the lead adviser's and the secondary adviser's bookmarked signature tables; the adviser
    * bookmarks (John, Hayden, Claudia, BKMRK) are then deleted.
    */
-  signature(lead: string, secondary: string, deleteBookmarks: string[]): { built: boolean; missing: string[] } {
+  signature(lead: string, secondary: string, deleteBookmarks: string[], layout: { widths: [number, number]; indent: number } = { widths: [380 * 0.75, 300 * 0.75], indent: 22 * 0.75 }): { built: boolean; missing: string[] } {
     const missing: string[] = [];
     const at = this.bookmark('AdvisorTable');
     if (!at) return { built: false, missing: ['AdvisorTable'] };
@@ -517,7 +532,7 @@ export class DocxDocument {
         });
     };
     const cols = [copyColumn(lead), copyColumn(secondary)];
-    const widths = [380 * 0.75, 300 * 0.75];
+    const widths = layout.widths;
     const tbl = this.el(
       'tbl',
       {},
@@ -526,7 +541,7 @@ export class DocxDocument {
         {},
         this.el('tblW', { w: twips(widths[0]! + widths[1]!), type: 'dxa' }),
         this.el('jc', { val: 'left' }),
-        this.el('tblInd', { w: twips(22 * 0.75), type: 'dxa' }),
+        this.el('tblInd', { w: twips(layout.indent), type: 'dxa' }),
         this.el('tblBorders', {}, ...['top', 'left', 'bottom', 'right', 'insideH', 'insideV'].map((k) => this.el(k, { val: 'nil' }))),
         this.el('tblLayout', { type: 'fixed' }),
       ),
@@ -565,6 +580,283 @@ export class DocxDocument {
     return { built: true, missing };
   }
 
+  // ------------------------------------------------------------ bookmarked tables (annual review)
+
+  /** The table holding a bookmark and the bookmarked cell: Bookmarks(name).Range.Tables(1) / .Cells(1). */
+  tableAtBookmark(name: string): { tbl: Element; cell: Element | null } | null {
+    const bm = this.bookmark(name);
+    if (!bm) return null;
+    const cell = closest(bm.start, 'tc');
+    if (cell) return { tbl: closest(cell, 'tbl')!, cell };
+    const tbl = this.bookmarkTable(name);
+    if (!tbl) return null;
+    return { tbl, cell: this.cellsOf(tbl)[0] ?? null };
+  }
+
+  tableRows(tbl: Element): Element[] {
+    return Array.from(tbl.childNodes).filter((c) => (c as Element).localName === 'tr') as Element[];
+  }
+
+  rowCells(tr: Element): Element[] {
+    return Array.from(tr.childNodes).filter((c) => (c as Element).localName === 'tc') as Element[];
+  }
+
+  /** Cells in reading order: Cell.Next walks them this way. */
+  cellsOf(tbl: Element): Element[] {
+    return this.tableRows(tbl).flatMap((tr) => this.rowCells(tr));
+  }
+
+  /** Cell (1-based row and column) like Table.Cell(r, c); null when out of range. */
+  cellAt(tbl: Element, row: number, col: number): Element | null {
+    const tr = this.tableRows(tbl)[row - 1];
+    return tr ? (this.rowCells(tr)[col - 1] ?? null) : null;
+  }
+
+  cellText(tc: Element): string {
+    return Array.from(tc.childNodes)
+      .filter((c) => (c as Element).localName === 'p')
+      .map((p) => this.paragraphText(p as Element))
+      .join('\n');
+  }
+
+  /** Cell.Range.Text = text: one paragraph keeping the first paragraph's and first run's formatting. */
+  setCellText(tc: Element, text: string, opts: { color?: string } = {}) {
+    const paras = Array.from(tc.childNodes).filter((c) => (c as Element).localName === 'p') as Element[];
+    const p = paras[0] ?? tc.appendChild(this.el('p'));
+    for (const extra of paras.slice(1)) tc.removeChild(extra);
+    const firstRun = p.getElementsByTagNameNS(W, 'r')[0];
+    const rPr = firstRun ? (Array.from(firstRun.childNodes).find((c) => (c as Element).localName === 'rPr') as Element | undefined) : undefined;
+    for (const c of Array.from(p.childNodes)) if ((c as Element).localName !== 'pPr') p.removeChild(c);
+    const r = this.el('r');
+    const props = rPr ? (rPr.cloneNode(true) as Element) : this.el('rPr');
+    if (opts.color) setOrdered(props, this.el('color', { val: opts.color }), RPR_ORDER);
+    if (props.childNodes.length) r.appendChild(props);
+    const t = this.el('t');
+    t.setAttributeNS(XML_NS, 'xml:space', 'preserve');
+    t.textContent = text;
+    r.appendChild(t);
+    p.appendChild(r);
+  }
+
+  setCellBorder(tc: Element, side: 'top' | 'bottom', size = 4) {
+    const tcPr = this.tcPr(tc);
+    let b = Array.from(tcPr.childNodes).find((c) => (c as Element).localName === 'tcBorders') as Element | undefined;
+    if (!b) setOrdered(tcPr, (b = this.el('tcBorders')), TCPR_ORDER);
+    setOrdered(b, this.el(side, { val: 'single', sz: String(size), space: '0', color: '000000' }), ['top', 'start', 'left', 'bottom', 'end', 'right', 'insideH', 'insideV', 'tl2br', 'tr2bl']);
+  }
+
+  private tcPr(tc: Element): Element {
+    let pr = Array.from(tc.childNodes).find((c) => (c as Element).localName === 'tcPr') as Element | undefined;
+    if (!pr) tc.insertBefore((pr = this.el('tcPr')), tc.firstChild);
+    return pr;
+  }
+
+  deleteRow(tr: Element) {
+    tr.parentNode?.removeChild(tr);
+  }
+
+  /** Cell(r1, col).Merge MergeTo:=Cell(r2, col): a vertical merge; the merged cell keeps the first cell's text. */
+  mergeVertical(tbl: Element, col: number, r1: number, r2: number) {
+    for (let r = r1; r <= r2; r++) {
+      const tc = this.cellAt(tbl, r, col);
+      if (!tc) continue;
+      setOrdered(this.tcPr(tc), this.el('vMerge', r === r1 ? { val: 'restart' } : {}), TCPR_ORDER);
+      if (r > r1) this.setCellText(tc, '');
+    }
+  }
+
+  // ------------------------------------------------------------ more bookmark operations
+
+  /** Bookmarks(name).Range.Text = text */
+  setBookmarkText(name: string, text: string): boolean {
+    const bm = this.bookmark(name);
+    if (!bm) return false;
+    const { start, end } = bm;
+    let rPr: Element | null = null;
+    if (end && start.parentNode === end.parentNode) {
+      let n = start.nextSibling;
+      while (n && n !== end) {
+        const next = n.nextSibling;
+        if (!rPr && (n as Element).localName === 'r') rPr = (Array.from(n.childNodes).find((c) => (c as Element).localName === 'rPr') as Element | undefined) ?? null;
+        n.parentNode!.removeChild(n);
+        n = next;
+      }
+    }
+    if (!rPr) {
+      let prev = start.previousSibling;
+      while (prev && (prev as Element).localName !== 'r') prev = prev.previousSibling;
+      if (prev) rPr = (Array.from(prev.childNodes).find((c) => (c as Element).localName === 'rPr') as Element | undefined) ?? null;
+    }
+    const r = this.el('r');
+    if (rPr) r.appendChild(rPr.cloneNode(true));
+    const t = this.el('t');
+    t.setAttributeNS(XML_NS, 'xml:space', 'preserve');
+    t.textContent = text;
+    r.appendChild(t);
+    if (start.parentNode && (start.parentNode as Element).localName === 'p') start.parentNode.insertBefore(r, start.nextSibling);
+    else {
+      const p = this.block(start);
+      if (p.localName === 'p') p.appendChild(r);
+      else return false;
+    }
+    return true;
+  }
+
+  /** Expand the bookmark to its paragraph and the paragraph before it, and delete both (empty Sig2–Sig4). */
+  deleteBookmarkParagraphWithPrevious(name: string): boolean {
+    const bm = this.bookmark(name);
+    if (!bm) return false;
+    const p = (bm.start.parentNode as Element).localName === 'p' ? (bm.start.parentNode as Element) : closest(bm.start, 'p');
+    if (!p) return false;
+    let prev = p.previousElementSibling;
+    while (prev && prev.localName !== 'p') prev = null;
+    if (prev) prev.parentNode!.removeChild(prev);
+    p.parentNode!.removeChild(p);
+    bm.end?.parentNode?.removeChild(bm.end);
+    return true;
+  }
+
+  /** HighlightTextInWord: highlight every whole-word, case-insensitive occurrence. Returns the count. */
+  highlight(text: string, color = 'yellow'): number {
+    const re = new RegExp(escapeRe(text), 'gi');
+    let count = 0;
+    for (const p of this.paragraphs()) {
+      const full = this.paragraphText(p);
+      const hits: [number, number][] = [];
+      for (const m of full.matchAll(re)) {
+        const s = m.index!;
+        const e = s + m[0].length;
+        if ((s > 0 && WORD_CHAR.test(full[s - 1]!)) || (e < full.length && WORD_CHAR.test(full[e]!) && WORD_CHAR.test(text.at(-1)!))) continue;
+        hits.push([s, e]);
+      }
+      for (const [s, e] of hits.reverse()) {
+        for (const r of this.isolate(p, s, e)) {
+          let rPr = Array.from(r.childNodes).find((c) => (c as Element).localName === 'rPr') as Element | undefined;
+          if (!rPr) r.insertBefore((rPr = this.el('rPr')), r.firstChild);
+          setOrdered(rPr, this.el('highlight', { val: color }), RPR_ORDER);
+        }
+        count++;
+      }
+    }
+    return count;
+  }
+
+  /** Split runs so that characters [s, e) of a paragraph sit in whole runs; returns those runs. */
+  private isolate(p: Element, s: number, e: number): Element[] {
+    const out: Element[] = [];
+    let pos = 0;
+    for (const t of this.textNodes(p)) {
+      const txt = t.textContent ?? '';
+      const a = pos;
+      const b = pos + txt.length;
+      pos = b;
+      if (b <= s || a >= e) continue;
+      const run = t.parentNode as Element;
+      const from = Math.max(s, a) - a;
+      const to = Math.min(e, b) - a;
+      const ts = Array.from(run.childNodes).filter((c) => (c as Element).localName === 't');
+      if (ts.length !== 1 || (from === 0 && to === txt.length)) {
+        out.push(run);
+        continue;
+      }
+      const mk = (str: string) => {
+        const c = run.cloneNode(true) as Element;
+        const ct = Array.from(c.childNodes).find((x) => (x as Element).localName === 't') as Element;
+        ct.textContent = str;
+        ct.setAttributeNS(XML_NS, 'xml:space', 'preserve');
+        return c;
+      };
+      const parent = run.parentNode!;
+      if (from > 0) parent.insertBefore(mk(txt.slice(0, from)), run);
+      const mid = mk(txt.slice(from, to));
+      parent.insertBefore(mid, run);
+      if (to < txt.length) parent.insertBefore(mk(txt.slice(to)), run);
+      parent.removeChild(run);
+      out.push(mid);
+    }
+    return out;
+  }
+
+  /**
+   * Paste another document's body at a bookmark (the annual review commentary insert). Text, tables
+   * and formatting are copied; pictures, embedded objects and links that need the other file's parts are left out.
+   */
+  insertDocumentAt(name: string, other: DocxDocument): { inserted: boolean; droppedPictures: number } {
+    const bm = this.bookmark(name);
+    if (!bm) return { inserted: false, droppedPictures: 0 };
+    const body = other.body;
+    let dropped = 0;
+    const nodes = Array.from(body.childNodes).filter((c) => (c as Element).localName !== 'sectPr');
+    const imported = nodes.map((n) => this.doc.importNode(n, true) as Element);
+    for (const n of imported) {
+      if (n.nodeType !== 1) continue;
+      for (const tag of ['drawing', 'pict', 'object']) {
+        for (const d of Array.from(n.getElementsByTagNameNS(W, tag))) {
+          d.parentNode?.removeChild(d);
+          dropped++;
+        }
+      }
+      for (const tag of ['bookmarkStart', 'bookmarkEnd', 'commentRangeStart', 'commentRangeEnd', 'commentReference', 'footnoteReference', 'endnoteReference']) {
+        for (const d of Array.from(n.getElementsByTagNameNS(W, tag))) d.parentNode?.removeChild(d);
+      }
+      for (const h of Array.from(n.getElementsByTagNameNS(W, 'hyperlink'))) {
+        while (h.firstChild) h.parentNode!.insertBefore(h.firstChild, h);
+        h.parentNode!.removeChild(h);
+      }
+      for (const pPr of Array.from(n.getElementsByTagNameNS(W, 'pPr'))) {
+        for (const sp of Array.from(pPr.childNodes)) if ((sp as Element).localName === 'sectPr') pPr.removeChild(sp);
+      }
+    }
+    const anchor = this.block(bm.start);
+    const parent = anchor.parentNode!;
+    for (const n of imported) parent.insertBefore(n, anchor);
+    if (anchor.localName === 'p' && !this.paragraphText(anchor).trim()) {
+      bm.end?.parentNode?.removeChild(bm.end);
+      parent.removeChild(anchor);
+    }
+    return { inserted: true, droppedPictures: dropped };
+  }
+
+  /** Ask Word to update fields (the table of contents) when the document is opened. */
+  updateFieldsOnOpenRequest() {
+    this.updateFieldsOnOpen = true;
+  }
+
+  /**
+   * The Statement of Advice appendix table: inserted at a bookmark in its own landscape section,
+   * blank paragraphs around it removed, and the rest of the document portrait with 1-inch margins.
+   */
+  insertLandscapeTableAt(name: string, t: DocTable): boolean {
+    const bm = this.bookmark(name);
+    if (!bm) return false;
+    const anchor = this.block(bm.start);
+    const tbl = this.buildTable(t);
+    anchor.parentNode!.insertBefore(tbl, anchor);
+    if (anchor.localName === 'p') {
+      for (const tn of this.textNodes(anchor)) tn.textContent = '';
+    }
+    // remove empty body paragraphs before and after the table (not section breaks)
+    const isBlank = (el: Element) =>
+      el.localName === 'p' && !this.paragraphText(el).trim() && !el.getElementsByTagNameNS(W, 'sectPr').length && !el.getElementsByTagNameNS(W, 'drawing').length && !el.getElementsByTagNameNS(W, 'pict').length;
+    for (const el of Array.from(this.body.childNodes) as Element[]) if (el !== tbl && el.nodeType === 1 && isBlank(el)) this.body.removeChild(el);
+    // the section the table is in: the next paragraph-level sectPr, else the body's
+    let sectHolder: Element | null = null;
+    for (let n = tbl.nextElementSibling; n; n = n.nextElementSibling) {
+      const s = n.localName === 'p' ? Array.from(n.getElementsByTagNameNS(W, 'sectPr'))[0] : null;
+      if (s) {
+        sectHolder = s;
+        break;
+      }
+    }
+    const bodySect = sectHolder ?? (Array.from(this.body.childNodes).find((c) => (c as Element).localName === 'sectPr') as Element | undefined) ?? this.body.appendChild(this.el('sectPr'));
+    const landscape = bodySect.cloneNode(true) as Element;
+    setPage(this, landscape, { landscape: true, top: 1, bottom: 1, left: 0.01, right: 0.05 });
+    setPage(this, bodySect, { landscape: false, top: 2.54, bottom: 2.54, left: 2.54, right: 2.54 });
+    const breakPara = this.el('p', {}, this.el('pPr', {}, landscape));
+    tbl.parentNode!.insertBefore(breakPara, tbl.nextSibling);
+    return true;
+  }
+
   // ------------------------------------------------------------ save
 
   async save(): Promise<Uint8Array> {
@@ -577,6 +869,16 @@ export class DocxDocument {
     this.changed.set('word/_rels/document.xml.rels', out(this.rels));
     this.changed.set('[Content_Types].xml', out(this.contentTypes));
     if (this.numbering) this.changed.set('word/numbering.xml', out(this.numbering));
+    if (this.updateFieldsOnOpen && this.settings) {
+      const root = this.settings.documentElement;
+      if (!Array.from(root.childNodes).some((c) => (c as Element).localName === 'updateFields')) {
+        const u = this.settings.createElementNS(W, 'w:updateFields');
+        u.setAttributeNS(W, 'w:val', 'true');
+        const before = Array.from(root.childNodes).find((c) => SETTINGS_AFTER_UPDATE_FIELDS.includes((c as Element).localName));
+        root.insertBefore(u, before ?? null);
+      }
+      this.changed.set('word/settings.xml', out(this.settings));
+    }
     const files: ZipInput[] = [];
     const seen = new Set<string>();
     const ct = this.changed.get('[Content_Types].xml')!;
@@ -591,6 +893,49 @@ export class DocxDocument {
     for (const [name, data] of this.changed) if (!seen.has(name)) files.push({ name, data });
     return writeZip(files);
   }
+}
+
+const RPR_ORDER = ['rStyle', 'rFonts', 'b', 'bCs', 'i', 'iCs', 'caps', 'smallCaps', 'strike', 'dstrike', 'outline', 'shadow', 'emboss', 'imprint', 'noProof', 'snapToGrid', 'vanish', 'webHidden', 'color', 'spacing', 'w', 'kern', 'position', 'sz', 'szCs', 'highlight', 'u', 'effect', 'bdr', 'shd', 'fitText', 'vertAlign', 'rtl', 'cs', 'em', 'lang', 'eastAsianLayout', 'specVanish', 'oMath'];
+const TCPR_ORDER = ['cnfStyle', 'tcW', 'gridSpan', 'hMerge', 'vMerge', 'tcBorders', 'shd', 'noWrap', 'tcMar', 'textDirection', 'tcFitText', 'vAlign', 'hideMark'];
+const SETTINGS_AFTER_UPDATE_FIELDS = ['hdrShapeDefaults', 'footnotePr', 'endnotePr', 'compat', 'docVars', 'rsids', 'mathPr', 'attachedSchema', 'themeFontLang', 'clrSchemeMapping', 'doNotIncludeSubdocsInStats', 'doNotAutoCompressPictures', 'forceUpgrade', 'captions', 'readModeInkLockDown', 'smartTagType', 'schemaLibrary', 'shapeDefaults', 'doNotEmbedSmartTags', 'decimalSymbol', 'listSeparator'];
+
+/** Put `el` in `parent` in schema order, replacing an element of the same name. */
+function setOrdered(parent: Element, el: Element, order: string[]) {
+  const name = el.localName;
+  for (const c of Array.from(parent.childNodes)) if ((c as Element).localName === name) parent.removeChild(c);
+  const idx = order.indexOf(name);
+  const after = Array.from(parent.childNodes).find((c) => order.indexOf((c as Element).localName) > idx);
+  parent.insertBefore(el, after ?? null);
+}
+
+const CM = 567; // twips per centimetre
+function setPage(d: DocxDocument, sect: Element, o: { landscape: boolean; top: number; bottom: number; left: number; right: number }) {
+  const doc = sect.ownerDocument;
+  const mk = (name: string) => doc.createElementNS(W, `w:${name}`);
+  const order = ['footnotePr', 'endnotePr', 'type', 'pgSz', 'pgMar', 'paperSrc', 'pgBorders', 'lnNumType', 'pgNumType', 'cols', 'formProt', 'vAlign', 'noEndnote', 'titlePg', 'textDirection', 'bidi', 'rtlGutter', 'docGrid', 'printerSettings', 'sectPrChange'];
+  const get = (name: string) => Array.from(sect.childNodes).find((c) => (c as Element).localName === name) as Element | undefined;
+  const old = get('pgSz');
+  const w = Number(old?.getAttributeNS(W, 'w') ?? old?.getAttribute('w:w') ?? 11906) || 11906;
+  const h = Number(old?.getAttributeNS(W, 'h') ?? old?.getAttribute('w:h') ?? 16838) || 16838;
+  const long = Math.max(w, h);
+  const short = Math.min(w, h);
+  const pgSz = mk('pgSz');
+  pgSz.setAttributeNS(W, 'w:w', String(o.landscape ? long : short));
+  pgSz.setAttributeNS(W, 'w:h', String(o.landscape ? short : long));
+  if (o.landscape) pgSz.setAttributeNS(W, 'w:orient', 'landscape');
+  setOrdered(sect, pgSz, order);
+  const oldMar = get('pgMar');
+  const pgMar = mk('pgMar');
+  const keep = (k: string, dflt: string) => oldMar?.getAttributeNS(W, k) ?? oldMar?.getAttribute(`w:${k}`) ?? dflt;
+  pgMar.setAttributeNS(W, 'w:top', String(Math.round(o.top * CM)));
+  pgMar.setAttributeNS(W, 'w:right', String(Math.round(o.right * CM)));
+  pgMar.setAttributeNS(W, 'w:bottom', String(Math.round(o.bottom * CM)));
+  pgMar.setAttributeNS(W, 'w:left', String(Math.round(o.left * CM)));
+  pgMar.setAttributeNS(W, 'w:header', keep('header', '709'));
+  pgMar.setAttributeNS(W, 'w:footer', keep('footer', '709'));
+  pgMar.setAttributeNS(W, 'w:gutter', keep('gutter', '0'));
+  setOrdered(sect, pgMar, order);
+  void d;
 }
 
 function closest(node: Node, localName: string): Element | null {

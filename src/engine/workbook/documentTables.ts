@@ -50,6 +50,14 @@ export interface DocTable {
   edgeBorders: boolean;
   /** Box and column lines drawn on the Summary Table sheet. */
   summaryBorders?: boolean;
+  /** Left and right lines on every cell (Statement of Advice). */
+  columnLines?: boolean;
+  /** Lines above and below the first row and below the last row (Statement of Advice). */
+  headerRule?: boolean;
+  /** Cell padding in points. */
+  padding?: { top: number; bottom: number; left: number; right: number };
+  /** Minimum row height in points. */
+  minRowHeight?: number;
   rows: DocCell[][];
 }
 
@@ -392,5 +400,60 @@ export function adviceTables(wb: Workbook, opts: { clientName: string; custodian
     costs: costsForAdvice(wb, opts.custodian, view),
     summary: summaryTable(wb, opts.clientName, view),
     rationale: investmentRationale(wb, view),
+  };
+}
+
+// ---------------------------------------------------------------- Statement of Advice (appendix product table)
+
+const SOA_HEADERS = ['Investments', 'Manager or Company Name', 'Website', 'Description', 'Broker', 'Brokerage', 'Buy', 'Sell', 'Cost p.a', 'Fact Sheet', 'Product Disclosure'];
+
+/**
+ * Statement_Of_Advice: one row per holding that is held or recommended (Portfolio B or F not 0),
+ * in Portfolio order, with the product details from the Data sheet. Currency cash rows are left out.
+ * Data columns: D name, AB manager, AA website, U description, broker and brokerage by custodian,
+ * Q buy, R sell, S cost p.a., AC fact sheet, T PDS.
+ *
+ * Deliberate difference: for OneAnswer clients the macro's lookup offsets point at the Data sheet's
+ * "Hedged" and "OA Brokerage" columns (the sheet has gained a column since); the app uses
+ * "OA Broker" and "OA Brokerage".
+ */
+export function soaTable(wb: Workbook, custodian: 'Apex' | 'OA'): DocTable {
+  const data = dataLookup(wb);
+  const cols = [4, 28, 27, 21, ...(custodian === 'OA' ? [13, 14] : [15, 16]), 17, 18, 19, 29, 20];
+  const header: DocCell[] = SOA_HEADERS.map((t) => ({ text: t, bold: true, align: 'center', color: WHITE, fill: NAVY }));
+  const rows: DocCell[][] = [header];
+  const last = SECTIONS.at(-1)!.total + 1;
+  for (let r = 2; r <= last; r++) {
+    const a = wb.get('Portfolio', r, 1);
+    if (typeof a !== 'string' || a === '') continue;
+    if (['AUD', 'NZD', 'GBP', 'USD'].includes(a)) continue;
+    if (isZero(wb.get('Portfolio', r, 2)) && isZero(wb.get('Portfolio', r, 6))) continue;
+    const dr = data.get(a.toLowerCase());
+    if (!dr) continue;
+    rows.push(
+      cols.map((c, i): DocCell => {
+        let v = wb.get('Data', dr, c);
+        if (v === BLANK) v = 0;
+        if (typeof v === 'string' && /^https?:\/\//.test(v)) {
+          if (i >= cols.length - 2) return { text: 'Click Here', link: v, align: 'center' };
+          let shown = v.replace('https://www.', '').replace('https://', '');
+          if (shown.endsWith('/')) shown = shown.slice(0, -1);
+          return { text: shown, link: v, align: 'center' };
+        }
+        if (i >= 5 && i <= 8) return { text: percent2(v), align: 'center' };
+        return { text: typeof v === 'number' ? String(Number(v.toPrecision(15))) : asText(v), align: 'center' };
+      }),
+    );
+  }
+  return {
+    widths: [124, 60, 92, 235, 37, 51, 34.5, 37, 37, 49, 49],
+    fontSize: 8,
+    center: true,
+    edgeBorders: false,
+    columnLines: true,
+    headerRule: true,
+    padding: { top: 1.5, bottom: 1.5, left: 0.75, right: 0.75 },
+    minRowHeight: 12,
+    rows,
   };
 }

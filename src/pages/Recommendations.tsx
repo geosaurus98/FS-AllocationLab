@@ -4,7 +4,8 @@ import { Button, Card, EmptyState, Field, inputCls, Notice, PageHeader, StatusBa
 import type { WorkbookModel } from '../engine/workbook/evaluator';
 import { dataRowsFromWorkbook, importApexHoldings, type ImportResult, type RawHolding } from '../engine/workbook/importHoldings';
 import { applyRounds, readImplementation, RECOMMENDATION_PROFILES, runRecommendation, type ClientInputs, type RecommendationResult, type SectionKey } from '../engine/workbook/run';
-import { Documents, emptyLetterClient } from './Documents';
+import { Documents, emptyLetterClient, emptyReviewDetails } from './Documents';
+import type { ReviewDetails } from '../lib/annualReview';
 import { emptyRounds, Implementation, type RoundsState } from './Implementation';
 import type { LetterClient } from '../lib/letters';
 import { Workbook } from '../engine/workbook/evaluator';
@@ -84,6 +85,7 @@ export function Recommendations() {
   const [impl, setImpl] = useState<ReturnType<typeof readImplementation> | null>(null);
   const [tab, setTab] = useState<'recommendation' | 'implementation' | 'documents'>('recommendation');
   const [letterClient, setLetterClient] = useState<LetterClient>(emptyLetterClient);
+  const [review, setReview] = useState<ReviewDetails>(emptyReviewDetails);
   const [fileNotice, setFileNotice] = useState<string | null>(null);
 
   const dataRows = useMemo(() => {
@@ -170,6 +172,7 @@ export function Recommendations() {
       addHoldings,
       rounds,
       letterClient,
+      review,
     };
     const url = URL.createObjectURL(new Blob([JSON.stringify(file, null, 1)], { type: 'application/json' }));
     const a = document.createElement('a');
@@ -200,6 +203,7 @@ export function Recommendations() {
       setAddHoldings(o.addHoldings ?? []);
       setRounds(o.rounds ?? emptyRounds());
       setLetterClient({ ...emptyLetterClient(), ...(o.letterClient ?? {}) });
+      setReview({ ...emptyReviewDetails(), ...(o.review ?? {}) });
       const p = parsePaste(o.paste ?? '');
       const imp = { result: importApexHoldings(p.rows, dataRows), parseErrors: p.errors, ids: p.portfolioIds };
       setImported(imp);
@@ -313,7 +317,7 @@ export function Recommendations() {
           ))}
         </div>
         {tab === 'documents' ? (
-          <Documents workbook={result.workbook} custodian={custodian} client={letterClient} onClient={setLetterClient} version={result} />
+          <Documents workbook={result.workbook} custodian={custodian} client={letterClient} onClient={setLetterClient} review={review} onReview={setReview} version={result} />
         ) : tab === 'implementation' && impl ? (
           <Implementation
             rows={impl.rows}
