@@ -1,0 +1,6 @@
+Client number,Risk Profile,Growth Target %,Annual Fee %,Monthly Fees,Monthly Withdrawals,Cash Cover Months,Drift Tolerance pp,Notes
+DEMO-001,Balanced 60/40,60,,450,2500,,,SYNTHETIC test client
+DEMO-002,Conservative,30,,300,4000,12,,SYNTHETIC test client - high withdrawals
+DEMO-003,Growth,75,,600,0,,3,SYNTHETIC test client - custom tolerance
+DEMO-004,Balanced 50/50,55,1,0,1000,,,SYNTHETIC test client - growth target differs from profile
+DEMO-005,High Growth,90,,200,0,,,SYNTHETIC test client - no holdings supplied

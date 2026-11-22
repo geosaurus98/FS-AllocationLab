@@ -1,0 +1,38 @@
+{
+  "name": "allocationlab",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build:offline": "tsc -b && vite build --mode offline && node -e \"require('fs').renameSync('dist-offline/index.html','dist-offline/AllocationLab.html')\"",
+    "golden": "python3 scripts/golden/gen_sector_targets.py /tmp/st.json 40 && python3 scripts/golden/run_workbook.py /tmp/st.json /tmp/st.out.json && python3 scripts/golden/trim_fixture.py /tmp/st.out.json src/engine/__golden__/sector-targets.json",
+    "golden:full": "python3 scripts/golden/gen_full.py /tmp/full.json 30 && python3 scripts/golden/run_workbook.py /tmp/full.json /tmp/full.out.json && python3 scripts/golden/trim_workbook_fixture.py /tmp/full.out.json src/engine/workbook/__golden__/full-portfolios.json full",
+    "extract:workbook": "python3 scripts/engine/extract_workbook.py"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.13.3"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.1.0",
+    "@types/node": "^22.10.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "jsdom": "^25.0.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.8"
+  }
+}
